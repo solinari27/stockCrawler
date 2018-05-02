@@ -26,7 +26,7 @@ class mongoConn():
         formatter = logging.Formatter('%(asctime)s %(levelname)-8s: %(message)s')
         date_str = time.strftime('%Y_%m_%d', time.gmtime ())
         filename = self._logConf['logpath'] + "/crawler_" + date_str + ".log"
-        self._logfile_handler = logging.FileHandler (filename)
+        self._logfile_handler = logging.FileHandler(filename)
         self._logfile_handler.setFormatter(formatter)
         self._logger.addHandler(self._logfile_handler)
 
@@ -37,6 +37,8 @@ class mongoConn():
         self._username = self._dbConf['username']
         self._password = self._dbConf['password']
 
+        self._logger.warn("stockcode crawler started.")
+
         try:
             self._conn = MongoClient(self._host, self._port)
             if not self._check_connected(self._conn):
@@ -46,41 +48,44 @@ class mongoConn():
             # self.connected = self.db.authenticate (self._username, self._password)
             self._db = self._conn.stockinfo
 
-        except Exceptions:
+        except Exception:
             self._logger.error("mongodb connection failed.")
             # sys.exit (1)
 
     def __del__(self):
+        self._conn.close()
+        self._logger.warn("stockcode crawler stopped.")
         self._logger.removeHandler(self._logfile_handler)
 
     # 检查是否连接成功
     def _check_connected (self, conn):
         return conn.connected
 
-    def createDB(self):
-        return
-
-    def maintain(self):
-        return
-
     def cleanStock(self):
+        self._logger.warn("stockcode crawler clean mongodb.")
         self._db.stocklist.remove({})
 
     def insertStock(self, code, name):
-        # self._db.stocklist.insert({"code": code, "name": name})    #完全清空后重新添加
+        # self._logger.debug("stockcode crawler insert mongodb stock code: " + code)
+        # self._db.stocklist.insert({"code": code, "name": name, "updatetime": None})    #完全清空后重新添加
+
         dbresult = self._db.stocklist.find({"code": code})
         result = {}
         have = False
+        updatetime = None
 
         for i in dbresult:
             result['code'] = i['code']
             result['name'] = i['name']
+            updatetime = i['updatetime']
             have = True
 
         if (not have):
-            self._db.stocklist.insert({"code": code, "name": name})
+            self._logger.info("stockcode crawler insert mongodb stock code: " + code)
+            self._db.stocklist.insert({"code": code, "name": name, "updatetime": None})
         elif (result['name'] != name):
-            self._db.stocklist.update({"code": code}, {"$set": {"name": name}})
+            self._logger.info("stockcode crawler insert mongodb stock code: " + code)
+            self._db.stocklist.update({"code": code}, {"$set": {"name": name, "updatetime": updatetime}})
 
 
 

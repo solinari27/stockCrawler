@@ -8,6 +8,7 @@
 
 import os
 import json
+import logging
 
 import stockcode.mongoConn as mc
 
