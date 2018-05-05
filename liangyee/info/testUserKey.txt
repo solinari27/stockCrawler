@@ -1,5 +1,0 @@
-{
-    user:   deeper1@163.com
-    passwd: assign01
-    key:    6F49F56DCE594273BF0B927C8ABE0A12
-}
