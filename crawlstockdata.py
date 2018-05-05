@@ -7,6 +7,10 @@
 # @Software: PyCharm
 
 import liangyee.liangyeeCrawler
+from liangyee.liangyeeUser import *
+
+refresh_liangyeeUser()
+
 ll = liangyee.liangyeeCrawler.liangyeeCrawler()
 ll.crawlliangyee()
 
