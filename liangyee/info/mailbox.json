@@ -11,7 +11,7 @@
     "key":"241e69c502564504b0e8b8feaeae0ba1",
     "mailbox":"liangyee001@126.com",
     "passwd":"passwd001",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -19,7 +19,7 @@
     "key":"d4ad6f2b919f4d5eaa7eb76961954045",
     "mailbox":"liangyee002@sina.com",
     "passwd":"passwd002",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -27,7 +27,7 @@
     "key":"6d1233b361c149d09213bfbbfbf0b6e8",
     "mailbox":"liangyee003@sohu.com",
     "passwd":"passwd003",
-     "timelimit":200,
+     "timelimit":100,
     "debug":"no"
   },
 
@@ -35,7 +35,7 @@
     "key":"fb99fb9b78d04ad0b52a8c1b3283ee94",
     "mailbox":"liangyee004@aliyun.com",
     "passwd":"passwd004",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -43,7 +43,7 @@
     "key":"417f063c2a5f46c7bfd4c2614173c42e",
     "mailbox":"liangyee005@mail.top",
     "passwd":"passwd005!",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -51,7 +51,7 @@
     "key":"5604f3868bda4750875d2cbe2eee8273",
     "mailbox":"liangyee006@outlook.com",
     "passwd":"passwd006",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -59,7 +59,7 @@
     "key":"e4e638deb6014509bb9058e47acf8d21",
     "mailbox":"liangyee007@21cn.com",
     "passwd":"passwd007",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -67,7 +67,7 @@
     "key":"a7c181ba37554472b1a97580d4b73d74",
     "mailbox":"liangyee008@sina.com",
     "passwd":"passwd008",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -75,7 +75,7 @@
     "key":"6b200c28825a4c3cbe9732995b8685ad",
     "mailbox":"liangyee009@126.com",
     "passwd":"passwd009",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -83,7 +83,7 @@
     "key":"83d4d2f9de5d4c74891a105dac940ae3",
     "mailbox":"liangyee010@sina.com",
     "passwd":"passwd010",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -91,7 +91,7 @@
     "key":"2b561efc670849f18a15103e0d766b6b",
     "mailbox":"liangyee011@sina.com",
     "passwd":"passwd011",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -99,7 +99,7 @@
     "key":"3bf06c586e174156b28bbd3c70875e29",
     "mailbox":"liangyee012@163.com",
     "passwd":"passwd012",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -107,7 +107,7 @@
     "key":"97b137b929194c38bdc9d3c606008af0",
     "mailbox":"liangyee013@sohu.com",
     "passwd":"passwd013",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -115,7 +115,7 @@
     "key":"1b6eaec5519546cb8d412e2aada8f9e0",
     "mailbox":"liangyee014@aliyun.com",
     "passwd":"passwd014",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -123,7 +123,7 @@
     "key":"3f75654d2e9a4403966f49fc11fca2d0",
     "mailbox":"liangyee015@21cn.com",
     "passwd":"passwd015",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -131,7 +131,7 @@
     "key":"4b33311696ae489c93d78c208d8f70d5",
     "mailbox":"liangyee016@126.com",
     "passwd":"passwd016",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -139,7 +139,7 @@
     "key":"9fdf3c6795f047b19a02ad705a98813d",
     "mailbox":"liangyee017@163.com",
     "passwd":"passwd017",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -147,7 +147,7 @@
     "key":"75af2af4116d4aa29acd0347ed6c151a",
     "mailbox":"liangyee018@aliyun.com",
     "passwd":"passwd018",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -155,7 +155,7 @@
     "key":"d663a92fbd5940f9aea81b75ddcdd20f",
     "mailbox":"liangyee019@sina.com",
     "passwd":"passwd019",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -163,7 +163,7 @@
     "key":"8a8cf526490f4a38b9c6c7e5132b24d5",
     "mailbox":"lianyee020@sohu.com",
     "passwd":"passwd020",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -171,7 +171,7 @@
     "key":"cdfe882076f543fdb69806a1e1ee4c55",
     "mailbox":"liangyee021@126.com",
     "passwd":"passwd021",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -179,7 +179,7 @@
     "key":"9e23a21f314a412c8ac02809c2fc30ad",
     "mailbox":"liangyee022@yeah.net",
     "passwd":"passwd022",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -187,7 +187,7 @@
     "key":"2b11f9e3680a460e927ee1864c5e6c3c",
     "mailbox":"liangyee023@sina.com",
     "passwd":"passwd023",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -195,7 +195,7 @@
     "key":"0e611685fdc54b54b13d19879efd16b0",
     "mailbox":"liangyee024@sohu.com",
     "passwd":"passwd024",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   },
 
@@ -203,7 +203,7 @@
     "key":"2054efc5466843dc9223e2002f4b4356",
     "mailbox":"liangyee025@21cn.com",
     "passwd":"passwd025",
-    "timelimit":200,
+    "timelimit":100,
     "debug":"no"
   }
 }
