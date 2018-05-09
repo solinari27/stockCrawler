@@ -296,11 +296,11 @@ class liangyeeCrawler():
             # print "code: ", code[0], "last: ", lastDate, "| now: ", nowDate
             if not date_cmp(nowDate, lastDate):
                 try:
-                    kData = self.getDailyKData(code[0], lastDate, nowDate)
-                    parseDailyKData(code[0], kData)
-
-                    fiveMinData = self.get5MinKData(code[0])
-                    parse5MinKData(code[0], fiveMinData)
+                    # kData = self.getDailyKData(code[0], lastDate, nowDate)
+                    # parseDailyKData(code[0], kData)
+                    #
+                    # fiveMinData = self.get5MinKData(code[0])
+                    # parse5MinKData(code[0], fiveMinData)
 
                     marketData = self.getMarketData([code[0]])
                     parseMarketData(code[0], marketData)

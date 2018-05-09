@@ -73,7 +73,7 @@ class mongoConn():
 
             # self.connected = self.db.authenticate (self._username, self._password)
             self._stockdb = self._conn.stockinfo
-            self._datadb = self._conn.stockdata
+            self._datadb = self._conn.liangyeestockdata
 
         except Exception:
             self._logger.error("mongodb connection failed.")
