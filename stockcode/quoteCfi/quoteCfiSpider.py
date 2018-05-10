@@ -17,9 +17,11 @@ class quoteCfiSpider():
         self._conn = mc.mongoConn()
 
     def crawl(self):
-        os.remove("Data/quoteCfiShanghai.json")
+        if (os.path.exists("Data/quoteCfiShanghai.json")):
+            os.remove("Data/quoteCfiShanghai.json")
         os.system("scrapy runspider stockcode/spider/scrapyCfiShanghai.py -o Data/quoteCfiShanghai.json --logfile Log/quoteCfiSpider.log --loglevel ERROR")
-        os.remove("Data/quoteCfiShenzhen.json")
+        if (os.path.exists("Data/quoteCfiShenzhen.json")):
+            os.remove("Data/quoteCfiShenzhen.json")
         os.system("scrapy runspider stockcode/spider/scrapyCfiShenzhen.py -o Data/quoteCfiShenzhen.json --logfile Log/quoteCfiSpider.log --loglevel ERROR")
 
     def inputDB(self):
