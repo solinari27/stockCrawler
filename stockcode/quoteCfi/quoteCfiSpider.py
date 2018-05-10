@@ -7,6 +7,7 @@
 """  
 
 import os
+import re
 import json
 
 import stockcode.mongoConn as mc
@@ -35,9 +36,11 @@ class quoteCfiSpider():
             
         with open("Data/quoteCfiShenzhen.json", 'r') as load_f:
             stocks = json.load(load_f)
-
+        
+        patten = r'000'
         for item in stocks:
-            self._conn.insertStock(item['code'], item['name'], item['type'])
+            if re.match(patten, item['code']):
+                self._conn.insertStock(item['code'], item['name'], item['type'])
             
             
 #0: [http://quote.cfi.cn/stockList.aspx?t=11]
