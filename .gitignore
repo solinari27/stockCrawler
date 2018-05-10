@@ -5,6 +5,7 @@ __pycache__/
 *.xml
 *.pyc
 *.conf
+*.ini
 
 # C extensions
 *.so
