@@ -37,9 +37,10 @@ class quoteCfiSpider():
         with open("Data/quoteCfiShenzhen.json", 'r') as load_f:
             stocks = json.load(load_f)
         
+        #shenzhen start with '000'
         patten = r'000'
         for item in stocks:
-            if re.match(patten, item['code']):
+            if re.match(patten, item['code']):  
                 self._conn.insertStock(item['code'], item['name'], item['type'])
             
             
