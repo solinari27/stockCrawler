@@ -3,7 +3,7 @@
 # @Time    : 2018/4/1 9:57
 # @Author  : Aries
 # @Site    : 
-# @File    : start.py
+# @File    : crawlstockcode.py
 # @Software: PyCharm
 
 import stockcode.quoteCfi.quoteCfiSpider as st

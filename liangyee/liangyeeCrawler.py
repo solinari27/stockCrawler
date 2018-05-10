@@ -156,7 +156,7 @@ class liangyeeCrawler():
     def _recordMarketData(self, data):
         self._conn.insertMarketData(data)
 
-    def crawlliangyee(self):
+    def crawlliangyee(self, action):
         def date_cmp(date1, date2):
             if ((date1.tm_year == date2.tm_year) and (date1.tm_mon == date2.tm_mon) and (date1.tm_mday == date2.tm_mday)):
                 return True
@@ -296,16 +296,18 @@ class liangyeeCrawler():
             # print "code: ", code[0], "last: ", lastDate, "| now: ", nowDate
             if not date_cmp(nowDate, lastDate):
                 try:
-                    # kData = self.getDailyKData(code[0], lastDate, nowDate)
-                    # parseDailyKData(code[0], kData)
-                    #
-                    # fiveMinData = self.get5MinKData(code[0])
-                    # parse5MinKData(code[0], fiveMinData)
-
-                    marketData = self.getMarketData([code[0]])
-                    parseMarketData(code[0], marketData)
-
-                    self._updateDataTime(code[0], nowDate)
+                    if (action == "weekend"):
+                        kData = self.getDailyKData(code[0], lastDate, nowDate)
+                        parseDailyKData(code[0], kData)
+                        self._updateDataTime(code[0], nowDate)                    
+                    
+                    if (action == "daily"):
+                        # fiveMinData = self.get5MinKData(code[0])
+                        # parse5MinKData(code[0], fiveMinData)
+                        marketData = self.getMarketData([code[0]])
+                        parseMarketData(code[0], marketData)
+                        self._updateDataTime(code[0], nowDate)
+                        
                 except Exception:
                     self._logger.error("liangyee crawler crawl error stock code:" + code[0])
                     continue
