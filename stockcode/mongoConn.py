@@ -23,7 +23,7 @@ class mongoConn():
 
         #init logging:
         self._logConf = self._mongoConf['logging']
-        self._name = self._logConf['name']
+        self._name = self._logConf['name'] + '_mongo'
         self._logger = logging.getLogger(self._name)
         formatter = logging.Formatter('%(asctime)s %(levelname)-8s: %(message)s')
         date_str = time.strftime('%Y_%m_%d', time.gmtime ())
@@ -91,9 +91,9 @@ class mongoConn():
         self._logger.warn("stockcode crawler clean mongodb.")
         self._db.stocklist.remove({})
 
-    def insertStock(self, code, name):
+    def insertStock(self, code, name, type):
         # self._logger.debug("stockcode crawler insert mongodb stock code: " + code)
-        # self._db.stocklist.insert({"code": code, "name": name, "updatetime": None})    #完全清空后重新添加
+        # self._db.stocklist.insert({"code": code, "name": name, "type": type, "updatetime": None})    #完全清空后重新添加
 
         dbresult = self._db.stocklist.find({"code": code})
         result = {}
@@ -103,12 +103,13 @@ class mongoConn():
         for i in dbresult:
             result['code'] = i['code']
             result['name'] = i['name']
+            result['type'] = str(i['type'])
             updatetime = i['updatetime']
             have = True
 
         if (not have):
             self._logger.info("stockcode crawler insert mongodb stock code: " + code)
-            self._db.stocklist.insert({"code": code, "name": name, "updatetime": None})
+            self._db.stocklist.insert({"code": code, "name": name, "type": type, "updatetime": None})
         elif (result['name'] != name):
             self._logger.info("stockcode crawler insert mongodb stock code: " + code)
             self._db.stocklist.update({"code": code}, {"$set": {"name": name, "updatetime": updatetime}})

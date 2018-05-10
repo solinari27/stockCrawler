@@ -8,7 +8,6 @@
 
 import os
 import json
-import logging
 
 import stockcode.mongoConn as mc
 
@@ -21,10 +20,16 @@ class quoteCfiSpider():
         os.system("scrapy runspider stockcode/spider/scrapyCfiSpider.py -o Data/quoteCfiSpider.json --logfile Log/quoteCfiSpider.log --loglevel ERROR")
 
     def inputDB(self):
-        with open("Data/out.json", 'r') as load_f:
+        with open("Data/quoteCfiSpider.json", 'r') as load_f:
             stocks = json.load(load_f)
 
         # self._conn.cleanStock()
 
         for item in stocks:
             self._conn.insertStock(item['code'], item['name'])
+            
+            
+#0: [http://quote.cfi.cn/stockList.aspx?t=11]
+#1：[http://quote.cfi.cn/stockList.aspx?t=12]
+#2: [http://quote.cfi.cn/stockList.aspx?t=13]
+#3: [http://quote.cfi.cn/stockList.aspx?t=14]

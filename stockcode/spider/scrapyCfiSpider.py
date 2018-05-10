@@ -32,5 +32,6 @@ class scrapyCfiSpider(scrapy.Spider):
                     stockname = stocknamesplit[0]
                     stock['code'] = code
                     stock['name'] = stockname
+                    stock['type'] = 0
                     yield stock
 
