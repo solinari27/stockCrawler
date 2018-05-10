@@ -107,7 +107,7 @@ class liangyeeCrawler():
     def _updateDataTime(self, code, date):
         self._conn.updateTime(code, date)
 
-    def getDailyKData(self, stock, startDay, endDay):
+    def getDailyKData(self, stock, startDay, endDay, type):
         url = self._agent.getDailyKUrl(stock, startDay, endDay)
         if url != "":
             return self._requestJson(url=url)['result']
@@ -115,12 +115,12 @@ class liangyeeCrawler():
             userKey, timelimit = self._getNextID()
             if (userKey != None):
                 self._setID(userKey, timelimit)
-                return self.getDailyKData(stock, startDay, endDay)
+                return self.getDailyKData(stock, startDay, endDay, type)
             else:
                 self._logger.warn("liangyee crawler getDailyKData timelimit.")
                 return None
 
-    def get5MinKData(self, stock):
+    def get5MinKData(self, stock, type):
         url = self._agent.get5MinKUrl(stock)
         if url != "":
             return self._requestJson(url=url)['result']
@@ -128,13 +128,13 @@ class liangyeeCrawler():
             userKey, timelimit = self._getNextID()
             if (userKey != None):
                 self._setID(userKey, timelimit)
-                return self.get5MinKData(stock)
+                return self.get5MinKData(stock, type)
             else:
                 self._logger.warn("liangyee crawler get5MinKData timelimit.")
 
                 return None
 
-    def getMarketData(self, stocks):
+    def getMarketData(self, stocks, type):
         url = self._agent.getMarketDataUrl(stocks)
         if url != "":
             return self._requestJson(url=url)['result']
@@ -142,7 +142,7 @@ class liangyeeCrawler():
             userKey, timelimit = self._getNextID()
             if (userKey != None):
                 self._setID(userKey, timelimit)
-                return self.getMarketData(stocks)
+                return self.getMarketData(stocks, type)
             else:
                 self._logger.warn("liangyee crawler getMarketData timelimit.")
                 return None
@@ -172,7 +172,7 @@ class liangyeeCrawler():
                 low = info[3]
                 end = info[4]
                 count = info[5]
-                # print date, start, high, low, end, count
+                
                 data = {}
                 data['code'] = code
                 data['date'] = date
@@ -195,7 +195,7 @@ class liangyeeCrawler():
                 low = info[3]
                 end = info[4]
                 count = info[5]
-                # print date, time, start, high, low, end, count
+
                 data = {}
                 data['code'] = code
                 data['date'] = date
@@ -242,9 +242,7 @@ class liangyeeCrawler():
                 sell5_count = info[28]
                 sell5_price = info[29]
                 marketdataDateTime = info[30]
-                # print name,today_start_price,yesterday_end_price,now_price,floating,floating_rate,highest_price,lowest_price,deal_count,deal_count_price,
-                # buy1_count,buy1_price,buy2_count,buy2_price,buy3_count,buy3_price,buy4_count,buy4_price,buy5_count,buy5_price,
-                # sell1_count,sell1_price,sell2_count,sell2_price,sell3_count,sell3_price,sell4_count,sell4_price,sell5_count,sell5_price,marketdataDateTime
+                
                 data = {}
                 data['code'] = code
                 data['name'] = name
@@ -284,6 +282,8 @@ class liangyeeCrawler():
             time.sleep(random.randint(2, 3))
 
         stockcodelist = self._getstockslist()
+        type0list = []
+        type1list = []
         for code in stockcodelist:
             # 0 for stockcode 1 for updatetime
             if code[1] == None:
@@ -293,24 +293,50 @@ class liangyeeCrawler():
                 lastDate = time_local
             now = time.gmtime()
             nowDate = time.strptime(str(now.tm_year) + ":" + str(now.tm_mon) + ":" + str(now.tm_mday), "%Y:%m:%d")
-            # print "code: ", code[0], "last: ", lastDate, "| now: ", nowDate
+            type = str(code[2])
             if not date_cmp(nowDate, lastDate):
                 try:
                     if (action == "weekend"):
-                        kData = self.getDailyKData(code[0], lastDate, nowDate)
+                        kData = self.getDailyKData(code[0], lastDate, nowDate, type)
                         parseDailyKData(code[0], kData)
                         self._updateDataTime(code[0], nowDate)                    
                     
                     if (action == "workday"):
-                        # fiveMinData = self.get5MinKData(code[0])
-                        # parse5MinKData(code[0], fiveMinData)
-                        marketData = self.getMarketData([code[0]])
-                        parseMarketData(code[0], marketData)
+                        fiveMinData = self.get5MinKData(code[0], type)
+                        parse5MinKData(code[0], fiveMinData)
+                        
+                        if (code[2] == 0):
+                            if (len(type0list) < 10):
+                                type1list.add(code[0])
+                            else:
+                                marketData = self.getMarketData(type0list, type)
+                                parseMarketData(code[0], marketData)
+                                type0list = []
+                        elif (code[2] == 1):
+                            if (len(type1list) < 10):
+                                type1list.add(code[0])
+                            else:
+                                marketData = self.getMarketData(type1list, type)
+                                parseMarketData(code[0], marketData)
+                                type1list = []
                         self._updateDataTime(code[0], nowDate)
                         
                 except Exception:
                     self._logger.error("liangyee crawler crawl error stock code:" + code[0])
                     continue
+                
+            #for last stocks
+            if (len(type1list) > 0):
+                try:
+                    marketData = self.getMarketData(type1list)
+                    parseMarketData(code[0], marketData)
+                    type1list = []
+                except Exception:
+                    self._logger.error("liangyee crawler crawl error stock code:" + code[0])
+
+
+                
+                
 
 
 

@@ -93,7 +93,7 @@ class mongoConn():
         try:
             stocks = self._stockdb.stocklist.find()
             for stock in stocks:
-                stockslist.append([stock['code'] , stock['updatetime']])
+                stockslist.append([stock['code'] , stock['updatetime'] , stock['type']])
             return stockslist
         except Exception:
             self._logger.error("mongodb get stocklist error.")
