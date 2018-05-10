@@ -9,6 +9,6 @@
 import stockcode.quoteCfi.quoteCfiSpider as st
 spider = st.quoteCfiSpider()
 spider.crawl()
-#spider.inputDB()
+spider.inputDB()
 
 

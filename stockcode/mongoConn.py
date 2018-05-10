@@ -103,7 +103,7 @@ class mongoConn():
         for i in dbresult:
             result['code'] = i['code']
             result['name'] = i['name']
-            result['type'] = str(i['type'])
+            result['type'] = i['type']
             updatetime = i['updatetime']
             have = True
 

@@ -17,16 +17,17 @@ class quoteCfiSpider():
         self._conn = mc.mongoConn()
 
     def crawl(self):
-        os.system("scrapy runspider stockcode/spider/scrapyCfiSpider.py -o Data/quoteCfiSpider.json --logfile Log/quoteCfiSpider.log --loglevel ERROR")
+        os.remove("Data/quoteCfiShanghai.json")
+        os.system("scrapy runspider stockcode/spider/scrapyCfiShanghai.py -o Data/quoteCfiShanghai.json --logfile Log/quoteCfiSpider.log --loglevel ERROR")
 
     def inputDB(self):
-        with open("Data/quoteCfiSpider.json", 'r') as load_f:
+        with open("Data/quoteCfiShanghai.json", 'r') as load_f:
             stocks = json.load(load_f)
 
         # self._conn.cleanStock()
 
         for item in stocks:
-            self._conn.insertStock(item['code'], item['name'])
+            self._conn.insertStock(item['code'], item['name'], item['type'])
             
             
 #0: [http://quote.cfi.cn/stockList.aspx?t=11]
