@@ -301,7 +301,7 @@ class liangyeeCrawler():
                         parseDailyKData(code[0], kData)
                         self._updateDataTime(code[0], nowDate)                    
                     
-                    if (action == "daily"):
+                    if (action == "workday"):
                         # fiveMinData = self.get5MinKData(code[0])
                         # parse5MinKData(code[0], fiveMinData)
                         marketData = self.getMarketData([code[0]])

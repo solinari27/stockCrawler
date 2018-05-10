@@ -12,6 +12,6 @@ from liangyee.liangyeeUser import *
 refresh_liangyeeUser()
 
 ll = liangyee.liangyeeCrawler.liangyeeCrawler()
-ll.crawlliangyee("daily")
+ll.crawlliangyee("workday")
 
 
