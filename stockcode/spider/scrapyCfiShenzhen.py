@@ -2,16 +2,16 @@
 #-*- coding:utf-8 _*-
 """
 @author: solinari
-@file: scrapyCfiShanghai.py
-@time: 2018/04/01
+@file: scrapyCfiShenzhen.py
+@time: 2018/05/10
 """
 
 import scrapy
 import re
 
 class scrapyCfiSpider(scrapy.Spider):
-    name = "scrapyCfiShanghai"
-    start_urls = ['http://quote.cfi.cn/stockList.aspx?t=11']
+    name = "scrapyCfiShenzhen"
+    start_urls = ['http://quote.cfi.cn/stockList.aspx?t=12']
     allowed_domains = ["quote.cfi.cn"]
 
     def parse(self, response):
@@ -32,6 +32,5 @@ class scrapyCfiSpider(scrapy.Spider):
                     stockname = stocknamesplit[0]
                     stock['code'] = code
                     stock['name'] = stockname
-                    stock['type'] = 0
+                    stock['type'] = 1
                     yield stock
-

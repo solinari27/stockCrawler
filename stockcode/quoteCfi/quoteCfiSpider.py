@@ -19,12 +19,20 @@ class quoteCfiSpider():
     def crawl(self):
         os.remove("Data/quoteCfiShanghai.json")
         os.system("scrapy runspider stockcode/spider/scrapyCfiShanghai.py -o Data/quoteCfiShanghai.json --logfile Log/quoteCfiSpider.log --loglevel ERROR")
+        os.remove("Data/quoteCfiShenzhen.json")
+        os.system("scrapy runspider stockcode/spider/scrapyCfiShenzhen.py -o Data/quoteCfiShenzhen.json --logfile Log/quoteCfiSpider.log --loglevel ERROR")
 
     def inputDB(self):
+        # self._conn.cleanStock()
+        
         with open("Data/quoteCfiShanghai.json", 'r') as load_f:
             stocks = json.load(load_f)
 
-        # self._conn.cleanStock()
+        for item in stocks:
+            self._conn.insertStock(item['code'], item['name'], item['type'])
+            
+        with open("Data/quoteCfiShenzhen.json", 'r') as load_f:
+            stocks = json.load(load_f)
 
         for item in stocks:
             self._conn.insertStock(item['code'], item['name'], item['type'])
