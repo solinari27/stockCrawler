@@ -315,7 +315,7 @@ class liangyeeCrawler():
                         continue
                     
                     if (code[2] == 0):
-                        type0list.add(code[0])
+                        type0list.append(code[0])
                         if (len(type0list) < 10):
                             continue
                         else:
@@ -323,7 +323,7 @@ class liangyeeCrawler():
                             #parseMarketData(code[0], marketData)
                             type0list = []
                     elif (code[2] == 1):
-                        type1list.add(code[0])
+                        type1list.append(code[0])
                         if (len(type1list) < 10):
                             continue
                         else:
