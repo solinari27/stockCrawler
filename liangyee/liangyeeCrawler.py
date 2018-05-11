@@ -333,22 +333,22 @@ class liangyeeCrawler():
                             type1list = []
 
                 
-            #for last stocks
-            if (len(type0list) > 0):
-                try:
-                    marketData = self.getMarketData(type0list)
-                    parseMarketData(type0list, marketData)
-                    type0list = []
-                except Exception:
-                    self._logger.error("liangyee crawler crawl marketData error stock code:" + code[0])
-            
-            if (len(type1list) > 0):
-                try:
-                    marketData = self.getMarketData(type1list)
-                    parseMarketData(type1list, marketData)
-                    type1list = []
-                except Exception:
-                    self._logger.error("liangyee crawler crawl marketData error stock code:" + code[0])
+        #for last stocks
+        if (len(type0list) > 0):
+            try:
+                marketData = self.getMarketData(type0list, '0')
+                parseMarketData(type0list, marketData)
+                type0list = []
+            except Exception:
+                self._logger.error("liangyee crawler crawl marketData error stock code:" + type0list)
+
+        if (len(type1list) > 0):
+            try:
+                marketData = self.getMarketData(type1list, '1')
+                parseMarketData(type1list, marketData)
+                type1list = []
+            except Exception:
+                self._logger.error("liangyee crawler crawl marketData error stock code:" + type1list)
 
 
                 
