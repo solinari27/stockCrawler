@@ -295,52 +295,58 @@ class liangyeeCrawler():
             nowDate = time.strptime(str(now.tm_year) + ":" + str(now.tm_mon) + ":" + str(now.tm_mday), "%Y:%m:%d")
             type = str(code[2])
             if not date_cmp(nowDate, lastDate):
-                try:
-                    if (action == "weekend"):
+                if (action == "weekend"):
+                    try:
                         kData = self.getDailyKData(code[0], lastDate, nowDate, type)
                         parseDailyKData(code[0], kData)
-                        self._updateDataTime(code[0], nowDate)                    
-                    
-                    if (action == "workday"):
+                        self._updateDataTime(code[0], nowDate)   
+                    except Exception:
+                        self._logger.error("liangyee crawler crawl dailyKdata error stock code:" + code[0])
+                        continue
+                
+                if (action == "workday"):
+                    try:
                         fiveMinData = self.get5MinKData(code[0], type)
                         parse5MinKData(code[0], fiveMinData)
-                        
-                        if (code[2] == 0):
-                            if (len(type0list) < 10):
-                                type1list.add(code[0])
-                            else:
-                                marketData = self.getMarketData(type0list, type)
-                                parseMarketData(code[0], marketData)
-                                type0list = []
-                        elif (code[2] == 1):
-                            if (len(type1list) < 10):
-                                type1list.add(code[0])
-                            else:
-                                marketData = self.getMarketData(type1list, type)
-                                parseMarketData(code[0], marketData)
-                                type1list = []
                         self._updateDataTime(code[0], nowDate)
-                        
-                except Exception:
-                    self._logger.error("liangyee crawler crawl error stock code:" + code[0])
-                    continue
+                    except Exception:
+                        self._logger.error("liangyee crawler crawl fiveMinData error stock code:" + code[0])
+                        continue
+                    
+                    if (code[2] == 0):
+                        type0list.add(code[0])
+                        if (len(type0list) < 10):
+                            continue
+                        else:
+                            marketData = self.getMarketData(type0list, type)
+                            #parseMarketData(code[0], marketData)
+                            type0list = []
+                    elif (code[2] == 1):
+                        type1list.add(code[0])
+                        if (len(type1list) < 10):
+                            continue
+                        else:
+                            marketData = self.getMarketData(type1list, type)
+                            #parseMarketData(code[0], marketData)
+                            type1list = []
+
                 
             #for last stocks
             if (len(type0list) > 0):
                 try:
                     marketData = self.getMarketData(type0list)
-                    parseMarketData(code[0], marketData)
+                    #parseMarketData(code[0], marketData)
                     type0list = []
                 except Exception:
-                    self._logger.error("liangyee crawler crawl error stock code:" + code[0])
+                    self._logger.error("liangyee crawler crawl marketData error stock code:" + code[0])
             
             if (len(type1list) > 0):
                 try:
                     marketData = self.getMarketData(type1list)
-                    parseMarketData(code[0], marketData)
+                    #parseMarketData(code[0], marketData)
                     type1list = []
                 except Exception:
-                    self._logger.error("liangyee crawler crawl error stock code:" + code[0])
+                    self._logger.error("liangyee crawler crawl marketData error stock code:" + code[0])
 
 
                 
