@@ -6,8 +6,11 @@
 @time: 2018/04/14 
 """  
 
+import os
 import json
 from pymongo import MongoClient
+
+from Tools import encoder
 
 def refresh_liangyeeUser():
     with open ('Conf/liangyee.conf') as f:
@@ -17,7 +20,11 @@ def refresh_liangyeeUser():
     mongoconf = liangyeeConf['mongo']
     mongohost = mongoconf['host']
     mongoport = int(mongoconf['port'])
-
+    
+    INPUT_PATH = "liangyee/info/mailbox.json.64"
+    OUTPUT_PATH ="liangyee/info/mailbox.json"  
+    encoder.Base64DecodeFileToFile(INPUT_PATH,OUTPUT_PATH)
+        
     with open ('liangyee/info/mailbox.json') as f:
         mailboxs = json.load(f)
 
@@ -33,3 +40,4 @@ def refresh_liangyeeUser():
 
     conn.close()
     mySet.find()
+    os.remove("liangyee/info/mailbox.json")
