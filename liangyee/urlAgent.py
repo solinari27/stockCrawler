@@ -49,7 +49,6 @@ class urlAgent():
     #stock: stock id
     #Day: timestamp of the YY-MM-DD
     def getDailyKUrl(self, stock, startDay, endDay, type):
-        #check params ...
         if self._addKeyTime() < self._timesLimit:
             startDayStr = time.strftime('%Y-%m-%d', startDay)
             endDayStr = time.strftime('%Y-%m-%d', endDay)
@@ -59,7 +58,6 @@ class urlAgent():
             return ""
 
     def get5MinKUrl(self, stock, type):
-        #check params ...
         if self._addKeyTime() < self._timesLimit:
             url = r'http://stock.liangyee.com/bus-api/stock/freeStockMarketData/get5MinK?userKey=' + self._userkey + r'&symbol=' + str(stock) + r'&type=' + type
             return url
@@ -67,7 +65,6 @@ class urlAgent():
             return ""
 
     def getMarketDataUrl(self, stocks, type):
-        #check params ...
         if self._addKeyTime() < self._timesLimit:
             # this stock must be tuples
             symbolist = self._getSymbolString(stocks)

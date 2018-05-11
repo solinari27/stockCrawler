@@ -108,7 +108,7 @@ class liangyeeCrawler():
         self._conn.updateTime(code, date)
 
     def getDailyKData(self, stock, startDay, endDay, type):
-        url = self._agent.getDailyKUrl(stock, startDay, endDay)
+        url = self._agent.getDailyKUrl(stock, startDay, endDay, type)
         if url != "":
             return self._requestJson(url=url)['result']
         else:
@@ -121,7 +121,8 @@ class liangyeeCrawler():
                 return None
 
     def get5MinKData(self, stock, type):
-        url = self._agent.get5MinKUrl(stock)
+        url = self._agent.get5MinKUrl(stock, type)
+        print url
         if url != "":
             return self._requestJson(url=url)['result']
         else:
@@ -135,7 +136,7 @@ class liangyeeCrawler():
                 return None
 
     def getMarketData(self, stocks, type):
-        url = self._agent.getMarketDataUrl(stocks)
+        url = self._agent.getMarketDataUrl(stocks, type)
         if url != "":
             return self._requestJson(url=url)['result']
         else:
