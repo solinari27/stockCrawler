@@ -208,7 +208,8 @@ class liangyeeCrawler():
                 self._record5MinyKData(data)
             time.sleep(random.randint(1, 3))
 
-        def parseMarketData(code, marketdata):
+        def parseMarketData(codelist, marketdata):
+            code = 0
             for i in marketdata:
                 info = i.split(',')
                 name = info[0]
@@ -244,7 +245,7 @@ class liangyeeCrawler():
                 marketdataDateTime = info[30]
                 
                 data = {}
-                data['code'] = code
+                data['code'] = codelist[code]
                 data['name'] = name
                 data['today_start_price'] = today_start_price
                 data['yesterday_end_price'] = yesterday_end_price
@@ -279,6 +280,7 @@ class liangyeeCrawler():
                 data['sell5_count'] = sell5_count
                 data['sell5_price'] = sell5_price
                 self._recordMarketData(data)
+                code = code + 1
             time.sleep(random.randint(2, 3))
 
         stockcodelist = self._getstockslist()
@@ -319,7 +321,7 @@ class liangyeeCrawler():
                             continue
                         else:
                             marketData = self.getMarketData(type0list, type)
-                            #parseMarketData(code[0], marketData)
+                            parseMarketData(type0list, marketData)
                             type0list = []
                     elif (code[2] == 1):
                         type1list.append(code[0])
@@ -327,7 +329,7 @@ class liangyeeCrawler():
                             continue
                         else:
                             marketData = self.getMarketData(type1list, type)
-                            #parseMarketData(code[0], marketData)
+                            parseMarketData(type1list, marketData)
                             type1list = []
 
                 
@@ -335,7 +337,7 @@ class liangyeeCrawler():
             if (len(type0list) > 0):
                 try:
                     marketData = self.getMarketData(type0list)
-                    #parseMarketData(code[0], marketData)
+                    parseMarketData(type0list, marketData)
                     type0list = []
                 except Exception:
                     self._logger.error("liangyee crawler crawl marketData error stock code:" + code[0])
@@ -343,7 +345,7 @@ class liangyeeCrawler():
             if (len(type1list) > 0):
                 try:
                     marketData = self.getMarketData(type1list)
-                    #parseMarketData(code[0], marketData)
+                    parseMarketData(type1list, marketData)
                     type1list = []
                 except Exception:
                     self._logger.error("liangyee crawler crawl marketData error stock code:" + code[0])

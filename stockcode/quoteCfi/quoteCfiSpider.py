@@ -26,7 +26,7 @@ class quoteCfiSpider():
         os.system("scrapy runspider stockcode/spider/scrapyCfiShenzhen.py -o Data/quoteCfiShenzhen.json --logfile Log/quoteCfiSpider.log --loglevel ERROR")
 
     def inputDB(self):
-        #self._conn.cleanStock()
+        # self._conn.cleanStock()
         
         with open("Data/quoteCfiShanghai.json", 'r') as load_f:
             stocks = json.load(load_f)
