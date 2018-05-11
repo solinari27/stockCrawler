@@ -122,7 +122,6 @@ class liangyeeCrawler():
 
     def get5MinKData(self, stock, type):
         url = self._agent.get5MinKUrl(stock, type)
-        print url
         if url != "":
             return self._requestJson(url=url)['result']
         else:
