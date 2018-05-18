@@ -156,6 +156,9 @@ class liangyeeCrawler():
     def _recordMarketData(self, data):
         self._conn.insertMarketData(data)
 
+    def cleanliangyee(self):
+        self._conn.cleandata()
+
     def crawlliangyee(self, action):
         def date_cmp(date1, date2):
             if ((date1.tm_year == date2.tm_year) and (date1.tm_mon == date2.tm_mon) and (date1.tm_mday == date2.tm_mday)):

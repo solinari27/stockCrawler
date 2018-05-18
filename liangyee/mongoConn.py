@@ -114,6 +114,10 @@ class mongoConn():
     def insertMarketData(self, data):
         self._datadb.marketData.insert(data)
 
+    def cleandata(self):
+        self._datadb.fiveMinKData.drop({})
+        self._datadb.marketData.drop({})
+
     def getUserID(self, id, times, debug):
         #TODO update time
         key = None
