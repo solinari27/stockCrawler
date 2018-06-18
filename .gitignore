@@ -7,6 +7,7 @@ __pycache__/
 *.conf
 *.ini
 *.json
+*.csv
 
 # C extensions
 *.so
