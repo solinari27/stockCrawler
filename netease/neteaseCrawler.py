@@ -8,7 +8,7 @@
 
 import json
 import requests
-import pandas as pd
+import csv,json
 
 
 class neteaseCrawler():
@@ -16,16 +16,20 @@ class neteaseCrawler():
         return
 
     def requestcsv(self, code):
+        filename = '../Data/' + code + '.csv'
         url = "http://quotes.money.163.com/service/chddata.html?code=0" + code + "&start=20071105&end=20150618&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP"
         response = requests.get(url=url)
-        filename = '../Data/' + code + '.csv'
         with open(filename, 'w') as f:
             f.write(response.content)
         f.close()
 
     def loadjson(self, code):
-        df1 = pd.read_csv('../Data/' + code + '.csv')
-        print df1
+        filename = '../Data/' + code + '.csv'
+        cf = open(filename, 'r')
+        for x in csv.DictReader(cf):
+            d = json.dumps(x, indent=6, separators=(',', ':'), ensure_ascii=False)  # ,sort_keys=True
+            print d
+        cf.close()
 
 
 # netease
