@@ -76,7 +76,7 @@ class neteaseCrawler():
             results = []
             for x in csv.DictReader(cf):
                 d = json.dumps(x, indent=4, separators=(',', ':'), ensure_ascii=False)  # ,sort_keys=True
-                print d
+
                 results.append(d)
             cf.close()
             return results
