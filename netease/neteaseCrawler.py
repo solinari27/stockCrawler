@@ -32,7 +32,7 @@ class neteaseCrawler():
         with open(filename, 'w') as f:
             f.write(response.content.decode('gb2312').encode('utf-8'))
         f.close()
-        results = loadjson()
+        return loadjson()
         os.remove(filename)
 
 # netease
