@@ -65,6 +65,10 @@ class neteaseCrawler():
         # self._conn = mongoConn.mongoConn()
         self._logger.debug("netease crawler init mongo connection.")
 
+    def __del__(self):
+        self._logger.warn("netease crawler stopped.")
+        self._logger.removeHandler(self._logfile_handler)
+
     def requestJson(self, code):
         def loadjson():
             cf = open(filename, 'r')
