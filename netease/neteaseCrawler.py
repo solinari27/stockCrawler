@@ -76,8 +76,7 @@ class neteaseCrawler():
             results = []
             for x in csv.DictReader(cf):
                 d = json.dumps(x, indent=4, separators=(',', ':'), ensure_ascii=False)  # ,sort_keys=True
-                for i in d:
-                    print i
+                print d
                 results.append(d)
             cf.close()
             return results
@@ -93,7 +92,11 @@ class neteaseCrawler():
 
     def crawl(self):
         stocks = self._conn.getStocks()
-        print stocks
+        for item in stocks:
+            code = item[0]
+            type = item[1]
+            print code, type
+
 
 
 
