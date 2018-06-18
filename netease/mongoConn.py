@@ -18,7 +18,7 @@ class mongoConn():
 
     def __init__(self):
         #注意路径配置
-        with open('Conf/liangyee.conf') as f:
+        with open('Conf/netease.conf') as f:
             self._mongoConf = json.load(f)
 
         #init logging:
@@ -63,12 +63,12 @@ class mongoConn():
         self._username = self._dbConf['username']
         self._password = self._dbConf['password']
 
-        self._logger.warn("stockcode crawler started.")
+        self._logger.warn("netease crawler mongo connection started.")
 
         try:
             self._conn = MongoClient(self._host, self._port)
             if not self._check_connected(self._conn):
-                self._logger.error("mongodb connection failed.")
+                self._logger.error("netease crawler mongo connection failed.")
                 sys.exit(1)
 
             # self.connected = self.db.authenticate (self._username, self._password)
@@ -76,13 +76,13 @@ class mongoConn():
             self._datadb = self._conn.liangyeestockdata
 
         except Exception:
-            self._logger.error("mongodb connection failed.")
+            self._logger.error("netease crawler mongo connection failed.")
             # sys.exit (1)
 
     def __del__(self):
-        self._logger.warn("stockcode crawler stopped.")
-        self._logger.removeHandler(self._logfile_handler)
+        self._logger.warn("netease crawler mongo connection stopped.")
         self._conn.close()
+        self._logger.removeHandler(self._logfile_handler)
 
     # 检查是否连接成功
     def _check_connected (self, conn):
@@ -93,45 +93,10 @@ class mongoConn():
         try:
             stocks = self._stockdb.stocklist.find()
             for stock in stocks:
-                stockslist.append([stock['code'] , stock['updatetime'] , stock['type']])
+                stockslist.append([stock['code'], stock['type']])
             return stockslist
         except Exception:
-            self._logger.error("mongodb get stocklist error.")
+            self._logger.error("netease crawler mongodb get stocklist error.")
 
-    def updateTime(self, code, date):
-        data = {}
-        un_time = time.mktime(date)
-        data['updatetime'] = un_time
-        self._stockdb.stocklist.update({"code": code}, {"$set": data})
-        return
 
-    def insertDailyKData(self, data):
-        self._datadb.dailyKData.insert(data)
-
-    def insert5MinKData(self, data):
-        self._datadb.fiveMinKData.insert(data)
-
-    def insertMarketData(self, data):
-        self._datadb.marketData.insert(data)
-
-    def cleandata(self):
-        self._conn.drop_database("liangyeestockdata")
-
-    def getUserID(self, id, times, debug):
-        #TODO update time
-        key = None
-        timelimit = 0
-
-        try:
-            if (id != None):
-                data = {}
-                data ['times'] = times;
-                self._stockdb.liangyeeuser.update({"key": id}, {"$set": data})
-            nextid = list(self._stockdb.liangyeeuser.find({"debug": debug, "times": 0}))[0]
-            key = nextid['key']
-            timelimit = nextid['timelimit']
-        except Exception:
-            return None, 0
-
-        return key, timelimit
 

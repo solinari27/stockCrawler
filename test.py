@@ -2,4 +2,5 @@ import netease.neteaseCrawler
 
 # netease
 n = netease.neteaseCrawler.neteaseCrawler()
-print n.requestJson('601857')
+# n.crawl()
+n.requestJson('601857')

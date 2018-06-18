@@ -14,6 +14,7 @@ import logging
 import time
 
 from Tools.swtich import switch
+import mongoConn
 
 
 class neteaseCrawler():
@@ -62,7 +63,7 @@ class neteaseCrawler():
         self._conf = self._liangyeeConf['crawler']
         self._debug = self._conf['debug']
         self._repeatTime = self._conf['requestrepeat']
-        # self._conn = mongoConn.mongoConn()
+        self._conn = mongoConn.mongoConn()
         self._logger.debug("netease crawler init mongo connection.")
 
     def __del__(self):
@@ -75,6 +76,8 @@ class neteaseCrawler():
             results = []
             for x in csv.DictReader(cf):
                 d = json.dumps(x, indent=4, separators=(',', ':'), ensure_ascii=False)  # ,sort_keys=True
+                for i in d:
+                    print i
                 results.append(d)
             cf.close()
             return results
@@ -88,8 +91,10 @@ class neteaseCrawler():
         return loadjson()
         os.remove(filename)
 
-# # netease
-# n = neteaseCrawler()
-# n.requestJson('601857')
+    def crawl(self):
+        stocks = self._conn.getStocks()
+        print stocks
+
+
 
 
