@@ -101,7 +101,7 @@ class neteaseCrawler():
         for item in stocks:
             code = item[0]
             type = item[1]
-            print code, type
+            
 
 
 
