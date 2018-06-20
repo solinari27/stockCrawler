@@ -13,3 +13,6 @@
     "涨跌额":"27.26",
     "成交量":"1547499487",
     "收盘价":"43.96"
+
+
+    自定义列可定义TCLOSE收盘价 ;HIGH最高价;LOW最低价;TOPEN开盘价;LCLOSE前收盘价;CHG涨跌额;PCHG涨跌幅;TURNOVER换手率;VOTURNOVER成交量;VATURNOVER成交金额;TCAP总市值;MCAP流通市值这些值。

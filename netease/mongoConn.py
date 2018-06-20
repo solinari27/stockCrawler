@@ -98,5 +98,6 @@ class mongoConn():
         except Exception:
             self._logger.error("netease crawler mongodb get stocklist error.")
 
-
+    def insertDailyData(self, data):
+        self._datadb.dailydata.insert(data)
 
