@@ -73,7 +73,7 @@ class mongoConn():
 
             # self.connected = self.db.authenticate (self._username, self._password)
             self._stockdb = self._conn.stockinfo
-            self._datadb = self._conn.liangyeestockdata
+            self._datadb = self._conn.neteasestockdata
 
         except Exception:
             self._logger.error("netease crawler mongo connection failed.")
