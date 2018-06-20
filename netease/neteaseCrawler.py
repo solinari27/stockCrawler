@@ -79,8 +79,10 @@ class neteaseCrawler():
                 d = json.dumps(x, indent=4, separators=(',', ':'), ensure_ascii=False)  # ,sort_keys=True
                 d2 = simplejson.loads(d)
                 for key in d2.keys():
-                    print d2[key]
-
+                    try:
+                        d2[key] = float(d2[key])
+                    except:
+                        continue
                 results.append(d2)
             cf.close()
             return results
