@@ -84,6 +84,7 @@ class neteaseCrawler():
                     except:
                         continue
                 results.append(d2)
+                self._conn.insertDailyData(d2)
             cf.close()
             return results
 
@@ -95,6 +96,7 @@ class neteaseCrawler():
         f.close()
         return loadjson()
         os.remove(filename)
+
 
     def crawl(self):
         stocks = self._conn.getStocks()
