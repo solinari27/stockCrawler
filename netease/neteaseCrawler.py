@@ -71,7 +71,7 @@ class neteaseCrawler():
         self._logger.warn("netease crawler stopped.")
         self._logger.removeHandler(self._logfile_handler)
 
-    def requestJson(self, code, startdate, enddate):
+    def requestJson(self, type, code, startdate, enddate):
         def loadjson():
             cf = open(filename, 'r')
             results = []
@@ -89,7 +89,8 @@ class neteaseCrawler():
             return results
 
         filename = 'Data/' + code + '.csv'
-        url = "http://quotes.money.163.com/service/chddata.html?code=0" + code + "&start=" + startdate + "&end=" + enddate + "&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP"
+        url = "http://quotes.money.163.com/service/chddata.html?code=" + str(type) + code + "&start=" + startdate + "&end=" + enddate + "&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP"
+        print url
         response = requests.get(url = url)
 
         # self._logger.info("netease crawler crawl daily data get response: ", response.status_code)
