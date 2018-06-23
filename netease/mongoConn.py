@@ -100,4 +100,16 @@ class mongoConn():
 
     def insertDailyData(self, data):
         self._datadb.dailydata.insert(data)
+    
+    def getTime(self, code):
+        date = self._datadb.datatime.find({"code": code})
+        if date.count() == 0:
+            self._datadb.datatime.insert({"code": code, "date": "20000101"})
+            return "20000101"
+        else:
+            print date
+            return date
+        
+    def updateTime(self, code, enddate):
+        self._datadb.datatime.update({"code": code}, {"$set":{"date":enddate}})
 
