@@ -65,6 +65,8 @@ class neteaseCrawler():
         self._repeatTime = self._conf['requestrepeat']
         self._conn = mongoConn.mongoConn()
         self._logger.debug("netease crawler init mongo connection.")
+        self._keylist = {}
+#        self._keylist[]
 
     def __del__(self):
         self._logger.warn("netease crawler stopped.")

@@ -9,5 +9,5 @@ import time
 #print '%02d' % s.tm_mday
 # netease
 n = netease.neteaseCrawler.neteaseCrawler()
-n.crawl()
-#print n.requestJson(0, '601857', '20071105', '20150618')
+#n.crawl()
+print n.requestJson(0, '600027', '20071105', '20150618')
