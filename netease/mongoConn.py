@@ -99,7 +99,7 @@ class mongoConn():
             self._logger.error("netease crawler mongodb get stocklist error.")
 
     def insertDailyData(self, data):
-        if (self._datadb.dailydata.find({"code": data["code"], "DATE": data["DATE"]}).count() == 0):
+        if (self._datadb.dailydata.find({"CODE": data["CODE"], "DATE": data["DATE"]}).count() == 0):
             self._datadb.dailydata.insert(data)
         else:
             return
