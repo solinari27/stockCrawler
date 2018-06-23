@@ -89,7 +89,7 @@ class neteaseCrawler():
             return results
 
         filename = 'Data/' + code + '.csv'
-        url = "http://quotes.money.163.com/service/chddata.html?code=" + str(type) + code + "&start=" + startdate + "&end=" + enddate + "&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP"
+        url = "http://quotes.money.163.com/service/chddata.html?code=" + str(type) + str(code) + "&start=" + startdate + "&end=" + enddate + "&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP"
         response = requests.get(url = url)
 
         # self._logger.info("netease crawler crawl daily data get response: ", response.status_code)
@@ -107,13 +107,16 @@ class neteaseCrawler():
         year = s.tm_year
         mon = s.tm_mon
         day = s.tm_mday
-        enddate = str(year) + str(mon) + str(day)
+        enddate = str(year) + '%02d' % (mon) + '%02d' % (day)
 
         stocks = self._conn.getStocks()
         for item in stocks:
             code = item[0]
             type = item[1]
-            self._logger.info("netease crawler crawl daily data code:" + code[0])
+            results = self.requestJson(type, code, startdate, enddate)
+            print code, results
+            self._logger.info("netease crawler crawl daily data code:" + str(code))
+            time.sleep(3)
 
 
 
