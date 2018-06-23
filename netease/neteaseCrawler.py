@@ -102,6 +102,13 @@ class neteaseCrawler():
         return loadjson()
 
     def crawl(self):
+        startdate = "20000101"
+        s = time.localtime(time.time())
+        year = s.tm_year
+        mon = s.tm_mon
+        day = s.tm_mday
+        enddate = str(year) + str(mon) + str(day)
+
         stocks = self._conn.getStocks()
         for item in stocks:
             code = item[0]
