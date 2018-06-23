@@ -8,7 +8,7 @@ import time
 #print '%02d' % s.tm_mon
 #print '%02d' % s.tm_mday
 # netease
-#n = netease.neteaseCrawler.neteaseCrawler()
-#n.crawl()
+n = netease.neteaseCrawler.neteaseCrawler()
+n.crawl()
 #print n.requestJson(0, '600027', '20071105', '20150618')
 

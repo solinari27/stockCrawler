@@ -65,26 +65,42 @@ class neteaseCrawler():
         self._repeatTime = self._conf['requestrepeat']
         self._conn = mongoConn.mongoConn()
         self._logger.debug("netease crawler init mongo connection.")
+        
         self._keylist = {}
-#        self._keylist[]
+        self._keylist[u'\u6da8\u8dcc\u989d'] = 'CHG'
+        self._keylist[u'\u80a1\u7968\u4ee3\u7801'] = 'CODE'
+        self._keylist[u'\u603b\u5e02\u503c'] = 'TCAP'
+        self._keylist[u'\u524d\u6536\u76d8'] = 'LCLOSE'
+        self._keylist[u'\u6700\u9ad8\u4ef7'] = 'HIGH'
+        self._keylist[u'\u6d41\u901a\u5e02\u503c'] = 'MCAP'
+        self._keylist[u'\u6700\u4f4e\u4ef7'] = 'LOW'
+        self._keylist[u'\u6210\u4ea4\u91cf'] = 'VOTURNOVER'
+        self._keylist[u'\u65e5\u671f'] = 'DATE'
+        self._keylist[u'\u6362\u624b\u7387'] = 'TURNOVER'
+        self._keylist[u'\u540d\u79f0'] = 'NAME'
+        self._keylist[u'\u6da8\u8dcc\u5e45'] = 'PCHG'
+        self._keylist[u'\u5f00\u76d8\u4ef7'] = 'TOPEN'
+        self._keylist[u'\u6536\u76d8\u4ef7'] = 'TCLOSE'
+        self._keylist[u'\u6210\u4ea4\u91d1\u989d'] = 'VATURNOVER'
 
     def __del__(self):
         self._logger.warn("netease crawler stopped.")
         self._logger.removeHandler(self._logfile_handler)
 
-    def requestJson(self, type, code, startdate, enddate):
+    def _requestJson(self, type, code, startdate, enddate):
         def loadjson():
             cf = open(filename, 'r')
             results = []
             for x in csv.DictReader(cf):
                 d = json.dumps(x, indent=4, separators=(',', ':'), ensure_ascii=False)  # ,sort_keys=True
                 d2 = json.loads(d)
+                d3 = {}
                 for key in d2.keys():
                     try:
-                        d2[key] = float(d2[key])
+                        d3[self._keylist[key]] = float(d2[key])
                     except:
-                        continue
-                results.append(d2)
+                        d3[self._keylist[key]] = d2[key]
+                results.append(d3)
                 # self._conn.insertDailyData(d2)
             cf.close()
             os.remove(filename)
@@ -115,10 +131,12 @@ class neteaseCrawler():
         for item in stocks:
             code = item[0]
             type = item[1]
-            results = self.requestJson(type, code, startdate, enddate)
+            # startdate
+            results = self._requestJson(type, code, startdate, enddate)
             print code, results
+            # self._conn.insertDailyData(item)
             self._logger.info("netease crawler crawl daily data code:" + str(code))
-            time.sleep(3)
+            time.sleep(30)
 
 
 
