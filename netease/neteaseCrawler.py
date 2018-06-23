@@ -85,11 +85,11 @@ class neteaseCrawler():
                 results.append(d2)
                 # self._conn.insertDailyData(d2)
             cf.close()
+            os.remove(filename)
             return results
 
         filename = 'Data/' + code + '.csv'
         url = "http://quotes.money.163.com/service/chddata.html?code=" + str(type) + code + "&start=" + startdate + "&end=" + enddate + "&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP"
-        print url
         response = requests.get(url = url)
 
         # self._logger.info("netease crawler crawl daily data get response: ", response.status_code)
@@ -98,9 +98,8 @@ class neteaseCrawler():
         with open(filename, 'w') as f:
             f.write(response.content.decode('gb2312').encode('utf-8'))
         f.close()
+        time.sleep(1)
         return loadjson()
-        os.remove(filename)
-
 
     def crawl(self):
         stocks = self._conn.getStocks()
