@@ -99,16 +99,21 @@ class mongoConn():
             self._logger.error("netease crawler mongodb get stocklist error.")
 
     def insertDailyData(self, data):
-        self._datadb.dailydata.insert(data)
+        if (self._datadb.dailydata.find({"code": data["code"], "DATE": data["DATE"]}).count() == 0):
+            self._datadb.dailydata.insert(data)
+        else:
+            return
     
     def getTime(self, code):
+        startdate = "20000101"
         date = self._datadb.datatime.find({"code": code})
         if date.count() == 0:
-            self._datadb.datatime.insert({"code": code, "date": "20000101"})
-            return "20000101"
+            self._datadb.datatime.insert({"code": code, "date": startdate})
+            return startdate
         else:
-            print date
-            return date
+            for i in date:
+                enddate = i["date"]
+            return enddate
         
     def updateTime(self, code, enddate):
         self._datadb.datatime.update({"code": code}, {"$set":{"date":enddate}})

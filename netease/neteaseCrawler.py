@@ -120,7 +120,7 @@ class neteaseCrawler():
         return loadjson()
 
     def crawl(self):
-        startdate = "20000101"
+#        startdate = "20000101"
         s = time.localtime(time.time())
         year = s.tm_year
         mon = s.tm_mon
@@ -131,12 +131,11 @@ class neteaseCrawler():
         for item in stocks:
             code = item[0]
             type = item[1]
-            # startdate
-            self._conn.getTime(code)
+            startdate = self._conn.getTime(code)
             results = self._requestJson(type, code, startdate, enddate)
             for item in results:
                 self._conn.insertDailyData(item)
-                self._conn.updateTime(code, enddate)
+            self._conn.updateTime(code, enddate)
             self._logger.info("netease crawler crawl daily data code:" + str(code))
             time.sleep(30)
 
