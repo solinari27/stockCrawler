@@ -7,7 +7,6 @@
 """
 
 import json
-import simplejson
 import csv
 import os
 import requests
@@ -77,7 +76,7 @@ class neteaseCrawler():
             results = []
             for x in csv.DictReader(cf):
                 d = json.dumps(x, indent=4, separators=(',', ':'), ensure_ascii=False)  # ,sort_keys=True
-                d2 = simplejson.loads(d)
+                d2 = json.loads(d)
                 for key in d2.keys():
                     try:
                         d2[key] = float(d2[key])
