@@ -120,3 +120,7 @@ class mongoConn():
         self._datadb.datatime.update({"code": code}, {"$set":{"date":enddate}})
         self._logger.info("netease crawler update datetime code: " + code + " date: " + enddate + ".")
 
+    def cleanDB(self):
+        self._datadb.datatime.remove({})
+        self._datadb.dailydata.remove({})
+

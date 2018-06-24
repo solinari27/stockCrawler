@@ -144,6 +144,9 @@ class neteaseCrawler():
             self._logger.info("netease crawler crawl daily data code:" + str(code))
             time.sleep(30)
 
+    def clean(self):
+        self._conn.cleanDB()
+
 
 
 
