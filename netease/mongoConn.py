@@ -101,6 +101,7 @@ class mongoConn():
     def insertDailyData(self, data):
         if (self._datadb.dailydata.find({"CODE": data["CODE"], "DATE": data["DATE"]}).count() == 0):
             self._datadb.dailydata.insert(data)
+            self._logger.info("netease crawler insert data code: " + data["CODE"] + " date: " + data["DATE"] + ".")
         else:
             return
     
@@ -117,4 +118,5 @@ class mongoConn():
         
     def updateTime(self, code, enddate):
         self._datadb.datatime.update({"code": code}, {"$set":{"date":enddate}})
+        self._logger.info("netease crawler update datetime code: " + code + " date: " + enddate + ".")
 
