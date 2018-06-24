@@ -106,7 +106,7 @@ class mongoConn():
             return
     
     def getTime(self, code):
-        startdate = "20000101"
+        startdate = "19920101"
         date = self._datadb.datatime.find({"code": code})
         if date.count() == 0:
             self._datadb.datatime.insert({"code": code, "date": startdate})
