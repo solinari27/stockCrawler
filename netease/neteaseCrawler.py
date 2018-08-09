@@ -141,6 +141,7 @@ class neteaseCrawler():
             trytime = 0
             while ((results == []) and (trytime < self._repeatTime)):
                 results = self._requestJson (type, code, startdate, enddate)
+                trytime += 1
                 time.sleep(10)
             if (results != []):
                 for item in results:
