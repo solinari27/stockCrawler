@@ -106,17 +106,23 @@ class mongoConn():
             return
     
     def getTime(self, code):
-        startdate = "19920101"
-        enddate = startdate
-        date = self._datadb.datatime.find({"code": code})
-        if date.count() == 0:
-            self._datadb.datatime.insert({"code": code, "date": startdate})
-            return startdate
-        else:
-            for i in date:
-                if (i["date"]>enddate):
-                    enddate = i["date"]
-            return enddate
+        # startdate = "19920101"
+        # enddate = startdate
+        # date = self._datadb.datatime.find({"code": code})
+        # if date.count() == 0:
+        #     self._datadb.datatime.insert({"code": code, "date": startdate})
+        #     return startdate
+        # else:
+        #     for i in date:
+        #         if (i["date"]>enddate):
+        #             enddate = i["date"]
+        #     return enddate
+        try:
+            enddate = self._datadb.datatime.find ({"code": code}).sort ({"date": -1}).limit (1)
+        except:
+            self._datadb.datatime.insert ({"code": code, "date": "19920101"})
+            enddate = "19920101"
+        return enddate
         
     def updateTime(self, code, enddate):
         self._datadb.datatime.update({"code": code}, {"$set":{"date":enddate}})
