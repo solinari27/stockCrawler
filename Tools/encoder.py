@@ -8,16 +8,26 @@ import sys
 GLOBAL_INPUT_PATH=""  
 GLOBAL_OUTPUT_PATH=""
 
-#convert file stream to base64 and save to file  
-def Base64EncodeFileToFile(inputFile,outputFile):  
+def Base64EncodeFileToFile(inputFile,outputFile):
+    """
+    convert file stream to base64 and save to file
+    :param inputFile:
+    :param outputFile:
+    :return:
+    """
     fread = open(inputFile, 'rb')  
     fwrite= open(outputFile, 'wb')  
     base64.encode(fread,fwrite)  
     fread.close()  
     fwrite.close()  
-    
-#decode file stream to orginal and save to file  
-def Base64DecodeFileToFile(inputFile,outputFile):  
+
+def Base64DecodeFileToFile(inputFile,outputFile):
+    """
+    decode file stream to orginal and save to file
+    :param inputFile:
+    :param outputFile:
+    :return:
+    """
     fileRead= open(inputFile, 'rb')  
     fileWrite = open(outputFile, 'wb')  
     base64.decode(fileRead, fileWrite)  
