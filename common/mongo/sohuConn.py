@@ -13,6 +13,8 @@ from pymongo import MongoClient
 class SohuConn(mongoConn):
     def __init__(self, confile=None):
         assert confile is not None
+
+        self.__name__ = "sohuCrawler Mongo Conn"
         # 注意路径配置
         with open (confile) as f:
             self._mongoConf = json.load (f)
