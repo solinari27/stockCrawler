@@ -19,8 +19,9 @@ class Sohu_crawler(scrapy.Spider):
         """
         headers = {}
         cookies = {}
-        url = get_url(str(300288))
-        yield scrapy.Request (url=url, headers=headers, callback=self.parse, cookies=cookies)
+        urls = [get_url(str(300288)), get_url(str(600000))]
+        for url in urls:
+            yield scrapy.Request (url=url, headers=headers, callback=self.parse, cookies=cookies)
 
     def parse(self, response):
         print response.body
