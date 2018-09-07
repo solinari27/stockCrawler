@@ -7,6 +7,7 @@
 """  
 import scrapy
 from sohu.urltools import get_url
+from common.mongo.sohuConn import SohuConn
 
 class Sohu_crawler(scrapy.Spider):
     name = "SohuCrawler"
@@ -19,9 +20,18 @@ class Sohu_crawler(scrapy.Spider):
         """
         headers = {}
         cookies = {}
-        urls = [get_url(str(300288)), get_url(str(600000))]
-        for url in urls:
-            yield scrapy.Request (url=url, headers=headers, callback=self.parse, cookies=cookies)
+        conn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
+        stocklist = conn.getStocks()
+        stocklist = [[300288, 1]]
+        print stocklist
+        for stock in stocklist:
+            code = stock[0]
+            type = stock[1]
+            date = conn.getTime(code=code)
+            url = get_url(str(code))
+            # FIXME: use date to make url
+            yield scrapy.Request(url=url, headers=headers, callback=self.parse, cookies=cookies)
+            # FIXME: add time intervals
 
     def parse(self, response):
         print response.body
