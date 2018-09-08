@@ -22,8 +22,7 @@ class Sohu_crawler(scrapy.Spider):
         cookies = {}
         conn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
         stocklist = conn.getStocks()
-        stocklist = [[300288, 1]]
-        print stocklist
+
         for stock in stocklist:
             code = stock[0]
             type = stock[1]
