@@ -16,7 +16,16 @@ class CrawlerPipeline(object):
         sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
         sohuconn.set_name("stock_" + str(code) + " pipeline")
 
-        for data in raw_data["hq"]:
-            print data
+        for codedata in raw_data["hq"]:
+            print codedata
+            # parse raw data to data
+            data = {
+                "CODE": code,
+                "DATE": date
+            }
             # add to mongo
+            # sohuconn.insertDailyData()
         # return item
+
+        # update date
+        # sohuconn.updateTime()
