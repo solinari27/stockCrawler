@@ -5,7 +5,12 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
+import json
 
 class CrawlerPipeline(object):
     def process_item(self, item, spider):
+        print(spider)
+        print(type(spider))
+        print spider.name
+
         return item
