@@ -41,7 +41,12 @@ class Sohu_crawler(scrapy.Spider):
             start_date = conn.getTime(code=code)
             end_date = get_today()
             url = get_url(code=str(code), start=start_date, end=end_date)
-            yield scrapy.Request(url=url, headers=headers, callback=self.parse, cookies=cookies)
+            meta = {
+                "url": url,
+                "code": code,
+                "date": end_date
+            }
+            yield scrapy.Request(url=url, headers=headers, callback=self.parse, cookies=cookies, meta=meta)
             # FIXME: add time intervals in scrapy
             time.sleep(10)
 
@@ -52,6 +57,10 @@ class Sohu_crawler(scrapy.Spider):
         jsonbody = json.loads(jsonstr.decode("gb2312").encode("utf-8"))
         item = CrawlerItem()
         item["raw_data"] = jsonbody
+        item["url"] = response.meta["url"]
+        item["code"] = response.meta["code"]
+        item["date"] = response.meta["date"]
+
         # 将item提交给pipelines
         yield item
 
