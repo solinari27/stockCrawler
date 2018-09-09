@@ -9,10 +9,6 @@ import json
 
 class CrawlerPipeline(object):
     def process_item(self, item, spider):
-        print(spider)
-        print(type(spider))
-        print spider.name
-
-        print item.get("raw_data")
-
+        raw_data = item.get("raw_data")
+        print raw_data
         return item

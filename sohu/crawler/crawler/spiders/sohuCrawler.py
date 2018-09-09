@@ -46,8 +46,10 @@ class Sohu_crawler(scrapy.Spider):
             time.sleep(10)
 
     def parse(self, response):
-        print response.body
-        jsonbody = json.dumps(response.body.decode("gb2312").encode("utf-8"))
+        # get json string
+        length = len(response.body)
+        jsonstr = response.body[22:length-3]
+        jsonbody = json.loads(jsonstr.decode("gb2312").encode("utf-8"))
         item = CrawlerItem()
         item["raw_data"] = jsonbody
         # 将item提交给pipelines
