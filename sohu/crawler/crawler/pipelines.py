@@ -13,4 +13,6 @@ class CrawlerPipeline(object):
         print(type(spider))
         print spider.name
 
+        print item.get("raw_data")
+
         return item

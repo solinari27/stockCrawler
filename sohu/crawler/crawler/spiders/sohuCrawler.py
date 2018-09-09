@@ -6,6 +6,7 @@
 @time: 2018/08/28 
 """
 import time
+import json
 import scrapy
 from sohu.urltools import get_url
 from common.mongo.sohuConn import SohuConn
@@ -46,7 +47,9 @@ class Sohu_crawler(scrapy.Spider):
 
     def parse(self, response):
         print response.body
+        jsonbody = json.dumps(response.body.decode("gb2312").encode("utf-8"))
         item = CrawlerItem()
+        item["raw_data"] = jsonbody
         # 将item提交给pipelines
         yield item
 

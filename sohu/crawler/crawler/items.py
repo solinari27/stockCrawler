@@ -14,4 +14,5 @@ class CrawlerItem(scrapy.Item):
     # name = scrapy.Field()
     url = Field ()  # 保存抓取数据的url
     code = Field () # 代码
+    date = Field () # 日期
     raw_data = Field () # 原始数据
