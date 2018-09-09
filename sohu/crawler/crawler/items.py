@@ -5,7 +5,6 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
 
-import json
 import scrapy
 from scrapy.item import Item, Field
 
