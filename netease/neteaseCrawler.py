@@ -142,13 +142,13 @@ class neteaseCrawler():
             while ((results == []) and (trytime < self._repeatTime)):
                 results = self._requestJson (type, code, startdate, enddate)
                 trytime += 1
-                time.sleep(15)
+                time.sleep(5)
             if (results != []):
                 for item in results:
                     self._conn.insertDailyData(item)
                 self._conn.updateTime(code, enddate)
                 self._logger.info("netease crawler crawl daily data code:" + str(code))
-            time.sleep(20)
+            time.sleep(15)
 
     def clean(self):
         self._conn.cleanDB()
