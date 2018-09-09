@@ -9,6 +9,7 @@ import time
 import scrapy
 from sohu.urltools import get_url
 from common.mongo.sohuConn import SohuConn
+from sohu.crawler.crawler.items import CrawlerItem
 
 class Sohu_crawler(scrapy.Spider):
     name = "SohuCrawler"
@@ -45,5 +46,8 @@ class Sohu_crawler(scrapy.Spider):
 
     def parse(self, response):
         print response.body
+        item = CrawlerItem()
+        # 将item提交给pipelines
+        yield item
 
 
