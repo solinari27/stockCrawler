@@ -41,6 +41,10 @@ class SohuConn(mongoConn):
         self._conn.close()
         self._logger.removeHandler(self._logfile_handler)
 
+    def set_name(self, name=None):
+        assert name is not None
+        self.__name__ = name
+
     def getStocks(self):
         stockslist = []
         try:
