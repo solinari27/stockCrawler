@@ -51,6 +51,10 @@ class Sohu_crawler(scrapy.Spider):
             time.sleep(10)
 
     def parse(self, response):
+        """
+        :param response:
+        :return:
+        """
         # get json string
         length = len(response.body)
         jsonstr = response.body[22:length-3]
