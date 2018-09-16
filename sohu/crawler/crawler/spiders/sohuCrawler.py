@@ -33,7 +33,6 @@ class Sohu_crawler(scrapy.Spider):
         cookies = {}
         conn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
         stocklist = conn.getStocks()
-        stocklist = [(600000, 0)]
 
         for stock in stocklist:
             code = stock[0]
@@ -48,7 +47,7 @@ class Sohu_crawler(scrapy.Spider):
             }
             yield scrapy.Request(url=url, headers=headers, callback=self.parse, cookies=cookies, meta=meta)
             # FIXME: add time intervals in scrapy
-            time.sleep(10)
+            time.sleep(15)
 
     def parse(self, response):
         """
