@@ -58,7 +58,7 @@ class SohuConn(mongoConn):
     def insertDailyData(self, data):
         if (self._datadb.dailydata.find ({"CODE": data["CODE"], "DATE": data["DATE"]}).count () == 0):
             self._datadb.dailydata.insert (data)
-            self._logger.info (self.__name__ + " insert data code: " + data["CODE"] + " date: " + data["DATE"] + ".")
+            self._logger.info ("{} insert data code: {} date: {} .".format(self.__name__, data["CODE"], data["DATE"]))
         else:
             return
 
@@ -72,7 +72,7 @@ class SohuConn(mongoConn):
 
     def updateTime(self, code, enddate):
         self._datadb.datatime.update ({"code": code}, {"$set": {"date": enddate}})
-        self._logger.info (self.__name__ + " update datetime code: " + code + " date: " + enddate + ".")
+        self._logger.info("{} update datetime code: {} date: {} .".format(self.__name__, code, enddate))
 
     def cleanDB(self):
         self._datadb.datatime.remove ({})

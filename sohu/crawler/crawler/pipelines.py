@@ -5,7 +5,6 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-import json
 from common.mongo.sohuConn import SohuConn
 
 class CrawlerPipeline(object):
@@ -18,32 +17,19 @@ class CrawlerPipeline(object):
         sohuconn.set_name("stock_" + str(code) + " pipeline")
 
         for codedata in raw_data["hq"]:
-            print codedata
-            # jsondata = json.load(codedata)
-            # print jsondata
-            for item in codedata:
-                pass
-                # info = {"CODE": code,
-                #         "DATE": item[0],
-                #         "TOPEN": item[1],
-                #         "TCLOSE": item[2],
-                #         "CHG": item[3],
-                #         "PCHG": item[4],
-                #         "LOW": item[5],
-                #         "HIGH": item[6],
-                #         "VOTURNOVER": item[7],
-                #         "VATURNOVER": item[8],
-                #         "TURNOVER": item[9]}
-                # print info
-
-
-        # data = {
-        #     "CODE": code,
-        #     "DATE": date
-        # }
+            info = {"CODE": code,
+                    "DATE": codedata[0],
+                    "TOPEN": codedata[1],
+                    "TCLOSE": codedata[2],
+                    "CHG": codedata[3],
+                    "PCHG": codedata[4],
+                    "LOW": codedata[5],
+                    "HIGH": codedata[6],
+                    "VOTURNOVER": codedata[7],
+                    "VATURNOVER": codedata[8],
+                    "TURNOVER": codedata[9]}
             # add to mongo
-            # sohuconn.insertDailyData()
-        # return item
+            sohuconn.insertDailyData(info)
 
         # update date
-        # sohuconn.updateTime()
+        sohuconn.updateTime(code, date)
