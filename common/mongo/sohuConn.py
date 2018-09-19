@@ -64,7 +64,9 @@ class SohuConn(mongoConn):
 
     def getTime(self, code):
         try:
-            enddate = self._datadb.datatime.find ({"code": code}).sort ({"date": -1}).limit (1)
+            cursor = self._datadb.datatime.find({"code": code}).sort([("date", -1)]).limit(1)
+            for item in cursor:
+                enddate = item['date']
         except:
             self._datadb.datatime.insert ({"code": code, "date": "19920101"})
             enddate = "19920101"
