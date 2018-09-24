@@ -37,7 +37,7 @@ class Sohu_crawler(scrapy.Spider):
         for stock in stocklist:
             code = stock[0]
             type = stock[1]
-            start_date = conn.getTime(code=code)
+            start_date = conn.getTime(code=code, today=get_today())
             end_date = get_today()
             url = get_url(code=str(code), start=start_date, end=end_date)
             meta = {
