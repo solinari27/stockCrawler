@@ -5,6 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
+import os
 from common.mongo.sohuConn import SohuConn
 
 class CrawlerPipeline(object):
@@ -13,7 +14,8 @@ class CrawlerPipeline(object):
         code = item.get ("code")
         date = item.get ("date")
         raw_data = item.get("raw_data")
-        sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
+        path = os.getcwd()
+        sohuconn = SohuConn(path + "/Conf/sohu.conf")
         sohuconn.set_name("stock_" + str(code) + " pipeline")
 
         for codedata in raw_data["hq"]:
