@@ -5,6 +5,7 @@
 @file: sohuCrawler.py 
 @time: 2018/08/28 
 """
+import os
 import time
 import json
 import scrapy
@@ -31,7 +32,8 @@ class Sohu_crawler(scrapy.Spider):
 
         headers = {}
         cookies = {}
-        conn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
+        path = os.getcwd ()
+        conn = SohuConn(path + "/Conf/sohu.conf")
         stocklist = conn.getStocks()
 
         for stock in stocklist:
