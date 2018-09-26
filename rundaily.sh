@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-cd /home/solinari/workspace/stockCrawler
+cd /home/ubuntu/stockCrawler
 #python /home/ubuntu/stockCrawler/crawlliangyeedaily.py&
-python /home/solinari/workspace/stockCrawler/crawlnetease.py&
+python /home/ubuntu/stockCrawler/crawlnetease.py&
+sh crawlsohu.sh
