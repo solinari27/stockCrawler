@@ -10,3 +10,5 @@ from common.mongo.neteaseConn import NeteaseConn
 
 sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
 neteaseconn = NeteaseConn("/home/solinari/workspace/stockCrawler/Conf/netease.conf")
+
+print neteaseconn.getDailyData()
