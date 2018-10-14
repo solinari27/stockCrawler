@@ -71,6 +71,9 @@ class NeteaseConn(mongoConn):
             self._datadb.datatime.insert ({"code": code, "date": "19920101"})
         return enddate
 
+    def getDailyData(self, code, date):
+        pass
+
     def updateTime(self, code, enddate):
         self._datadb.datatime.update ({"code": code}, {"$set": {"date": enddate}})
         self._logger.info("{} update datetime code: {} date: {} .".format(self.__name__, code, enddate))
