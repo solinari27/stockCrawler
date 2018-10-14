@@ -5,11 +5,8 @@
 @file: collection.py
 @time: 2018/10/09
 """
-
-
-from common.mongo.mongoConn import mongoConn
 from common.mongo.sohuConn import SohuConn
-# netease Conn
+from common.mongo.neteaseConn import NeteaseConn
 
 sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
-neteaseconn = mongoConn.mongoConn()
+neteaseconn = NeteaseConn("/home/solinari/workspace/stockCrawler/Conf/netease.conf")
