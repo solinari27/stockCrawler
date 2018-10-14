@@ -73,7 +73,7 @@ class NeteaseConn(mongoConn):
 
     def getDailyData(self, code, date1=None, date2=None):
         # cursor = self._datadb.dailydata.find({"CODE": code}).sort([("DATE", -1)])
-        cursor = self._datadb.dailydata.find({"CODE": code})
+        cursor = self._datadb.dailydata.find({"CODE": code}).sort([("DATE", -1)])
         for item in cursor:
             print item
 
