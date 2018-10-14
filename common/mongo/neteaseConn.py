@@ -31,7 +31,7 @@ class NeteaseConn(mongoConn):
 
             # self.connected = self.db.authenticate (self._username, self._password)
             self._stockdb = self._conn.stockinfo
-            self._datadb = self._conn.sohustockdata
+            self._datadb = self._conn.neteasestockdata
 
         except Exception:
             self._logger.error(self.__name__ + " mongo connection failed.")
@@ -71,8 +71,11 @@ class NeteaseConn(mongoConn):
             self._datadb.datatime.insert ({"code": code, "date": "19920101"})
         return enddate
 
-    def getDailyData(self, code, date):
-        pass
+    def getDailyData(self, code, date1=None, date2=None):
+        # cursor = self._datadb.dailydata.find({"CODE": code}).sort([("DATE", -1)])
+        cursor = self._datadb.dailydata.find({"CODE": code})
+        for item in cursor:
+            print item
 
     def updateTime(self, code, enddate):
         self._datadb.datatime.update ({"code": code}, {"$set": {"date": enddate}})
