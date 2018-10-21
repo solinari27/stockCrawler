@@ -46,8 +46,9 @@ class Collection(object):
                     item[key] = netease_item[key]
                 else:
                     # assert (sohu_item[key] == netease_item[key])
-                    print key, sohu_item[key], netease_item[key]
+                    print key, netease_item[key], sohu_item[key]
                     # find problem
+                    pass
             # print item
 
 # sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
