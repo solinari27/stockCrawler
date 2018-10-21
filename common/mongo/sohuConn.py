@@ -71,6 +71,15 @@ class SohuConn(mongoConn):
             self._datadb.datatime.insert ({"code": code, "date": "19920101"})
         return enddate
 
+    def getDailyData(self, code, date1=None, date2=None):
+        # cursor = self._datadb.dailydata.find({"CODE": code}).sort([("DATE", -1)])
+        cursor = self._datadb.dailydata.find({"CODE": code, "DATE": {'$gte':date1, '$lte': date2}}).sort([("DATE", 1)]) #升序
+
+        result = []
+        for item in cursor:
+            result.append(item)
+        return result
+
     def updateTime(self, code, enddate):
         self._datadb.datatime.update ({"code": code}, {"$set": {"date": enddate}})
         self._logger.info("{} update datetime code: {} date: {} .".format(self.__name__, code, enddate))

@@ -18,8 +18,14 @@ mon = s.tm_mon
 day = s.tm_mday
 #end date is today
 
-startdate = str(year-1) + '%02d' % (mon) + '%02d' % (day)
-enddate = str(year) + '%02d' % (mon) + '%02d' % (day)
+startdate = str(year-1) + '-%02d' % (mon) + '-%02d' % (day)
+enddate = str(year) + '-%02d' % (mon) + '-%02d' % (day)
 result = neteaseconn.getDailyData(code=str("600000"), date1=startdate, date2=enddate)
+for item in result:
+    print item
+
+startdate = str(year-2) + '-%02d' % (mon) + '-%02d' % (day)
+enddate = str(year-1) + '-%02d' % (mon) + '-%02d' % (day)
+result = sohuconn.getDailyData(code=str("600000"), date1=startdate, date2=enddate)
 for item in result:
     print item
