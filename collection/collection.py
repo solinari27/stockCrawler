@@ -33,13 +33,26 @@ class Collection(object):
 
         netease_result = self.neteaseconn.getDailyData(code=str(code), date1=start_date, date2=end_date)
         sohu_result = self.sohuconn.getDailyData(code=str(code), date1=start_date, date2=end_date)
-        assert (len(netease_result) == len(sohu_result))
+        # assert (len(netease_result) == len(sohu_result))
 
+        result = []
         for index, sohu_item in enumerate(sohu_result):
             netease_item = netease_result[index]
-            print netease_item, sohu_item
+            item = {}
+            for key in sohu_item.keys():
+                item[key] = sohu_item[key]
+            for key in netease_item.keys():
+                if not key in sohu_item.keys():
+                    item[key] = netease_item[key]
+                else:
+                    # assert (sohu_item[key] == netease_item[key])
+                    print key, sohu_item[key], netease_item[key]
+                    # find problem
+            # print item
 
-
+# sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
+# neteaseconn = NeteaseConn("/home/solinari/workspace/stockCrawler/Conf/netease.conf")
+#
 # s = time.localtime(time.time())
 # year = s.tm_year
 # mon = s.tm_mon
@@ -51,7 +64,7 @@ class Collection(object):
 # result = neteaseconn.getDailyData(code=str("600000"), date1=startdate, date2=enddate)
 # for item in result:
 #     print item
-#
+
 # startdate = str(year-2) + '-%02d' % (mon) + '-%02d' % (day)
 # enddate = str(year-1) + '-%02d' % (mon) + '-%02d' % (day)
 # result = sohuconn.getDailyData(code=str("600000"), date1=startdate, date2=enddate)
@@ -59,4 +72,4 @@ class Collection(object):
 #     print item
 
 c = Collection()
-c.getData(code="600001", start_date="2016-01-01", end_date="2018-12-31")
+c.getData(code="600000", start_date="2016-01-01", end_date="2018-12-31")
