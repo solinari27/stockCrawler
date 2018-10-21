@@ -75,8 +75,11 @@ class NeteaseConn(mongoConn):
         # cursor = self._datadb.dailydata.find({"CODE": code}).sort([("DATE", -1)])
         code = "'" + code   # bug for netease data
         cursor = self._datadb.dailydata.find({"CODE": code, "DATE": {'$gte':date1, '$lte': date2}}).sort([("DATE", 1)]) #升序
+
+        result = []
         for item in cursor:
-            print item
+            result.append(item)
+        return result
 
     def updateTime(self, code, enddate):
         self._datadb.datatime.update ({"code": code}, {"$set": {"date": enddate}})
