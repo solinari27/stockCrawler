@@ -17,6 +17,8 @@ year = s.tm_year
 mon = s.tm_mon
 day = s.tm_mday
 #end date is today
+
+startdate = str(year-1) + '%02d' % (mon) + '%02d' % (day)
 enddate = str(year) + '%02d' % (mon) + '%02d' % (day)
-print s
-# print neteaseconn.getDailyData(code=str("'600000")) #new bug to fix for '
+print enddate
+print neteaseconn.getDailyData(code=str("600000"), date1=startdate, date2=enddate)
