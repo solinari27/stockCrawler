@@ -44,6 +44,7 @@ class Collection(object):
             for key in netease_item.keys():
                 if not key in sohu_item.keys():
                     item[key] = netease_item[key]
+                    print key, netease_item[key]
                 else:
                     # assert (sohu_item[key] == netease_item[key])
                     print key, netease_item[key], sohu_item[key]
