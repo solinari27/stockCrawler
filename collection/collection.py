@@ -58,11 +58,11 @@ class Collection(object):
 
                   if case('HIGH'):
                     item[key] = netease_item[key]
-                    print "get HIGH", netease_item[key]
+                    # print "get HIGH", netease_item[key]
                     break
                   if case('LOW'):
                     item[key] = netease_item[key]
-                    print "get LOW", netease_item[key]
+                    # print "get LOW", netease_item[key]
                     break
 
                 #drop this
@@ -80,48 +80,50 @@ class Collection(object):
 
                   if case('TCAP'):
                     item[key] = netease_item[key]
-                    print "get TCAP", netease_item[key]
+                    # print "get TCAP", netease_item[key]
                     break
                   if case('MCAP'):
                     item[key] = netease_item[key]
-                    print "get MCAP", netease_item[key]
+                    # print "get MCAP", netease_item[key]
                     break
 
                   if case('CHG'):
                     item[key] = netease_item[key]
-                    print "get CHG", netease_item[key]
+                    # print "get CHG", netease_item[key]
                     break
                   if case('PCHG'):
                     item[key] = netease_item[key]
-                    print "get PCHG", netease_item[key]
+                    # print "get PCHG", netease_item[key]
                     break
 
                   if case('LCLOSE'):
                     item[key] = netease_item[key]
-                    print "get LCLOSE", netease_item[key]
+                    # print "get LCLOSE", netease_item[key]
                     break
                   if case('TOPEN'):
                     item[key] = netease_item[key]
-                    print "get TOPEN", netease_item[key]
+                    # print "get TOPEN", netease_item[key]
                     break
                   if case('TCLOSE'):
-                    print "get TCLOSE", netease_item[key]
+                    # print "get TCLOSE", netease_item[key]
                     break
                   if case('VATURNOVER'):
-                    print "get VATURNOVER", netease_item[key]
+                    # print "get VATURNOVER", netease_item[key]
                     break
 
                   if case('VOTURNOVER'):
                     item[key] = netease_item[key]
-                    print "get VOTURNOVER", netease_item[key]
+                    # print "get VOTURNOVER", netease_item[key]
                     break
                   if case('TURNOVER'):
                     item[key] = netease_item[key]
-                    print "get TURNOVER", netease_item[key]
+                    # print "get TURNOVER", netease_item[key]
                     break
                   if case(): # default, could also just omit condition or 'if True'
                     pass
                     # No need to break here, it'll stop anyway
+
+            print item
 
 
 # sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
