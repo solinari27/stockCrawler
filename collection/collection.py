@@ -7,6 +7,7 @@
 """
 from common.mongo.sohuConn import SohuConn
 from common.mongo.neteaseConn import NeteaseConn
+from utils.common.switch import switch
 import time
 
 class Collection(object):
@@ -44,13 +45,23 @@ class Collection(object):
             for key in netease_item.keys():
                 if not key in sohu_item.keys():
                     item[key] = netease_item[key]
-                    print key, netease_item[key]
+                    print key, "netease: ", netease_item[key]
                 else:
                     # assert (sohu_item[key] == netease_item[key])
-                    print key, netease_item[key], sohu_item[key]
+                    print key, "netease: ", netease_item[key], "soho: ", sohu_item[key]
                     # find problem
                     pass
             # print item
+            print "switch"
+            for key in netease_item.keys():
+                for case in switch(key):
+                  if case('TCAP'):
+                    print "get TCAP", netease_item[key]
+                    break
+                  if case(): # default, could also just omit condition or 'if True'
+                    print "something else!"
+                    # No need to break here, it'll stop anyway
+
 
 # sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
 # neteaseconn = NeteaseConn("/home/solinari/workspace/stockCrawler/Conf/netease.conf")
