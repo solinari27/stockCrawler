@@ -58,6 +58,24 @@ class Collection(object):
                   if case('TCAP'):
                     print "get TCAP", netease_item[key]
                     break
+                  if case('HIGH'):
+                    print "get HIGH", netease_item[key]
+                    break
+                  if case('CODE'):
+                    print "get CODE", netease_item[key]
+                    break
+                  if case('NAME'):
+                    print "get NAME", netease_item[key]
+                    break
+                  if case('CHG'):
+                    print "get CHG", netease_item[key]
+                    break
+                  if case('VATURNOVER'):
+                    print "get VATURNOVER", netease_item[key]
+                    break
+                  if case('MCAP'):
+                    print "get MCAP", netease_item[key]
+                    break
                   if case(): # default, could also just omit condition or 'if True'
                     print "something else!"
                     # No need to break here, it'll stop anyway
