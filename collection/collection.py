@@ -40,19 +40,18 @@ class Collection(object):
         for index, sohu_item in enumerate(sohu_result):
             netease_item = netease_result[index]
             item = {}
-            for key in sohu_item.keys():
-                item[key] = sohu_item[key]
-            for key in netease_item.keys():
-                if not key in sohu_item.keys():
-                    item[key] = netease_item[key]
-                    print key, "netease: ", netease_item[key]
-                else:
-                    # assert (sohu_item[key] == netease_item[key])
-                    print key, "netease: ", netease_item[key], "soho: ", sohu_item[key]
-                    # find problem
-                    pass
-            # print item
-            print "switch"
+            # for key in sohu_item.keys():
+            #     item[key] = sohu_item[key]
+            # for key in netease_item.keys():
+            #     if not key in sohu_item.keys():
+            #         item[key] = netease_item[key]
+            #         print key, "netease: ", netease_item[key]
+            #     else:
+            #         # assert (sohu_item[key] == netease_item[key])
+            #         print key, "netease: ", netease_item[key], "soho: ", sohu_item[key]
+            #         # find problem
+            #         pass
+
             for key in netease_item.keys():
                 for case in switch(key):
                   if case('TCAP'):
@@ -61,8 +60,14 @@ class Collection(object):
                   if case('HIGH'):
                     print "get HIGH", netease_item[key]
                     break
+                  if case('LOW'):
+                    print "get LOW", netease_item[key]
+                    break
                   if case('CODE'):
                     print "get CODE", netease_item[key]
+                    break
+                  if case('DATE'):
+                    print "get DATE", netease_item[key]
                     break
                   if case('NAME'):
                     print "get NAME", netease_item[key]
@@ -70,11 +75,29 @@ class Collection(object):
                   if case('CHG'):
                     print "get CHG", netease_item[key]
                     break
+                  if case('MCAP'):
+                    print "get MCAP", netease_item[key]
+                    break
+                  if case('PCHG'):
+                    print "get PCHG", netease_item[key]
+                    break
+                  if case('LCLOSE'):
+                    print "get LCLOSE", netease_item[key]
+                    break
+                  if case('TOPEN'):
+                    print "get TOPEN", netease_item[key]
+                    break
+                  if case('TCLOSE'):
+                    print "get TCLOSE", netease_item[key]
+                    break
                   if case('VATURNOVER'):
                     print "get VATURNOVER", netease_item[key]
                     break
-                  if case('MCAP'):
-                    print "get MCAP", netease_item[key]
+                  if case('VOTURNOVER'):
+                    print "get VOTURNOVER", netease_item[key]
+                    break
+                  if case('TURNOVER'):
+                    print "get TURNOVER", netease_item[key]
                     break
                   if case(): # default, could also just omit condition or 'if True'
                     print "something else!"
