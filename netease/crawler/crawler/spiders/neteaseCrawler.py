@@ -55,6 +55,14 @@ class NeteaseCrawler(scrapy.Spider):
             enddate = str(year) + '%02d' % (mon) + '%02d' % (day)
             return enddate
 
+        def get_today():
+            s = time.localtime(time.time())
+            year = s.tm_year
+            mon = s.tm_mon
+            day = s.tm_mday
+            # end date is today
+            return str(year) + '%02d' % (mon) + '%02d' % (day)
+
         self.__load_conf()
         enddate = do_init()
         headers = {}
@@ -65,14 +73,15 @@ class NeteaseCrawler(scrapy.Spider):
         for stock in stocklist:
             code = stock[0]
             type = stock[1]
-            startdate = self._conn.getTime(code)
+            startdate = conn.getTime(code, today=get_today())
             url = get_url(type=str(type), code=str(code), startdate=startdate, enddate=enddate)
-            # results = self._requestJson(type, code, startdate, enddate)
-            # yield this
-
-
-        yield "xxx"
-
+            meta = {
+                "url": url,
+                "code": code,
+                "date": enddate
+            }
+            yield scrapy.Request(url=url, headers=headers, callback=self.parse, cookies=cookies, meta=meta)
+            time.sleep(15)
 
     def parse(self, response):
-        print 'parse'
+        print response
