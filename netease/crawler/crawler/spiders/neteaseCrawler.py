@@ -10,6 +10,7 @@ import time
 import json
 import yaml
 import scrapy
+from common.mongo.neteaseConn import NeteaseConn
 
 
 class NeteaseCrawler(scrapy.Spider):
@@ -30,7 +31,7 @@ class NeteaseCrawler(scrapy.Spider):
         self.__load_conf()
         headers = {}
         cookies = {}
-        # conn = SohuConn(self._yamlconf['netease']['conf'])
+        conn = NeteaseConn(self._yamlconf['netease']['conf'])
         # stocklist = conn.getStocks()
 
 
