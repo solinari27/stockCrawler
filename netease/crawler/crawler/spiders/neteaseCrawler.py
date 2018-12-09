@@ -10,6 +10,7 @@ import time
 import json
 import yaml
 import scrapy
+import csv
 from common.mongo.neteaseConn import NeteaseConn
 from netease.utils import get_url
 
@@ -67,13 +68,13 @@ class NeteaseCrawler(scrapy.Spider):
         enddate = do_init()
         headers = {}
         cookies = {}
-        conn = NeteaseConn(self._yamlconf['netease']['conf'])
-        stocklist = conn.getStocks()
+        self.__conn = NeteaseConn(self._yamlconf['netease']['conf'])
+        stocklist = self.__conn.getStocks()
 
         for stock in stocklist:
             code = stock[0]
             type = stock[1]
-            startdate = conn.getTime(code, today=get_today())
+            startdate = self.__conn.getTime(code, today=get_today())
             url = get_url(type=str(type), code=str(code), startdate=startdate, enddate=enddate)
             meta = {
                 "url": url,
@@ -81,7 +82,34 @@ class NeteaseCrawler(scrapy.Spider):
                 "date": enddate
             }
             yield scrapy.Request(url=url, headers=headers, callback=self.parse, cookies=cookies, meta=meta)
-            time.sleep(15)
+            time.sleep(5)
 
     def parse(self, response):
-        print response
+        def loadjson():
+            cf = open(filename, 'r')
+            results = []
+            for x in csv.DictReader(cf):
+                d = json.dumps(x, indent=4, separators=(',', ':'), ensure_ascii=False)  # ,sort_keys=True
+                d2 = json.loads(d)
+                d3 = {}
+                for key in d2.keys():
+                    try:
+                        d3[self._keylist[key]] = float(d2[key])
+                    except:
+                        d3[self._keylist[key]] = d2[key]
+                results.append(d3)
+                # self._conn.insertDailyData(d2)
+            cf.close()
+            os.remove(filename)
+            return results
+
+        filename = 'data/' + response.meta['code'] + '.csv'
+        filename = os.path.join(os.getcwd(), filename)
+        with open(filename, 'w') as f:
+            f.write(response.body.decode('gb2312').encode('utf-8'))
+        f.close()
+        result = loadjson()
+        for item in result:
+            item['CODE'] = item['CODE'][1:6]
+            self.__conn.insertDailyData(item)
+        self.__conn.updateTime(response.meta['code'], response.meta['date'])
