@@ -11,6 +11,7 @@ import json
 import yaml
 import scrapy
 from common.mongo.neteaseConn import NeteaseConn
+from netease.utils import get_url
 
 
 class NeteaseCrawler(scrapy.Spider):
@@ -65,6 +66,7 @@ class NeteaseCrawler(scrapy.Spider):
             code = stock[0]
             type = stock[1]
             startdate = self._conn.getTime(code)
+            url = get_url(type=str(type), code=str(code), startdate=startdate, enddate=enddate)
             # results = self._requestJson(type, code, startdate, enddate)
             # yield this
 
