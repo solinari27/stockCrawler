@@ -32,7 +32,14 @@ class NeteaseCrawler(scrapy.Spider):
         headers = {}
         cookies = {}
         conn = NeteaseConn(self._yamlconf['netease']['conf'])
-        # stocklist = conn.getStocks()
+        stocklist = conn.getStocks()
+
+        for stock in stocklist:
+            code = stock[0]
+            type = stock[1]
+            pass
+
+        yield "xxx"
 
 
     def parse(self, response):

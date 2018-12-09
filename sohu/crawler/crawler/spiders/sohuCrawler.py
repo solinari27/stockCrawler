@@ -46,7 +46,6 @@ class Sohu_crawler(scrapy.Spider):
                 "date": end_date
             }
             yield scrapy.Request(url=url, headers=headers, callback=self.parse, cookies=cookies, meta=meta)
-            # FIXME: add time intervals in scrapy
             time.sleep(15)
 
     def parse(self, response):
