@@ -1,0 +1,3 @@
+# yaml
+netease:
+    conf: '/home/solinari/workspace/stockCrawler/Conf/netease.conf'
