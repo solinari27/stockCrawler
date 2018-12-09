@@ -5,7 +5,6 @@
 @file: sohuCrawler.py 
 @time: 2018/08/28 
 """
-import os
 import time
 import json
 import scrapy
