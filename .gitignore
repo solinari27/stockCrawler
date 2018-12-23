@@ -4,9 +4,7 @@ __pycache__/
 *$py.class
 *.xml
 *.pyc
-*.conf
 *.ini
-*.json
 *.csv
 
 # C extensions
