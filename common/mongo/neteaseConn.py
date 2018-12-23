@@ -48,9 +48,9 @@ class NeteaseConn(mongoConn):
     def getStocks(self):
         stockslist = []
         try:
-            stocks = self._stockdb.stocklist.find ()
+            stocks = self._stockdb.stocklist.find()
             for stock in stocks:
-                stockslist.append ([stock['code'], stock['type']])
+                stockslist.append([stock['code'], stock['type']])
             return stockslist
         except Exception:
             self._logger.error (self.__name__ + " mongodb get stocklist error.")
