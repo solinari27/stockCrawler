@@ -1,3 +1,4 @@
 # yaml
 netease:
-    conf: '/home/solinari/workspace/stockCrawler/Conf/netease.conf'
+#    conf: '/home/solinari/workspace/stockCrawler/Conf/netease.conf'
+    conf: '/home/ubuntu/stockCrawler/Conf/netease.conf'
