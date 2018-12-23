@@ -15,5 +15,5 @@ RUN mkdir /home/ubuntu/stockCrawler/sohu/crawler/Log
 # RUN echo 'Hi, I am in your container' > /usr/share/nginx/html/index.html
 # EXPOSE 80
 
-ENV MONGODB_AUTH mongodb://127.0.0.1:27017
-
+# ENV MONGODB_AUTH mongodb://127.0.0.1:27017
+# ENV MONGODB_AUTH mongodb://login:pw@mongodb:27017/dbname
