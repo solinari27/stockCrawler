@@ -9,7 +9,6 @@ RUN apt-get install -y vim
 RUN git clone https://github.com/solinari27/stockCrawler.git /home/ubuntu/stockCrawler/
 RUN pip install -r /home/ubuntu/stockCrawler/requirements.txt
 RUN pip install pyaml
-RUN mkdir /home/ubuntu/stockCrawler/Data
 RUN mkdir /home/ubuntu/stockCrawler/netease/crawler/data
 RUN mkdir /home/ubuntu/stockCrawler/Log
 RUN mkdir /home/ubuntu/stockCrawler/netease/crawler/Log
