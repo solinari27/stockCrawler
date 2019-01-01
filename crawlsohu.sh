@@ -3,4 +3,4 @@ cd /home/ubuntu/stockCrawler/sohu/crawler
 export PYTHONPATH=/home/ubuntu/stockCrawler:%PYTHONPATH
 #cd /home/solinari/workspace/stockCrawler/sohu/crawler
 #export PYTHONPATH=/home/solinari/workspace/stockCrawler:%PYTHONPATH
-nohup python run.py&
+nohup python run.py
