@@ -13,6 +13,7 @@ import scrapy
 import csv
 from common.mongo.neteaseConn import NeteaseConn
 from netease.utils import get_url
+from netease.crawler.crawler.items import CrawlerItem
 
 
 class NeteaseCrawler(scrapy.Spider):
@@ -85,6 +86,11 @@ class NeteaseCrawler(scrapy.Spider):
             time.sleep(5)
 
     def parse(self, response):
+        """
+        get csv file
+        :param response:
+        :return:
+        """
         def loadjson():
             cf = open(filename, 'r')
             results = []
@@ -108,8 +114,18 @@ class NeteaseCrawler(scrapy.Spider):
         with open(filename, 'w') as f:
             f.write(response.body.decode('gb2312').encode('utf-8'))
         f.close()
-        result = loadjson()
-        for item in result:
-            item['CODE'] = item['CODE'][1:6]
-            self.__conn.insertDailyData(item)
-        self.__conn.updateTime(response.meta['code'], response.meta['date'])
+
+        item = CrawlerItem()
+        item["file"] = filename
+        item["url"] = response.meta["url"]
+        item["code"] = response.meta["code"]
+        item["date"] = response.meta["date"]
+
+        # 将item提交给pipelines
+        yield item
+
+        # result = loadjson()
+        # for item in result:
+        #     item['CODE'] = item['CODE'][1:6]
+        #     self.__conn.insertDailyData(item)
+        # self.__conn.updateTime(response.meta['code'], response.meta['date'])
