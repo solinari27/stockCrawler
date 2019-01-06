@@ -19,7 +19,7 @@ class CrawlerPipeline(object):
         self._yamlconf = yaml.load(f.read())  # 用load方法转字典
 
     def process_item(self, item, spider):
-        def loadjson():
+        def loadjson(file):
             cf = open(file, 'r')
             results = []
             for x in csv.DictReader(cf):
@@ -46,7 +46,7 @@ class CrawlerPipeline(object):
         self.__conn = NeteaseConn(self._yamlconf['netease']['conf'])
         self.__conn.set_name("stock_" + str(code) + " pipeline")
 
-        result = loadjson()
+        result = loadjson(file=file)
         for item in result:
             item['CODE'] = code
             self.__conn.insertDailyData(item)
