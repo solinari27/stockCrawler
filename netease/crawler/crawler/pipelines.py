@@ -7,6 +7,7 @@
 import json
 import os
 import yaml
+import csv
 from common.mongo.neteaseConn import NeteaseConn
 
 
@@ -43,6 +44,7 @@ class CrawlerPipeline(object):
 
         self.__load_conf()
         self.__conn = NeteaseConn(self._yamlconf['netease']['conf'])
+        self.__conn.set_name("stock_" + str(code) + " pipeline")
 
         result = loadjson()
         for item in result:
