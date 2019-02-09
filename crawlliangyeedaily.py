@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2018/4/3 17:03
 # @Author  : Aries
-# @Site    : 
+# @Site    :
 # @File    : crawlliangyeedaily.py
 # @Software: PyCharm
 
@@ -13,5 +13,3 @@ refresh_liangyeeUser()
 
 ll = liangyee.liangyeeCrawler.liangyeeCrawler()
 ll.crawlliangyee("workday")
-
-
