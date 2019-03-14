@@ -26,18 +26,7 @@ def get_batch(dataset):
     return x_rand, y_list
 
 
-def check_results(datasets, model, thres, DBSCAN_eps, DBSCAN_minsamples):
-    X, y = datasets[0], datasets[1]
-    diff = model.predict(X) - y
-    far_x = []
-    fars = []
-    for _i in range(0, len(diff)):
-        _diff = math.fabs(diff[_i][0])
-        if (_diff > 0):
-            if (y[_i][0] / _diff) < thres:
-                far_x.append([X[_i][0]])
-                fars.append(_diff)
-
+def DBSCAN_split(far_x, fars, DBSCAN_eps, DBSCAN_minsamples):
     ret = []
     res = [[]]
     if len(far_x) > 0:
@@ -62,6 +51,47 @@ def check_results(datasets, model, thres, DBSCAN_eps, DBSCAN_minsamples):
                     k = _j
                     _y = y
             ret[_i] = k
+    return ret
+
+def check_results(datasets, model, thres, DBSCAN_eps, DBSCAN_minsamples, **kwargs):
+    X, y = datasets[0], datasets[1]
+    diff = model.predict(X) - y
+    far_x = []
+    fars = []
+    for _i in range(0, len(diff)):
+        _diff = math.fabs(diff[_i][0])
+        if (_diff > 0):
+            if (y[_i][0] / _diff) < thres:
+                far_x.append([X[_i][0]])
+                fars.append(_diff)
+
+    ret = DBSCAN_split(far_x=far_x, fars=fars,
+                       DBSCAN_eps=DBSCAN_eps,
+                       DBSCAN_minsamples=DBSCAN_minsamples)
+    # ret = []
+    # res = [[]]
+    # if len(far_x) > 0:
+    #     fars_scale = np.array(far_x)
+    #     y_pred = DBSCAN(
+    #         eps=DBSCAN_eps, min_samples=DBSCAN_minsamples).fit_predict(fars_scale)
+    #
+    #     for _i, pred in enumerate(y_pred):
+    #         if pred >= 0:
+    #             if pred > len(ret) - 1:
+    #                 ret.append([far_x[_i][0]])
+    #                 res.append([fars[_i]])
+    #             else:
+    #                 ret[pred].append(far_x[_i][0])
+    #                 res[pred].append(fars[_i])
+    #
+    #     for _i, group in enumerate(ret):
+    #         _y = 0
+    #         k = -1
+    #         for _j, y in enumerate(group):
+    #             if y > _y:
+    #                 k = _j
+    #                 _y = y
+    #         ret[_i] = k
     return ret
 
 
