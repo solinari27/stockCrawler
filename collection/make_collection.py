@@ -12,9 +12,9 @@ import time
 sys.path.append('/home/ubuntu/stockCrawler')
 sys.path.append('/home/solinari/workspace/stockCrawler')
 
-from collection import data_show
+from collection.utils import data_show
 from collection import collection
-from pytorch.sklearn_lineregression import do_regression
+from sk_utils.sklearn_lineregression import do_regression
 
 
 c = collection.Collection()
