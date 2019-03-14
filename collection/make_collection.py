@@ -9,8 +9,8 @@
 import sys
 import time
 
-sys.path.append('/home/ubuntu/test')
-sys.path.append('/home/solinari/workspace/test')
+sys.path.append('/home/ubuntu/stockCrawler')
+sys.path.append('/home/solinari/workspace/stockCrawler')
 
 from collection import data_show
 from collection import collection
