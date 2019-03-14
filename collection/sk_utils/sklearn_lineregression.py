@@ -38,7 +38,6 @@ def check_results(datasets, model, thres, DBSCAN_eps, DBSCAN_minsamples):
                 far_x.append([X[_i][0]])
                 fars.append(_diff)
 
-    ret = [[]]
     ret = []
     res = [[]]
     if len(far_x) > 0:
