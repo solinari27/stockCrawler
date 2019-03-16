@@ -1,6 +1,5 @@
 #!usr/bin/env python
 # -*- coding:utf-8 _*-
-
 """
 @author: solinari
 @file: make_collection.py
@@ -12,15 +11,15 @@ import time
 sys.path.append('/home/ubuntu/stockCrawler')
 sys.path.append('/home/solinari/workspace/stockCrawler')
 
-import collection
-from tools import data_show
 from sk_utils.sklearn_lineregression import do_regression
-
+from tools import data_show
+import collection
 
 c = collection.Collection()
 
 for result in c.getData(code="600000", start_date="2017-01-01", end_date="2019-12-31"):
     ret = do_regression(result, epochs=10000, thres=10,
+                        algo='DBSCAN',
                         DBSCAN_eps=3, DBSCAN_minsamples=4)
     for item in ret:
         w = item[0]
