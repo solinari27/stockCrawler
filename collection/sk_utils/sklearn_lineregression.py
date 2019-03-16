@@ -53,7 +53,8 @@ def DBSCAN_split(far_x, fars, DBSCAN_eps, DBSCAN_minsamples):
             ret[_i] = k
     return ret
 
-def check_results(datasets, model, thres, DBSCAN_eps, DBSCAN_minsamples, **kwargs):
+
+def check_results(datasets, model, **kwargs):
     X, y = datasets[0], datasets[1]
     diff = model.predict(X) - y
     far_x = []
@@ -61,37 +62,15 @@ def check_results(datasets, model, thres, DBSCAN_eps, DBSCAN_minsamples, **kwarg
     for _i in range(0, len(diff)):
         _diff = math.fabs(diff[_i][0])
         if (_diff > 0):
-            if (y[_i][0] / _diff) < thres:
+            if (y[_i][0] / _diff) < kwargs['thres']:
                 far_x.append([X[_i][0]])
                 fars.append(_diff)
 
-    ret = DBSCAN_split(far_x=far_x, fars=fars,
-                       DBSCAN_eps=DBSCAN_eps,
-                       DBSCAN_minsamples=DBSCAN_minsamples)
-    # ret = []
-    # res = [[]]
-    # if len(far_x) > 0:
-    #     fars_scale = np.array(far_x)
-    #     y_pred = DBSCAN(
-    #         eps=DBSCAN_eps, min_samples=DBSCAN_minsamples).fit_predict(fars_scale)
-    #
-    #     for _i, pred in enumerate(y_pred):
-    #         if pred >= 0:
-    #             if pred > len(ret) - 1:
-    #                 ret.append([far_x[_i][0]])
-    #                 res.append([fars[_i]])
-    #             else:
-    #                 ret[pred].append(far_x[_i][0])
-    #                 res[pred].append(fars[_i])
-    #
-    #     for _i, group in enumerate(ret):
-    #         _y = 0
-    #         k = -1
-    #         for _j, y in enumerate(group):
-    #             if y > _y:
-    #                 k = _j
-    #                 _y = y
-    #         ret[_i] = k
+    if (kwargs['algo'] == 'DBSCAN'):
+        ret = DBSCAN_split(far_x=far_x, fars=fars,
+                           DBSCAN_eps=kwargs['DBSCAN_eps'],
+                           DBSCAN_minsamples=kwargs['DBSCAN_minsamples'])
+
     return ret
 
 
@@ -110,7 +89,7 @@ def do_regression(dataset, **kwargs):
         w = model.coef_[0][0]
         b = model.intercept_[0]
         far_points = check_results(
-            [X, y], model, kwargs['thres'], kwargs['DBSCAN_eps'], kwargs['DBSCAN_minsamples'])
+            [X, y], model, **kwargs)
 
         if far_points == []:
             ret.append([w, b, 0, len(dataset)])
@@ -119,7 +98,7 @@ def do_regression(dataset, **kwargs):
             far_points.append(len(dataset) - 1)
             for x1 in far_points:
                 res = do_regression(
-                    dataset[x0:x1], epochs=10000, thres=10, DBSCAN_eps=3, DBSCAN_minsamples=4)
+                    dataset[x0:x1], **kwargs)
                 for item in res:
                     item[2] += x0
                     item[3] += x0
