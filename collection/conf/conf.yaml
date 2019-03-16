@@ -2,5 +2,5 @@ thres: 10
 epochs: 10000
 algo:
   name: DBSCAN
-  eps: 4
-  min_samples: 3
+  DBSCAN_eps: 4
+  DBSCAN_minsamples: 3

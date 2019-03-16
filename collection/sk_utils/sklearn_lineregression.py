@@ -68,8 +68,8 @@ def check_results(datasets, model, **kwargs):
 
     if (kwargs['algo'] == 'DBSCAN'):
         ret = DBSCAN_split(far_x=far_x, fars=fars,
-                           DBSCAN_eps=kwargs['DBSCAN_eps'],
-                           DBSCAN_minsamples=kwargs['DBSCAN_minsamples'])
+                           DBSCAN_eps=kwargs['params']['DBSCAN_eps'],
+                           DBSCAN_minsamples=kwargs['params']['DBSCAN_minsamples'])
 
     return ret
 
