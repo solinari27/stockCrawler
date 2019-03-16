@@ -18,13 +18,11 @@ import collection
 
 with open("/home/solinari/workspace/stockCrawler/collection/conf/conf.yaml") as f:
     conf = yaml.load(f)
-    print conf
     c = collection.Collection()
 
     for result in c.getData(code="600000", start_date="2017-01-01", end_date="2019-12-31"):
         ret = do_regression(result, epochs=10000, thres=10,
-                            algo=conf['algo']['name'],
-                            DBSCAN_eps=3, DBSCAN_minsamples=4)
+                            algo=conf['algo']['name'], params=conf['algo'])
         for item in ret:
             w = item[0]
             b = item[1]
