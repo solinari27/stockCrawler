@@ -27,7 +27,8 @@ with open("/home/solinari/workspace/stockCrawler/collection/conf/conf.yaml") as 
             w = item[0]
             b = item[1]
             dataset = result[item[2]: item[3]]
-            show = data_show.Plt()
-            show.load_data(data=dataset)
-            show.plot(w=w, b=b)
-            time.sleep(1)
+            dateperiod = len(dataset)
+            # show = data_show.Plt()
+            # show.load_data(data=dataset)
+            # show.plot(w=w, b=b)
+            # time.sleep(1)
