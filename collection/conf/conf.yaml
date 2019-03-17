@@ -4,4 +4,7 @@ algo:
   name: DBSCAN
   DBSCAN_eps: 4
   DBSCAN_minsamples: 3
-datepreiod: 20
+collection:
+  dateperiod: 20
+  w_up: 0.01
+  w_down: -0.01
