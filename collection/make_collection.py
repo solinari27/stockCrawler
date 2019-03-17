@@ -22,6 +22,9 @@ def del_useless_info(info_dict):
     del(info_dict['DATE'])
     return info_dict
 
+def dict2array():
+    pass
+
 with open("/home/solinari/workspace/stockCrawler/collection/conf/conf.yaml") as f:
     conf = yaml.load(f)
     c = collection.Collection()
