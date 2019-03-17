@@ -30,12 +30,14 @@ with open("/home/solinari/workspace/stockCrawler/collection/conf/conf.yaml") as 
             dateperiod = len(dataset)
             stand = conf['collection']
             if dateperiod >= stand['dateperiod'] and w >= stand['w_up']:
-                show = data_show.Plt()
-                show.load_data(data=dataset)
-                show.plot(w=w, b=b)
-                time.sleep(1)
+                print dataset
+                # show = data_show.Plt()
+                # show.load_data(data=dataset)
+                # show.plot(w=w, b=b)
+                # time.sleep(1)
             if dateperiod >= stand['dateperiod'] and w <= stand['w_down']:
-                show = data_show.Plt()
-                show.load_data(data=dataset)
-                show.plot(w=w, b=b)
-                time.sleep(1)
+                print dataset
+                # show = data_show.Plt()
+                # show.load_data(data=dataset)
+                # show.plot(w=w, b=b)
+                # time.sleep(1)
