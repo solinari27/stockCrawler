@@ -20,7 +20,7 @@ with open("/home/solinari/workspace/stockCrawler/collection/conf/conf.yaml") as 
     conf = yaml.load(f)
     c = collection.Collection()
 
-    for result in c.getData(code="600000", start_date="2017-01-01", end_date="2019-12-31"):
+    for result in c.getData(code="600007", start_date="2017-01-01", end_date="2019-12-31"):
         ret = do_regression(result, epochs=conf['epochs'], thres=conf['thres'],
                             algo=conf['algo']['name'], params=conf['algo'])
         for item in ret:

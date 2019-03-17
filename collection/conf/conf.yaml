@@ -6,5 +6,5 @@ algo:
   DBSCAN_minsamples: 3
 collection:
   dateperiod: 20
-  w_up: 0.01
-  w_down: -0.01
+  w_up: 0.02
+  w_down: -0.02
