@@ -2,7 +2,7 @@
 # -*- coding:utf-8 _*-
 """
 @author: solinari
-@file: collection.py
+@file: base.py
 @time: 2018/10/09
 """
 import time
@@ -12,7 +12,7 @@ from common.mongo.neteaseConn import NeteaseConn
 from utils.common.switch import switch
 
 
-class Collection(object):
+class Base(object):
     def __init__(self):
         self.sohuconn = SohuConn(
             "/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
@@ -40,19 +40,10 @@ class Collection(object):
             code=str(code), date1=start_date, date2=end_date)
         sohu_result = self.sohuconn.getDailyData(
             code=str(code), date1=start_date, date2=end_date)
-        # assert (len(netease_result) == len(sohu_result))
 
         result = []
         name = None
         for index, netease_item in enumerate(netease_result):
-            # netease_item = netease_result[index]
-            if name is None:
-                name = netease_item['NAME']
-
-            if netease_item['NAME'] != name and name is not None:
-                yield result
-                result = []
-
             item = {}
 
             for key in netease_item.keys():
@@ -116,4 +107,4 @@ class Collection(object):
                         pass
                         # No need to break here, it'll stop anyway
             result.append(item)
-        yield result
+        return result

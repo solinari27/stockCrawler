@@ -5,6 +5,7 @@ algo:
   DBSCAN_eps: 4
   DBSCAN_minsamples: 3
 collection:
-  dateperiod: 20
-  w_up: 0.02
-  w_down: -0.02
+  dateperiod_up: 20
+  dateperiod_down: 10
+  w_up: 0.05
+  w_down: -0.05
