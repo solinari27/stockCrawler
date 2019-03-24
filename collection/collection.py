@@ -44,8 +44,8 @@ class Collection(object):
 
         result = []
         name = None
-        for index, sohu_item in enumerate(sohu_result):
-            netease_item = netease_result[index]
+        for index, netease_item in enumerate(netease_result):
+            # netease_item = netease_result[index]
             if name is None:
                 name = netease_item['NAME']
 

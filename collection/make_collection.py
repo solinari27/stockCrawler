@@ -42,7 +42,10 @@ def dict2list(_dict):
 def data2ndarray(dataset):
     _data = []
     for _item in dataset:
-        _item = del_useless_info(_item)
+        try:
+            _item = del_useless_info(_item)
+        except KeyError:
+            pass    # FIXME: ERROR in dict key
         _data.append(dict2list(_item))
     _data = np.array(_data).T
     return _data
@@ -61,19 +64,22 @@ def make():
                 dataset = result[item[2]: item[3]]
                 dateperiod = len(dataset)
                 stand = conf['collection']
+                # date > stand and weights > stand
                 if dateperiod >= stand['dateperiod_up'] and w > stand['w_up']:
                     _data = data2ndarray(dataset=dataset)
-                    print _data
                     # show = data_show.Plt()
                     # show.load_data(data=dataset)
                     # show.plot(w=w, b=b)
                     # time.sleep(1)
+                    yield _data
+                # date > stand and weights stand
                 if dateperiod >= stand['dateperiod_down'] and w < stand['w_down']:
                     _data = data2ndarray(dataset=dataset)
-                    print _data
                     # show = data_show.Plt()
                     # show.load_data(data=dataset)
                     # show.plot(w=w, b=b)
                     # time.sleep(1)
+                    yield _data
 
-make()
+for ret in make():
+    print ret
