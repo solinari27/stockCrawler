@@ -6,10 +6,12 @@
 @time: 2018/10/09
 """
 import time
-import sys
 
+
+import sys
 sys.path.append('/home/ubuntu/stockCrawler')
 sys.path.append('/home/solinari/workspace/stockCrawler')
+
 
 from common.mongo.sohuConn import SohuConn
 from common.mongo.neteaseConn import NeteaseConn
@@ -114,4 +116,6 @@ class Base(object):
         return result
 
 base = Base()
-print base.getData(code="600007", start_date="2015-01-01", end_date="2019-01-01")
+datalist = base.getData(code="600007", start_date="2015-01-01", end_date="2019-01-01")
+for item in datalist:
+    print item
