@@ -20,6 +20,7 @@ import sys
 sys.path.append('/home/ubuntu/stockCrawler')
 sys.path.append('/home/solinari/workspace/stockCrawler')
 
+
 from base import Base
 
 class WR_index():
@@ -32,6 +33,7 @@ class WR_index():
         self.datas = base.getData(
             code=code, start_date=start_date, end_date=end_date)
         self._index = 0
+        self.period = 14
 
     @property
     def C(self):
@@ -40,15 +42,37 @@ class WR_index():
     @property
     def Hn(self):
         Hn = self.datas[self._index]['HIGH']
+        for index in range(self._index - self.period, self._index):
+            if index < 0:
+                break
+            if self.datas[self._index]['HIGH'] > Hn:
+                Hn = self.datas[self._index]['HIGH']
+
+        return Hn
 
     @property
     def Ln(self):
         Hn = self.datas[self._index]['LOW']
+        for index in range(self._index - self.period, self._index):
+            if index < 0:
+                break
+            if self.datas[self._index]['LOW'] < Ln:
+                Ln = self.datas[self._index]['LOW']
+
+        return Hn
+
+    def set_period(self, period):
+        self.period = period
+
 
     def cal_index(self):
-        pass
+        total = len(self.datas)
+        for index in range(0, total):
+            self._index = index
+            print (self.Hn - self.C) / (self.Hn - self.Ln)*100
 
 
-c = WR_index(code="600004")
+c = WR_index(code="600007")
 c.cal_index()
+c.set_period(period=55)
 print c.C, c.Hn, c.Ln
