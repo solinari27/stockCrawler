@@ -67,12 +67,19 @@ class WR_index():
 
     def cal_index(self):
         total = len(self.datas)
+        wr_list = []
         for index in range(0, total):
             self._index = index
-            print (self.Hn - self.C) / (self.Hn - self.Ln)*100
+            Hn_Ln = self.Hn - self.Ln
+            if Hn_Ln>0:
+                wr = (self.Hn - self.C) / (self.Hn - self.Ln)*100
+            else:
+                wr = 100
+            wr_list.append({'DATE': self.datas[index]['DATE'], 'W%R': wr})
+
+        return wr_list
 
 
 c = WR_index(code="600007")
-c.cal_index()
 c.set_period(period=55)
-print c.C, c.Hn, c.Ln
+print c.cal_index()
