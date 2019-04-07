@@ -52,14 +52,14 @@ class WR_index():
 
     @property
     def Ln(self):
-        Hn = self.datas[self._index]['LOW']
+        Ln = self.datas[self._index]['LOW']
         for index in range(self._index - self.period, self._index):
             if index < 0:
                 break
             if self.datas[self._index]['LOW'] < Ln:
                 Ln = self.datas[self._index]['LOW']
 
-        return Hn
+        return Ln
 
     def set_period(self, period):
         self.period = period
