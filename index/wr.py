@@ -44,11 +44,11 @@ class WR_index():
     def Hn(self):
         # now = datetime.datetime.strptime(self.datas[self._index]['DATE'], "%Y-%m-%d")
         Hn = self.datas[self._index]['HIGH']
+        start = self._index - self.period + 1
+        if start < 0:
+            start = 0
 
-        for index in range(self._index - self.period - 1, self._index):
-            if index < 0:
-                break
-
+        for index in range(start, self._index):
             # day = datetime.datetime.strptime(self.datas[index]['DATE'], "%Y-%m-%d")
             # if (now-day).days < self.period:
             if self.datas[index]['HIGH'] > Hn:
@@ -60,11 +60,11 @@ class WR_index():
     def Ln(self):
         # now = datetime.datetime.strptime(self.datas[self._index]['DATE'], "%Y-%m-%d")
         Ln = self.datas[self._index]['LOW']
+        start = self._index - self.period + 1
+        if start < 0:
+            start = 0
 
-        for index in range(self._index - self.period - 1, self._index):
-            if index < 0:
-                break
-
+        for index in range(start, self._index):
             # day = datetime.datetime.strptime(self.datas[index]['DATE'], "%Y-%m-%d")
             # if (now-day).days < self.period:
             if self.datas[index]['LOW'] < Ln:
@@ -96,5 +96,5 @@ class WR_index():
 
 
 c = WR_index(code="600007")
-c.set_period(period=10)
+c.set_period(period=55)
 print c.cal_index()
