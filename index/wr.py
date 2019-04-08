@@ -44,14 +44,15 @@ class WR_index():
     def Hn(self):
         now = datetime.datetime.strptime(self.datas[self._index]['DATE'], "%Y-%m-%d")
         Hn = self.datas[self._index]['HIGH']
+
         for index in range(self._index - self.period - 1, self._index):
             if index < 0:
                 break
 
             day = datetime.datetime.strptime(self.datas[index]['DATE'], "%Y-%m-%d")
             if (now-day).days < self.period:
-                if self.datas[self._index]['HIGH'] > Hn:
-                    Hn = self.datas[self._index]['HIGH']
+                if self.datas[index]['HIGH'] > Hn:
+                    Hn = self.datas[index]['HIGH']
 
         return Hn
 
@@ -59,14 +60,15 @@ class WR_index():
     def Ln(self):
         now = datetime.datetime.strptime(self.datas[self._index]['DATE'], "%Y-%m-%d")
         Ln = self.datas[self._index]['LOW']
+
         for index in range(self._index - self.period - 1, self._index):
             if index < 0:
                 break
 
             day = datetime.datetime.strptime(self.datas[index]['DATE'], "%Y-%m-%d")
             if (now-day).days < self.period:
-                if self.datas[self._index]['LOW'] < Ln:
-                    Ln = self.datas[self._index]['LOW']
+                if self.datas[index]['LOW'] < Ln:
+                    Ln = self.datas[index]['LOW']
 
         return Ln
 
@@ -82,7 +84,7 @@ class WR_index():
             Hn = self.Hn
             Ln = self.Ln
             C = self.C
-            print self._index, Hn, Ln, C
+            # print self._index, Hn, Ln, C
             Hn_Ln = Hn - Ln
             if Hn_Ln > 0:
                 wr = (Hn - C) / (Hn - Ln) * 100
