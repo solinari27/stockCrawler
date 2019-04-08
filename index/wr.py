@@ -84,8 +84,8 @@ class WR_index():
             C = self.C
             print self._index, Hn, Ln, C
             Hn_Ln = Hn - Ln
-            if Hn_Ln>0:
-                wr = (Hn - C) / (Hn - Ln)*100
+            if Hn_Ln > 0:
+                wr = (Hn - C) / (Hn - Ln) * 100
             else:
                 wr = 100
             wr_list.append({'DATE': self.datas[index]['DATE'], 'W%R': wr})
