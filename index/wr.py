@@ -84,7 +84,6 @@ class WR_index():
             Hn = self.Hn
             Ln = self.Ln
             C = self.C
-            # print self._index, Hn, Ln, C
             Hn_Ln = Hn - Ln
             if Hn_Ln > 0:
                 wr = (Hn - C) / (Hn - Ln) * 100
