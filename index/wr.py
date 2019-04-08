@@ -42,33 +42,33 @@ class WR_index():
 
     @property
     def Hn(self):
-        now = datetime.datetime.strptime(self.datas[self._index]['DATE'], "%Y-%m-%d")
+        # now = datetime.datetime.strptime(self.datas[self._index]['DATE'], "%Y-%m-%d")
         Hn = self.datas[self._index]['HIGH']
 
         for index in range(self._index - self.period - 1, self._index):
             if index < 0:
                 break
 
-            day = datetime.datetime.strptime(self.datas[index]['DATE'], "%Y-%m-%d")
-            if (now-day).days < self.period:
-                if self.datas[index]['HIGH'] > Hn:
-                    Hn = self.datas[index]['HIGH']
+            # day = datetime.datetime.strptime(self.datas[index]['DATE'], "%Y-%m-%d")
+            # if (now-day).days < self.period:
+            if self.datas[index]['HIGH'] > Hn:
+                Hn = self.datas[index]['HIGH']
 
         return Hn
 
     @property
     def Ln(self):
-        now = datetime.datetime.strptime(self.datas[self._index]['DATE'], "%Y-%m-%d")
+        # now = datetime.datetime.strptime(self.datas[self._index]['DATE'], "%Y-%m-%d")
         Ln = self.datas[self._index]['LOW']
 
         for index in range(self._index - self.period - 1, self._index):
             if index < 0:
                 break
 
-            day = datetime.datetime.strptime(self.datas[index]['DATE'], "%Y-%m-%d")
-            if (now-day).days < self.period:
-                if self.datas[index]['LOW'] < Ln:
-                    Ln = self.datas[index]['LOW']
+            # day = datetime.datetime.strptime(self.datas[index]['DATE'], "%Y-%m-%d")
+            # if (now-day).days < self.period:
+            if self.datas[index]['LOW'] < Ln:
+                Ln = self.datas[index]['LOW']
 
         return Ln
 
