@@ -33,7 +33,6 @@ class EXPMA_index():
 
         self._index = 0
         self._last_expma = 0
-        # self._last_expma = self.datas[0]['TCLOSE']
         self.period = 14
 
 
@@ -57,6 +56,7 @@ class EXPMA_index():
             self._last_expma = value
 
             print expma
+        return ret
 
 
 
