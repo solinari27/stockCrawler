@@ -11,6 +11,7 @@
 # EXPMA指标由于其计算公式中着重考虑了价格当天（当期）行情的权重，
 # 因此在使用中可克服MACD其他指标信号对于价格走势的滞后性。
 # 同时也在一定程度中消除了DMA指标在某些时候对于价格走势所产生的信号提前性，是一个非常有效的分析指标。
+# EXPMA=[当日或当期收盘价*2 + 上日或上期EXPMA*(N-1)] / (N+1)
 # EXPMA=（当日或当期收盘价－上一日或上期EXPMA）/N+上一日或上期EXPMA，其中，首次上期EXPMA值为上一期收盘价，N为天数。
 # 经：
 
@@ -46,7 +47,8 @@ class EXPMA_index():
         ret = []
         for index in range(0, total):
             CLOSE = (self.datas[index]['TCLOSE'])
-            value = (CLOSE - self._last_expma)/self.period + self._last_expma
+            N = self.period
+            value = (CLOSE*2 + self._last_expma*(N-1))/(N+1)
             expma = {"DATE": self.datas[index]['DATE'], "expma": value}
             # if index < self.period - 1:
             #     value = 0
