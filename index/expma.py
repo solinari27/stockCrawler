@@ -32,8 +32,8 @@ class EXPMA_index():
             code=code, start_date=start_date, end_date=end_date)
 
         self._index = 0
-        self._last_expma = 0
-        self.period = 14
+        self._last_expma = (self.datas[0]['TCLOSE'])
+        self.period = 12
 
 
     def set_period(self, period):
@@ -45,12 +45,16 @@ class EXPMA_index():
 
         ret = []
         for index in range(0, total):
-            if index < self.period - 1:
-                value = self.datas[index]['TCLOSE']
-                expma = {"DATE": self.datas[index]['DATE'], "expma": value}
-            else:
-                value = (self.datas[index]['TCLOSE'] - self._last_expma)/self.period + self._last_expma
-                expma = {"DATE": self.datas[index]['DATE'], "expma": value}
+            CLOSE = (self.datas[index]['TCLOSE'])
+            value = (CLOSE - self._last_expma)/self.period + self._last_expma
+            expma = {"DATE": self.datas[index]['DATE'], "expma": value}
+            # if index < self.period - 1:
+            #     value = 0
+            #     expma = {"DATE": self.datas[index]['DATE'], "expma": value}
+            # else:
+            #     CLOSE = (self.datas[index]['TCLOSE'])
+            #     value = (CLOSE - self._last_expma)/self.period + self._last_expma
+            #     expma = {"DATE": self.datas[index]['DATE'], "expma": value}
 
             ret.append(expma)
             self._last_expma = value
