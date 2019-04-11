@@ -37,7 +37,7 @@ class CR_index():
 
 
         self._index = 0
-        self.period = 12
+        self.period = 10
 
     def set_period(self, period):
         self.period = period
@@ -50,15 +50,15 @@ class CR_index():
         for index in range(0, total):
             P1 = 0
             P2 = 0
-            for _i in range(index - self.period -1, index):
+            for _i in range(index - self.period -1, index + 1):
                 H = self.datas[_i]['HIGH']
                 L = self.datas[_i]['LOW']
 
-                if (_i>0):
+                if (_i > 0):
                     C = self.datas[_i-1]['TCLOSE']
                     _H = self.datas[_i-1]['HIGH']
                     _L = self.datas[_i-1]['LOW']
-                    M = (2*C+_H+_L)/4
+                    M = (C+_H+_L)/3
                 else:
                     M = 0
 
