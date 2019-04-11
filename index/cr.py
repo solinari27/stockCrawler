@@ -58,7 +58,7 @@ class CR_index():
                     C = self.datas[_i-1]['TCLOSE']
                     _H = self.datas[_i-1]['HIGH']
                     _L = self.datas[_i-1]['LOW']
-                    M = (C+_H+_L)/3
+                    M = (2*C+_H+_L)/4
                 else:
                     M = 0
 
