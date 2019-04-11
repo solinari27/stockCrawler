@@ -11,6 +11,11 @@
 # 但它与AR、BR指标最大不同的地方在于理论的出发点有不同之处。CR指标的理论出发点是：中间价是股市最有代表性的价格。
 # CR（N日）=P1÷P2×100
 # P1=Σ（H－YM），表示N日以来多方力量的总和；P2=Σ（YM－L），表示N日以来空方力量的总和。H表示今日的最高价，L表示今日的最低价YM表示昨日（上一个交易日）的中间价。
+# 1、M=（2C+H+L）÷4
+# 2、M=（C+H+L+O）÷4
+# 3、M=（C+H+L）÷3
+# 4、M=（H+L）÷2
+# 式中，C为收盘价，H为最高价，L为最低价，O为开盘价。
 # 经：
 
 import sys
@@ -59,6 +64,7 @@ class CR_index():
             for _i in range(0, index):
                 H = self.datas[_i]['HIGH']
                 L = self.datas[_i]['LOW']
+                YM =
                 print H, L
             # CR = P1 / P2 * 100
 
