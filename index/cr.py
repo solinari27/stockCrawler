@@ -55,7 +55,9 @@ class CR_index():
         ret = []
         for index in range(0, total):
             for _i in range(0, index):
-                print _i
+                H = self.datas[_i]['HIGH']
+                L = self.datas[_i]['LOW']
+                print H, L
 
         return ret
 
