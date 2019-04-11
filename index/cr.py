@@ -54,7 +54,8 @@ class CR_index():
 
         ret = []
         for index in range(0, total):
-            pass
+            for _i in range(0, index):
+                print _i
 
         return ret
 
