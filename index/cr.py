@@ -19,3 +19,43 @@ sys.path.append('/home/solinari/workspace/stockCrawler')
 
 
 from base import Base
+
+class CR_index():
+
+    def __init__(self, code, start_date="1900-01-01", end_date="2020-01-01"):
+        """
+        default cal index from 1900-01-01
+        """
+        base = Base()
+        self.datas = base.getData(
+            code=code, start_date=start_date, end_date=end_date)
+
+        self._index = 0
+        self.period = 12
+
+    @property
+    def H(self):
+        return self.datas[self._index]['TCLOSE']
+
+    @property
+    def L(self):
+        return self.datas[self._index]['TCLOSE']
+
+    @property
+    def YM(self):
+        return self.datas[self._index]['TCLOSE']
+
+    def set_period(self, period):
+        self.period = period
+
+
+    def cal_index(self):
+        total = len(self.datas)
+
+        pass
+
+
+
+c = CR_index(code="600007")
+c.set_period(period=12)
+c.cal_index()
