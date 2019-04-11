@@ -38,18 +38,6 @@ class CR_index():
         self._index = 0
         self.period = 12
 
-    @property
-    def H(self):
-        return self.datas[self._index]['TCLOSE']
-
-    @property
-    def L(self):
-        return self.datas[self._index]['TCLOSE']
-
-    @property
-    def YM(self):
-        return self.datas[self._index]['TCLOSE']
-
     def set_period(self, period):
         self.period = period
 
