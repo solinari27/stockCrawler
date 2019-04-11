@@ -60,7 +60,7 @@ class CR_index():
                 H = self.datas[_i]['HIGH']
                 L = self.datas[_i]['LOW']
                 print H, L
-            CR = P1 / P2 * 100
+            # CR = P1 / P2 * 100
 
         return ret
 
