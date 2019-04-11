@@ -35,6 +35,7 @@ class CR_index():
         self.datas = base.getData(
             code=code, start_date=start_date, end_date=end_date)
 
+
         self._index = 0
         self.period = 12
 
