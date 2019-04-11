@@ -54,10 +54,13 @@ class CR_index():
 
         ret = []
         for index in range(0, total):
+            P1 = 0
+            P2 = 0
             for _i in range(0, index):
                 H = self.datas[_i]['HIGH']
                 L = self.datas[_i]['LOW']
                 print H, L
+            CR = P1 / P2 * 100
 
         return ret
 
