@@ -52,8 +52,11 @@ class CR_index():
     def cal_index(self):
         total = len(self.datas)
 
-        pass
+        ret = []
+        for index in range(0, total):
+            pass
 
+        return ret
 
 
 c = CR_index(code="600007")
