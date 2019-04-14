@@ -54,13 +54,21 @@ class CR_index():
                 H = self.datas[_i]['HIGH']
                 L = self.datas[_i]['LOW']
 
-                if (_i > 0):
-                    C = self.datas[_i-1]['TCLOSE']
-                    _H = self.datas[_i-1]['HIGH']
-                    _L = self.datas[_i-1]['LOW']
-                    M = (2*C+_H+_L)/4
-                else:
-                    M = 0
+                # if (_i > 0):
+                #     C = self.datas[_i-1]['TCLOSE']
+                #     _H = self.datas[_i-1]['HIGH']
+                #     _L = self.datas[_i-1]['LOW']
+                #     _O = self.datas[_i-1]['TOPEN']
+                #     # M = (2*C+_H+_L)/4
+                #     M = (C + _H + _L + _O) / 4
+                # else:
+                #     M = 0
+
+                C = self.datas[_i]['TCLOSE']
+                O = self.datas[_i]['TOPEN']
+                # M = (2*C+H+L)/4
+                # M = (C + H + L + O) / 4
+                M = (C + H + L)/3
 
                 P1 += H - M
                 P2 += M - L
