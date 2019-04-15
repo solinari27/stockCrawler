@@ -59,7 +59,7 @@ class CR_index():
                     _H = self.datas[_i-1]['HIGH']
                     _L = self.datas[_i-1]['LOW']
                     _O = self.datas[_i-1]['TOPEN']
-                    M = (2*C+_H+_L)/4
+                    YM = (2*C+_H+_L)/4
                     # M = (C + _H + _L + _O) / 4
                     # M = (C + _H + _L)/3
                     # M = (_H + _L) / 2
@@ -73,8 +73,8 @@ class CR_index():
                 # M = (C + H + L)/3
                 # M = (H + L) / 2
 
-                P1 += H - M
-                P2 += M - L
+                P1 += H - YM
+                P2 += YM - L
 
             if P2 > 0:
                 CR = P1 / P2 * 100
