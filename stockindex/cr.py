@@ -16,8 +16,12 @@
 # 3、M=（C+H+L）÷3
 # 4、M=（H+L）÷2
 # 式中，C为收盘价，H为最高价，L为最低价，O为开盘价。
+# CR指标以每天股价运行的中间价作为计算标准，
+# 其中间价为MID := (HIGH+LOW+CLOSE)/3；
+# 计算机理是累计N日内每天上升值SUM(MAX(0,HIGH-REF(MID,1)),N)与下降值SUM (MAX(0,REF(MID,1)-L),N)之和的比值
+# （MAX项中判断式上升与下跌值若为负值或0，则记成0）： CR:=SUM(MAX(0,HIGH-REF(MID,1)),N)/SUM(MAX(0,REF(MID,1)-L),N)*100;
 # 经：
-# FIXME: not correct CR index
+# FIXME: not correct CR index 132.56
 
 import sys
 sys.path.append('/home/ubuntu/stockCrawler')
@@ -36,12 +40,7 @@ class CR_index():
         self.datas = base.getData(
             code=code, start_date=start_date, end_date=end_date)
 
-        self._index = 0
-        self.period = 10
-
-
-    def set_period(self, period):
-        self.period = period
+        self.period = 26
 
 
     def cal_index(self):
@@ -51,34 +50,29 @@ class CR_index():
         for index in range(0, total):
             P1 = 0
             P2 = 0
-            for _i in range(index - self.period + 1, index + 1):
-                H = self.datas[_i]['HIGH']
-                L = self.datas[_i]['LOW']
+            for _i in range(index - self.period, index):
+                if _i >= 0:
+                    H = self.datas[_i + 1]['HIGH']
+                    L = self.datas[_i + 1]['LOW']
+                    C = self.datas[_i]['TCLOSE']
+                    O = self.datas[_i]['TOPEN']
+                    _H = self.datas[_i]['HIGH']
+                    _L = self.datas[_i]['LOW']
+                    # YM = (2 * C + H + L) / 4
+                    # YM = (C + _H + _L + O) / 4
+                    YM = (C + _H + _L) / 3
+                    YM = (3* C + _H + _L) / 5
+                    # YM = (_H + _L) / 2
 
-                if (_i > 0):
-                    C = self.datas[_i-1]['TCLOSE']
-                    _H = self.datas[_i-1]['HIGH']
-                    _L = self.datas[_i-1]['LOW']
-                    _O = self.datas[_i-1]['TOPEN']
-                    YM = (2*C+_H+_L)/4
-                    # M = (C + _H + _L + _O) / 4
-                    # M = (C + _H + _L)/3
-                    # M = (_H + _L) / 2
+                    print (self.datas[_i]['DATE'], H, YM, L)
+                    P1 += max(0, H - YM)
+                    P2 += max(0, YM - L)
                 else:
-                    M = (H + L) / 2
-
-                # C = self.datas[_i]['TCLOSE']
-                # O = self.datas[_i]['TOPEN']
-                # M = (2 * C + H + L) / 4
-                # M = (C + H + L + O) / 4
-                # M = (C + H + L)/3
-                # M = (H + L) / 2
-
-                P1 += H - YM
-                P2 += YM - L
+                    break
 
             if P2 > 0:
                 CR = P1 / P2 * 100
+                print ("CR: ", CR)
             else:
                 CR = 100
             ret.append({'DATE': self.datas[index]['DATE'], 'CR': CR})
@@ -86,6 +80,5 @@ class CR_index():
         return ret
 
 
-c = CR_index(code="600007")
-c.set_period(period=29)
+c = CR_index(code="600007", end_date='1999-05-31')
 print c.cal_index()

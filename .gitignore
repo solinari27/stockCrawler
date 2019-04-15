@@ -94,3 +94,5 @@ ENV/
 .ropeproject
 .idea
 .DS_Store
+.vscode/settings.json
+netease/crawler/spider.yaml

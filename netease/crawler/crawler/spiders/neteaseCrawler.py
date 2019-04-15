@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # @Author  : Solinari
-# @Email   : 
+# @Email   :
 # @File    : neteaseCrawler.py
 # @Software: PyCharm
 # @Time    : 2018/12/09
@@ -57,13 +57,18 @@ class NeteaseCrawler(scrapy.Spider):
             code = stock[0]
             type = stock[1]
             startdate = self.__conn.getTime(code, today=get_today())
-            url = get_url(type=str(type), code=str(code), startdate=startdate, enddate=enddate)
+            url = get_url(type=str(type), code=str(code),
+                          startdate=startdate, enddate=enddate)
             meta = {
                 "url": url,
                 "code": code,
                 "date": enddate
             }
-            yield scrapy.Request(url=url, headers=headers, callback=self.parse, cookies=cookies, meta=meta)
+            yield scrapy.Request(url=url,
+                                 headers=headers,
+                                 callback=self.parse,
+                                 cookies=cookies,
+                                 meta=meta)
             time.sleep(5)
 
     def parse(self, response):
