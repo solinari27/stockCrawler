@@ -69,6 +69,7 @@ class CR_index():
                 M = (2 * C + H + L) / 4
                 # M = (C + H + L + O) / 4
                 # M = (C + H + L)/3
+                # M = (H + L) / 2
 
                 P1 += H - M
                 P2 += M - L
