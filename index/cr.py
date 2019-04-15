@@ -50,7 +50,7 @@ class CR_index():
         for index in range(0, total):
             P1 = 0
             P2 = 0
-            for _i in range(index - self.period -1, index + 1):
+            for _i in range(index - self.period + 1, index + 1):
                 H = self.datas[_i]['HIGH']
                 L = self.datas[_i]['LOW']
 
@@ -59,10 +59,10 @@ class CR_index():
                     _H = self.datas[_i-1]['HIGH']
                     _L = self.datas[_i-1]['LOW']
                     _O = self.datas[_i-1]['TOPEN']
-                    # M = (2*C+_H+_L)/4
+                    M = (2*C+_H+_L)/4
                     # M = (C + _H + _L + _O) / 4
                     # M = (C + _H + _L)/3
-                    M = (_H + _L) / 2
+                    # M = (_H + _L) / 2
                 else:
                     M = (H + L) / 2
 
