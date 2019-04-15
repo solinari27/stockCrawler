@@ -65,7 +65,7 @@ class CR_index():
                     # M = (C + _H + _L)/3
                     # M = (_H + _L) / 2
                 else:
-                    M = (H + L) / 2
+                    YM = (H + L) / 2
 
                 # C = self.datas[_i]['TCLOSE']
                 # O = self.datas[_i]['TOPEN']
@@ -87,5 +87,5 @@ class CR_index():
 
 
 c = CR_index(code="600007")
-c.set_period(period=29)
+c.set_period(period=26)
 print c.cal_index()
