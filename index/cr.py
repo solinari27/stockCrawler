@@ -17,7 +17,7 @@
 # 4、M=（H+L）÷2
 # 式中，C为收盘价，H为最高价，L为最低价，O为开盘价。
 # 经：
-# FIXME: not correct CR index
+# FIXME: not correct CR index 132.56
 
 import sys
 sys.path.append('/home/ubuntu/stockCrawler')
