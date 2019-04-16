@@ -37,7 +37,7 @@ class CR_index():
             code=code, start_date=start_date, end_date=end_date)
 
         self._index = 0
-        self.period = 10
+        self.period = 26
 
 
     def set_period(self, period):
@@ -51,28 +51,30 @@ class CR_index():
         for index in range(0, total):
             P1 = 0
             P2 = 0
-            for _i in range(index - self.period + 1, index + 1):
-                H = self.datas[_i]['HIGH']
-                L = self.datas[_i]['LOW']
+            for _i in range(index - self.period, index):
+                H = self.datas[_i + 1]['HIGH']
+                L = self.datas[_i + 1]['LOW']
 
-                if (_i > 0):
-                    C = self.datas[_i-1]['TCLOSE']
-                    _H = self.datas[_i-1]['HIGH']
-                    _L = self.datas[_i-1]['LOW']
-                    _O = self.datas[_i-1]['TOPEN']
-                    YM = (2*C+_H+_L)/4
-                    # M = (C + _H + _L + _O) / 4
-                    # M = (C + _H + _L)/3
-                    # M = (_H + _L) / 2
-                else:
-                    YM = (H + L) / 2
+                # if (_i > 0):
+                #     C = self.datas[_i-1]['TCLOSE']
+                #     _H = self.datas[_i-1]['HIGH']
+                #     _L = self.datas[_i-1]['LOW']
+                #     _O = self.datas[_i-1]['TOPEN']
+                #     YM = (2*C+_H+_L)/4
+                #     # M = (C + _H + _L + _O) / 4
+                #     # M = (C + _H + _L)/3
+                #     # M = (_H + _L) / 2
+                # else:
+                #     YM = (H + L) / 2
 
-                # C = self.datas[_i]['TCLOSE']
-                # O = self.datas[_i]['TOPEN']
-                # M = (2 * C + H + L) / 4
-                # M = (C + H + L + O) / 4
-                # M = (C + H + L)/3
-                # M = (H + L) / 2
+                C = self.datas[_i]['TCLOSE']
+                O = self.datas[_i]['TOPEN']
+                _H = self.datas[_i]['HIGH']
+                _L = self.datas[_i]['LOW']
+                YM = (2 * C + _H + _L) / 4
+                # YM = (C + _H + _L + O) / 4
+                # YM = (C + _H + _L)/3
+                # YM = (_H + _L) / 2
 
                 P1 += H - YM
                 P2 += YM - L
