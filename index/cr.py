@@ -36,12 +36,7 @@ class CR_index():
         self.datas = base.getData(
             code=code, start_date=start_date, end_date=end_date)
 
-        self._index = 0
         self.period = 26
-
-
-    def set_period(self, period):
-        self.period = period
 
 
     def cal_index(self):
@@ -67,14 +62,17 @@ class CR_index():
                 # else:
                 #     YM = (H + L) / 2
 
-                C = self.datas[_i]['TCLOSE']
-                O = self.datas[_i]['TOPEN']
-                _H = self.datas[_i]['HIGH']
-                _L = self.datas[_i]['LOW']
-                YM = (2 * C + _H + _L) / 4
-                # YM = (C + _H + _L + O) / 4
-                # YM = (C + _H + _L)/3
-                # YM = (_H + _L) / 2
+                if _i >= 0:
+                    C = self.datas[_i]['TCLOSE']
+                    O = self.datas[_i]['TOPEN']
+                    _H = self.datas[_i]['HIGH']
+                    _L = self.datas[_i]['LOW']
+                    YM = (2 * C + _H + _L) / 4
+                    # YM = (C + _H + _L + O) / 4
+                    # YM = (C + _H + _L)/3
+                    # YM = (_H + _L) / 2
+                else:
+                    YM = (H + L) / 2
 
                 P1 += H - YM
                 P2 += YM - L
@@ -89,5 +87,4 @@ class CR_index():
 
 
 c = CR_index(code="600007")
-c.set_period(period=26)
 print c.cal_index()
