@@ -16,6 +16,10 @@
 # 3、M=（C+H+L）÷3
 # 4、M=（H+L）÷2
 # 式中，C为收盘价，H为最高价，L为最低价，O为开盘价。
+# CR指标以每天股价运行的中间价作为计算标准，
+# 其中间价为MID := (HIGH+LOW+CLOSE)/3；
+# 计算机理是累计N日内每天上升值SUM(MAX(0,HIGH-REF(MID,1)),N)与下降值SUM (MAX(0,REF(MID,1)-L),N)之和的比值
+# （MAX项中判断式上升与下跌值若为负值或0，则记成0）： CR:=SUM(MAX(0,HIGH-REF(MID,1)),N)/SUM(MAX(0,REF(MID,1)-L),N)*100;
 # 经：
 # FIXME: not correct CR index 132.56
 
@@ -56,11 +60,11 @@ class CR_index():
                     _L = self.datas[_i]['LOW']
                     # YM = (2 * C + H + L) / 4
                     # YM = (C + _H + _L + O) / 4
-                    YM = (C + _H + _L)/3
+                    YM = (C + _H + _L) / 3
                     # YM = (_H + _L) / 2
 
-                    P1 += H - YM
-                    P2 += YM - L
+                    P1 += max(0, H - YM)
+                    P2 += max(0, YM - L)
                 else:
                     break
 
