@@ -57,7 +57,7 @@ class CR_index():
                     _L = self.datas[_i]['LOW']
                     # YM = (2 * C + H + L) / 4
                     # YM = (C + _H + _L + O) / 4
-                    # YM = (C + _H + _L)/3
+                    YM = (C + _H + _L)/3
                     # YM = (_H + _L) / 2
 
                     P1 += H - YM
