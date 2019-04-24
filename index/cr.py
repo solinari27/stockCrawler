@@ -47,10 +47,9 @@ class CR_index():
             P1 = 0
             P2 = 0
             for _i in range(index - self.period, index):
-                H = self.datas[_i + 1]['HIGH']
-                L = self.datas[_i + 1]['LOW']
-
                 if _i >= 0:
+                    H = self.datas[_i + 1]['HIGH']
+                    L = self.datas[_i + 1]['LOW']
                     C = self.datas[_i]['TCLOSE']
                     O = self.datas[_i]['TOPEN']
                     _H = self.datas[_i]['HIGH']
