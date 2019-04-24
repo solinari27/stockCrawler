@@ -63,7 +63,7 @@ class CR_index():
                     P1 += H - YM
                     P2 += YM - L
                 else:
-                    pass
+                    break
 
             if P2 > 0:
                 CR = P1 / P2 * 100
