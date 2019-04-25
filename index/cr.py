@@ -61,6 +61,7 @@ class CR_index():
                     # YM = (2 * C + H + L) / 4
                     # YM = (C + _H + _L + O) / 4
                     YM = (C + _H + _L) / 3
+                    YM = (C + _H + _L) / 3
                     # YM = (_H + _L) / 2
 
                     print (self.datas[_i]['DATE'], H, YM, L)
