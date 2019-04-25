@@ -77,5 +77,5 @@ class CR_index():
         return ret
 
 
-c = CR_index(code="600007")
+c = CR_index(code="600007", end_date='1999-05-31')
 print c.cal_index()
