@@ -63,6 +63,7 @@ class CR_index():
                     YM = (C + _H + _L) / 3
                     # YM = (_H + _L) / 2
 
+                    print (self.datas[_i]['DATE'], H, YM, L)
                     P1 += max(0, H - YM)
                     P2 += max(0, YM - L)
                 else:
@@ -70,6 +71,7 @@ class CR_index():
 
             if P2 > 0:
                 CR = P1 / P2 * 100
+                print ("CR: ", CR)
             else:
                 CR = 100
             ret.append({'DATE': self.datas[index]['DATE'], 'CR': CR})
