@@ -45,11 +45,15 @@ def s3_download():
     # print bucket_info
     # for item in bucket_info:
     #     print item, bucket_info[item]
-    Key = ''
-    Datetime = datetime.datetime('1900-01-01')
+    file = bucket_info['Contents'][0]['KEY']
+    day = bucket_info['Contents'][0]['LastModified']
     counts = len(bucket_info['Contents'])
     for i in range(0, counts):
-        print bucket_info['Contents'][i]
+        if bucket_info['Contents'][i]['LastModified'] > day:
+            file = bucket_info['Contents'][i]['KEY']
+            day = bucket_info['Contents'][i]['LastModified']
+
+    print file, day
 
 # main
 # make_tar()
