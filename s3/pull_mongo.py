@@ -45,12 +45,12 @@ def s3_download():
     # print bucket_info
     # for item in bucket_info:
     #     print item, bucket_info[item]
-    file = bucket_info['Contents'][0]['KEY']
+    file = bucket_info['Contents'][0]['Key']
     day = bucket_info['Contents'][0]['LastModified']
     counts = len(bucket_info['Contents'])
     for i in range(0, counts):
         if bucket_info['Contents'][i]['LastModified'] > day:
-            file = bucket_info['Contents'][i]['KEY']
+            file = bucket_info['Contents'][i]['Key']
             day = bucket_info['Contents'][i]['LastModified']
 
     print file, day
