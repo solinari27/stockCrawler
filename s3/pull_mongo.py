@@ -40,11 +40,16 @@ def s3_download():
 
     # upload_data = open(TAR_FILE, 'rb')
     # s3.Bucket(BUCKET).get_object(Key=upload_file, Body=upload_data)
-    # client.download_file(Bucket=BUCKET, Key=upload_file, "文件下载到的地址")
+    # client.download_file(Bucket=BUCKET, Key=upload_file, '/tmp/download_file.tar.gz')
     bucket_info = client.list_objects(Bucket=BUCKET)
-    print bucket_info
-    for item in bucket_info:
-        print item, bucket_info[item]
+    # print bucket_info
+    # for item in bucket_info:
+    #     print item, bucket_info[item]
+    Key = ''
+    Datetime = datetime.datetime('1900-01-01')
+    counts = len(bucket_info['Contents'])
+    for i in range(0, counts):
+        print bucket_info['Contents'][i]
 
 # main
 # make_tar()
