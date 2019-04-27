@@ -53,7 +53,9 @@ def s3_download():
             file = bucket_info['Contents'][i]['Key']
             day = bucket_info['Contents'][i]['LastModified']
 
-    print file, day
+    print ('start to download file %s form AWS S3.', file)
+    client.download_file(BUCKET, file, '/tmp/mongo_backup.tar.gz')
+    print ('download finished.')
 
 # main
 # make_tar()
