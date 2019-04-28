@@ -33,4 +33,5 @@ class MACD_index():
         self.datas = base.getData(
             code=code, start_date=start_date, end_date=end_date)
 
-        self.period = 26
+        self.exa12 = None
+        self.ema26 = None
