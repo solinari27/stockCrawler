@@ -7,10 +7,10 @@
 """
 import time
 
+from index.wr import WR
 from common.mongo.sohuConn import SohuConn
 from common.mongo.neteaseConn import NeteaseConn
 from utils.common.switch import switch
-from index.wr import WR
 
 
 class Collection(object):
