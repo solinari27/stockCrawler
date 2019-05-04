@@ -88,6 +88,7 @@ def ascend_training_tensor(code, start_date, end_date):
     with open("/home/solinari/workspace/stockCrawler/collection/conf/conf.yaml") as f:
         conf = yaml.load(f)
         c = collection.Collection()
+        print c.index()
 
         for result in c.getData(code=code, start_date=start_date, end_date=end_date):
             ret = do_regression(result, epochs=conf['epochs'], thres=conf['thres'],
