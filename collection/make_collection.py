@@ -101,21 +101,17 @@ def ascend_training_tensor(code, start_date, end_date):
                 else:
                     d1 = 0
 
+                # ???
                 if ascend_point + 12 < item[3]:
                     d2 = ascend_point + 12
                 else:
                     d2 = item[3]
                 print d1, d2
-                dataset = result[d1, d2]
+                dataset = result[d1: d2]
                 dateperiod = len(dataset)
 
-                stand = conf['collection']
-                if dateperiod >= stand['dateperiod_up'] and w > stand['w_up']:
-                    _data = data2ndarray(dataset=dataset)
-                    yield _data
-                if dateperiod >= stand['dateperiod_down'] and w < stand['w_down']:
-                    _data = data2ndarray(dataset=dataset)
-                    yield _data
+                _data = data2ndarray(dataset=dataset)
+                yield _data
 
 # for ret in make_training_tensor(code="600007", start_date="2015-01-01", end_date="2019-12-31"):
 #     print torch.tensor(ret)
