@@ -21,11 +21,12 @@ import yaml
 def del_useless_info(info_dict):
     del(info_dict['CODE'])
     del(info_dict['NAME'])
-    del(info_dict['DATE'])
+    # del(info_dict['DATE'])
     return info_dict
 
 def dict2list(_dict):
     _list = []
+    _list.append(_dict['DATE'])
     _list.append(_dict['LCLOSE'])
     _list.append(_dict['TOPEN'])
     _list.append(_dict['TCLOSE'])
