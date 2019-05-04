@@ -101,7 +101,7 @@ def ascend_training_tensor(code, start_date, end_date):
                 before_days = 0
                 after_days = 0
 
-                # below all bullshits
+                # below r all bullshits
                 d1 = 0
                 d2 = 0
                 if ascend_point > 30:
