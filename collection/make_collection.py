@@ -87,13 +87,19 @@ def ascend_training_tensor(code, start_date, end_date):
     with open("/home/solinari/workspace/stockCrawler/collection/conf/conf.yaml") as f:
         conf = yaml.load(f)
         c = collection.Collection()
+        # get indexs
+        wr = c.get_index(code=None, index=None, start_date=None, end_date=None)
 
         for result in c.getData(code=code, start_date=start_date, end_date=end_date):
             ret = do_regression(result, epochs=conf['epochs'], thres=conf['thres'],
                                 algo=conf['algo']['name'], params=conf['algo'])
             for item in ret:
                 ascend_point = item[2]
-                print result[ascend_point]
+                try:
+                    print result[ascend_point]['DATE']
+                except KeyError:
+                    print result[ascend_point]
+                    # need fix bug
 
                 # cal befire days and after days
                 # using BOLLING MACD EXPMA WR ...
