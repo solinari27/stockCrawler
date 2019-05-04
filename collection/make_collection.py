@@ -93,12 +93,14 @@ def ascend_training_tensor(code, start_date, end_date):
         for result in c.getData(code=code, start_date=start_date, end_date=end_date):
             ret = do_regression(result, epochs=conf['epochs'], thres=conf['thres'],
                                 algo=conf['algo']['name'], params=conf['algo'])
+
             for item in ret:
                 ascend_point = item[2]
-                try:
-                    print result[ascend_point]['DATE']
-                except KeyError:
-                    print result[ascend_point]
+                print result[ascend_point]
+                # try:
+                #     print result[ascend_point]['DATE']
+                # except KeyError:
+                #     print result[ascend_point]
                     # need fix bug
 
                 # cal befire days and after days
@@ -129,5 +131,5 @@ def ascend_training_tensor(code, start_date, end_date):
 # for ret in make_training_tensor(code="600007", start_date="2015-01-01", end_date="2019-12-31"):
 #     print torch.tensor(ret)
 
-for ret in ascend_training_tensor(code="600007", start_date="2015-01-01", end_date="2019-12-31"):
+for ret in ascend_training_tensor(code="600027", start_date="2015-01-01", end_date="2019-12-31"):
     print torch.tensor(ret)
