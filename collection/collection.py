@@ -7,7 +7,7 @@
 """
 import time
 
-import stockindex
+from stockindex.wr import WR_index
 from common.mongo.sohuConn import SohuConn
 from common.mongo.neteaseConn import NeteaseConn
 from utils.common.switch import switch
