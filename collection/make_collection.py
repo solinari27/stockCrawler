@@ -94,6 +94,14 @@ def ascend_training_tensor(code, start_date, end_date):
                                 algo=conf['algo']['name'], params=conf['algo'])
             for item in ret:
                 ascend_point = item[2]
+                print result[ascend_point]
+
+                # cal befire days and after days
+                # using BOLLING MACD EXPMA WR ...
+                before_days = 0
+                after_days = 0
+
+                # below all bullshits
                 d1 = 0
                 d2 = 0
                 if ascend_point > 30:
@@ -106,7 +114,7 @@ def ascend_training_tensor(code, start_date, end_date):
                     d2 = ascend_point + 12
                 else:
                     d2 = item[3]
-                print d1, d2
+
                 dataset = result[d1: d2]
                 dateperiod = len(dataset)
 
