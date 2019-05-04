@@ -65,6 +65,7 @@ def make_training_tensor(code, start_date, end_date):
                 b = item[1]
                 dataset = result[item[2]: item[3]]
                 dateperiod = len(dataset)
+                # print item[2], item[3], dateperiod
                 stand = conf['collection']
                 # date > stand and weights > stand
                 if dateperiod >= stand['dateperiod_up'] and w > stand['w_up']:
@@ -83,5 +84,41 @@ def make_training_tensor(code, start_date, end_date):
                     # time.sleep(1)
                     yield _data
 
-for ret in make_training_tensor(code="600007", start_date="2015-01-01", end_date="2019-12-31"):
+def ascend_training_tensor(code, start_date, end_date):
+    with open("/home/solinari/workspace/stockCrawler/collection/conf/conf.yaml") as f:
+        conf = yaml.load(f)
+        c = collection.Collection()
+
+        for result in c.getData(code=code, start_date=start_date, end_date=end_date):
+            ret = do_regression(result, epochs=conf['epochs'], thres=conf['thres'],
+                                algo=conf['algo']['name'], params=conf['algo'])
+            for item in ret:
+                ascend_point = item[2]
+                d1 = 0
+                d2 = 0
+                if ascend_point > 30:
+                    d1 = ascend_point - 30
+                else:
+                    d1 = 0
+
+                if ascend_point + 12 < item[3]:
+                    d2 = ascend_point + 12
+                else:
+                    d2 = item[3]
+                print d1, d2
+                dataset = result[d1, d2]
+                dateperiod = len(dataset)
+
+                stand = conf['collection']
+                if dateperiod >= stand['dateperiod_up'] and w > stand['w_up']:
+                    _data = data2ndarray(dataset=dataset)
+                    yield _data
+                if dateperiod >= stand['dateperiod_down'] and w < stand['w_down']:
+                    _data = data2ndarray(dataset=dataset)
+                    yield _data
+
+# for ret in make_training_tensor(code="600007", start_date="2015-01-01", end_date="2019-12-31"):
+#     print torch.tensor(ret)
+
+for ret in ascend_training_tensor(code="600007", start_date="2015-01-01", end_date="2019-12-31"):
     print torch.tensor(ret)
