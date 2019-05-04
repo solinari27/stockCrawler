@@ -26,7 +26,7 @@ def del_useless_info(info_dict):
 
 def dict2list(_dict):
     _list = []
-    _list.append(_dict['DATE'])
+    # _list.append(_dict['DATE'])
     _list.append(_dict['LCLOSE'])
     _list.append(_dict['TOPEN'])
     _list.append(_dict['TCLOSE'])
