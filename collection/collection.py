@@ -32,8 +32,7 @@ class Collection(object):
         day = s.tm_mday
         return year, mon, day
 
-    @property
-    def index(self, code, index, start_date, end_date):
+    def get_index(self, code, index, start_date, end_date):
         c = WR_index(code="600007")
         c.set_period(period=55)
         print c.cal_index()
