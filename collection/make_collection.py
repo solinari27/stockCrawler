@@ -131,5 +131,5 @@ def ascend_training_tensor(code, start_date, end_date):
 # for ret in make_training_tensor(code="600007", start_date="2015-01-01", end_date="2019-12-31"):
 #     print torch.tensor(ret)
 
-for ret in ascend_training_tensor(code="600027", start_date="2015-01-01", end_date="2019-12-31"):
+for ret in ascend_training_tensor(code="600000", start_date="2015-01-01", end_date="2019-12-31"):
     print torch.tensor(ret)
