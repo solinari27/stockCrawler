@@ -91,6 +91,7 @@ def ascend_training_tensor(code, start_date, end_date):
         wr = c.get_index(code=None, index=None, start_date=None, end_date=None)
 
         for result in c.getData(code=code, start_date=start_date, end_date=end_date):
+            print result
             ret = do_regression(result, epochs=conf['epochs'], thres=conf['thres'],
                                 algo=conf['algo']['name'], params=conf['algo'])
 
@@ -98,7 +99,7 @@ def ascend_training_tensor(code, start_date, end_date):
                 ascend_point = item[2]
 
                 print ascend_point
-                print result[ascend_point]
+                print result[ascend_point]['DATE']
                 # try:
                 #     print result[ascend_point]['DATE']
                 # except KeyError:
