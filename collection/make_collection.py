@@ -95,6 +95,7 @@ def ascend_training_tensor(code, start_date, end_date):
                                 algo=conf['algo']['name'], params=conf['algo'])
 
             for item in ret:
+                print item[2], item[3]
                 ascend_point = item[2]
 
                 print ascend_point
