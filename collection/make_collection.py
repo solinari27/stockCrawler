@@ -96,6 +96,12 @@ def ascend_training_tensor(code, start_date, end_date):
 
             for item in ret:
                 ascend_point = item[2]
+
+                print ascend_point
+                _num = 0
+                for _j in result:
+                    print _num, _j
+                    _num += 1
                 print result[ascend_point]['DATE']
                 # try:
                 #     print result[ascend_point]['DATE']
