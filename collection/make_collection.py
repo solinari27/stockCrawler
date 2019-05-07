@@ -96,7 +96,7 @@ def ascend_training_tensor(code, start_date, end_date):
 
             for item in ret:
                 ascend_point = item[2]
-                print result[ascend_point]
+                print result[ascend_point]['DATE']
                 # try:
                 #     print result[ascend_point]['DATE']
                 # except KeyError:
@@ -131,5 +131,6 @@ def ascend_training_tensor(code, start_date, end_date):
 # for ret in make_training_tensor(code="600007", start_date="2015-01-01", end_date="2019-12-31"):
 #     print torch.tensor(ret)
 
-for ret in ascend_training_tensor(code="600000", start_date="2015-01-01", end_date="2019-12-31"):
-    print torch.tensor(ret)
+for ret in ascend_training_tensor(code="600000", start_date="2010-01-01", end_date="2019-12-31"):
+    # print torch.tensor(ret)
+    pass
