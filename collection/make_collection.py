@@ -95,15 +95,10 @@ def ascend_training_tensor(code, start_date, end_date):
                                 algo=conf['algo']['name'], params=conf['algo'])
 
             for item in ret:
-                print item[2], item[3]
                 ascend_point = item[2]
 
                 print ascend_point
-                _num = 0
-                for _j in result:
-                    print _num, _j
-                    _num += 1
-                print result[ascend_point]['DATE']
+                print result[ascend_point]
                 # try:
                 #     print result[ascend_point]['DATE']
                 # except KeyError:
