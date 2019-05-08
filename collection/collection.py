@@ -32,10 +32,13 @@ class Collection(object):
         day = s.tm_mday
         return year, mon, day
 
-    def get_index(self, code, index, start_date, end_date):
-        c = WR_index(code="600007")
-        c.set_period(period=55)
-        print c.cal_index()
+    def get_index(self, code, index, start_date, end_date, **kwargs):
+        if index is 'WR':
+            c = WR_index(code=code)
+            c.set_period(period=kwargs['period'])
+            return c.cal_index()
+
+        return None
 
     def getData(self, code, start_date, end_date):
         assert code is not None

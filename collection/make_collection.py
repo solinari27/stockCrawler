@@ -89,7 +89,8 @@ def ascend_training_tensor(code, start_date, end_date):
         conf = yaml.load(f)
         c = collection.Collection()
         # get indexs
-        wr = c.get_index(code=None, index=None, start_date=None, end_date=None)
+        wr = c.get_index(code=code, index='WR', start_date=None, end_date=None, period=55)
+        print wr
 
         for result in c.getData(code=code, start_date=start_date, end_date=end_date):
             ret = do_regression(result, epochs=conf['epochs'], thres=conf['thres'],
@@ -100,6 +101,9 @@ def ascend_training_tensor(code, start_date, end_date):
                 ascend_point = item[2]
                 ascend_date = result[ascend_point]['DATE']
                 print ascend_date
+                for _i in wr:
+                    if _i['DATE'] == ascend_date:
+                        print "OK"
 
                 # cal befire days and after days
                 # using BOLLING MACD EXPMA WR ...
