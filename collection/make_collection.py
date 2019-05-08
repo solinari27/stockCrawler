@@ -129,6 +129,7 @@ def ascend_training_tensor(code, start_date, end_date):
                 else:
                     d2 = item[3]
 
+                #deep copy
                 dataset = result[d1: d2]
                 dateperiod = len(dataset)
 
