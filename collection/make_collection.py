@@ -11,6 +11,7 @@ import time
 sys.path.append('/home/ubuntu/stockCrawler')
 sys.path.append('/home/solinari/workspace/stockCrawler')
 
+import copy
 import numpy as np
 import torch
 import collection
@@ -130,10 +131,10 @@ def ascend_training_tensor(code, start_date, end_date):
                     d2 = item[3]
 
                 #deep copy
-                dataset = result[d1: d2]
+                dataset = copy.deepcopy(result[d1: d2])
                 dateperiod = len(dataset)
 
-                # _data = data2ndarray(dataset=dataset)
+                _data = data2ndarray(dataset=dataset)
                 _data = []
                 yield _data
 
