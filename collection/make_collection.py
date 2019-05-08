@@ -91,20 +91,24 @@ def ascend_training_tensor(code, start_date, end_date):
         wr = c.get_index(code=None, index=None, start_date=None, end_date=None)
 
         for result in c.getData(code=code, start_date=start_date, end_date=end_date):
-            print result
             ret = do_regression(result, epochs=conf['epochs'], thres=conf['thres'],
                                 algo=conf['algo']['name'], params=conf['algo'])
 
+            # print result
             for item in ret:
                 ascend_point = item[2]
 
-                print ascend_point
-                print result[ascend_point]['DATE']
-                # try:
-                #     print result[ascend_point]['DATE']
-                # except KeyError:
-                #     print result[ascend_point]
+                # print ascend_point
+                # print result[ascend_point]['DATE']
+                try:
+                    print result[ascend_point]['DATE']
+                except KeyError:
+                    # print result
+                    # print ret
                     # need fix bug
+                    pass
+                    print result
+                    print result[ascend_point]
 
                 # cal befire days and after days
                 # using BOLLING MACD EXPMA WR ...
@@ -128,7 +132,8 @@ def ascend_training_tensor(code, start_date, end_date):
                 dataset = result[d1: d2]
                 dateperiod = len(dataset)
 
-                _data = data2ndarray(dataset=dataset)
+                # _data = data2ndarray(dataset=dataset)
+                _data = []
                 yield _data
 
 # for ret in make_training_tensor(code="600007", start_date="2015-01-01", end_date="2019-12-31"):
