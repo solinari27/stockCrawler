@@ -98,18 +98,8 @@ def ascend_training_tensor(code, start_date, end_date):
             # print result
             for item in ret:
                 ascend_point = item[2]
-
-                # print ascend_point
-                # print result[ascend_point]['DATE']
-                try:
-                    print result[ascend_point]['DATE']
-                except KeyError:
-                    # print result
-                    # print ret
-                    # need fix bug
-                    pass
-                    print result
-                    print result[ascend_point]
+                ascend_date = result[ascend_point]['DATE']
+                print ascend_date
 
                 # cal befire days and after days
                 # using BOLLING MACD EXPMA WR ...
