@@ -109,7 +109,7 @@ def ascend_training_tensor(code, start_date, end_date):
                 for _i in wr:
                     if _i['DATE'] == ascend_date:
                         print _i['W%R']
-                        
+
                 # below r all bullshits
                 d1 = 0
                 d2 = 0
