@@ -100,16 +100,16 @@ def ascend_training_tensor(code, start_date, end_date):
             for item in ret:
                 ascend_point = item[2]
                 ascend_date = result[ascend_point]['DATE']
-                print ascend_date
-                for _i in wr:
-                    if _i['DATE'] == ascend_date:
-                        print "OK"
 
                 # cal befire days and after days
                 # using BOLLING MACD EXPMA WR ...
                 before_days = 0
                 after_days = 0
 
+                for _i in wr:
+                    if _i['DATE'] == ascend_date:
+                        print _i['W%R']
+                        
                 # below r all bullshits
                 d1 = 0
                 d2 = 0
