@@ -101,9 +101,11 @@ def ascend_training_tensor(code, start_date, end_date):
                 w = item[0]
                 b = item[1]
                 dateperiod = item[3] - item[2]
-                # if dateperiod >= stand['dateperiod_up'] and w > stand['w_up']:
 
-                #==============================================================================
+                if not (dateperiod >= stand['dateperiod_up'] and w > stand['w_up']):
+                    break
+
+                # ==============================================================================
 
                 ascend_upper = conf['collection']['ascend_upper']
                 ascend_point = item[2] - 1
@@ -131,6 +133,7 @@ def ascend_training_tensor(code, start_date, end_date):
 
 
 
+                # =================================================================================
                 #deep copy
                 dataset = copy.deepcopy(result[item[2]: item[3]])
                 dateperiod = len(dataset)
