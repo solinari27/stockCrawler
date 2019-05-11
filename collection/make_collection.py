@@ -108,7 +108,7 @@ def ascend_training_tensor(code, start_date, end_date):
                 after_days = 0
 
                 #rule: under start point 20% upper
-                _top = result[top_point]['TCLOSE'] - result[ascend_point]['TCLOSE']
+                _top = 20% * （result[top_point]['TCLOSE'] - result[ascend_point]['TOPEN']） + result[ascend_point]['TOPEN']
                 #rule: below start point 10% lower
 
                 # rule: W%R
