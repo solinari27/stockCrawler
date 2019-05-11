@@ -98,7 +98,8 @@ def ascend_training_tensor(code, start_date, end_date):
 
             # print result
             for item in ret:
-                ascend_point = item[2]
+                ascend_point = item[2] - 1
+                top_point = item[3] - 1
                 ascend_date = result[ascend_point]['DATE']
 
                 # cal befire days and after days
@@ -106,10 +107,21 @@ def ascend_training_tensor(code, start_date, end_date):
                 before_days = 0
                 after_days = 0
 
+                #rule: under start point 20% upper
+                _top = result[top_point]['TCLOSE'] - result[ascend_point]['TCLOSE']
+                #rule: below start point 10% lower
+
                 # rule: W%R
+                #locate
+                _index = 0
                 for _i in wr:
                     if _i['DATE'] == ascend_date:
-                        print _i['W%R']
+                        break
+                    _index += 1
+                print _index
+                # lists ascend points
+
+
 
                 #deep copy
                 dataset = copy.deepcopy(result[item[2]: item[3]])
