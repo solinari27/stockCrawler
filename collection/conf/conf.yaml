@@ -9,3 +9,4 @@ collection:
   dateperiod_down: 10
   w_up: 0.05
   w_down: -0.05
+  ascend_upper: 0.15

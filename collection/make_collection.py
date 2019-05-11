@@ -100,10 +100,12 @@ def ascend_training_tensor(code, start_date, end_date):
             for item in ret:
                 w = item[0]
                 b = item[1]
+                dateperiod = item[3] - item[2]
+                # if dateperiod >= stand['dateperiod_up'] and w > stand['w_up']:
 
                 #==============================================================================
 
-
+                ascend_upper = conf['collection']['ascend_upper']
                 ascend_point = item[2] - 1
                 top_point = item[3] - 1
                 ascend_date = result[ascend_point]['DATE']
@@ -114,7 +116,7 @@ def ascend_training_tensor(code, start_date, end_date):
                 after_days = 0
 
                 #rule: under start point 20% upper
-                _top = 20% * （result[top_point]['TCLOSE'] - result[ascend_point]['TOPEN']） + result[ascend_point]['TOPEN']
+                _top = ascend_upper * (result[top_point]['TCLOSE'] - result[ascend_point]['TOPEN']) + result[ascend_point]['TOPEN']
                 #rule: below start point 10% lower
 
                 # rule: W%R
