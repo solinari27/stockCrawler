@@ -133,6 +133,16 @@ def ascend_training_tensor(code, start_date, end_date):
                 print _index, 'W%R: ', wr[_index]['W%R']
                 # lists ascend points
 
+                WR_rules = conf['WR']
+                for _i in range(_index, 0, -1):
+                    if wr[_i]['W%R'] > WR_rules['ascend']:
+                        break
+                    start_day -= 1
+                for _i in range(_index, len(wr)):
+                    if wr[_i]['W%R'] > WR_rules['ascend']:
+                        break
+                    end_day += 1
+                print start_day, end_day
 
 
                 # =================================================================================
