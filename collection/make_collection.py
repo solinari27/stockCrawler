@@ -115,11 +115,11 @@ def ascend_training_tensor(code, start_date, end_date):
 
                 # cal befire days and after days
                 # using BOLLING MACD EXPMA WR ...
-                before_days = 0
-                after_days = 0
+                start_day = 0
+                end_day = 0
 
                 #rule: under start point 20% upper
-                _top = ascend_upper * (result[top_point]['TCLOSE'] - result[ascend_point]['TOPEN']) + result[ascend_point]['TOPEN']
+                _topprice = ascend_upper * (result[top_point]['TCLOSE'] - result[ascend_point]['TOPEN']) + result[ascend_point]['TOPEN']
                 #rule: below start point 10% lower
 
                 # rule: W%R
