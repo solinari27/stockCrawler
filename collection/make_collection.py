@@ -129,7 +129,7 @@ def ascend_training_tensor(code, start_date, end_date):
                     if _i['DATE'] == ascend_date:
                         break
                     _index += 1
-                print 'W%R: ', _index
+                print _index, 'W%R: ', wr[_index]['W%R']
                 # lists ascend points
 
 
