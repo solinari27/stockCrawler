@@ -101,13 +101,14 @@ def ascend_training_tensor(code, start_date, end_date):
                 w = item[0]
                 b = item[1]
                 dateperiod = item[3] - item[2]
+                stand = conf['collection']
 
                 if not (dateperiod >= stand['dateperiod_up'] and w > stand['w_up']):
                     break
 
                 # ==============================================================================
 
-                ascend_upper = conf['collection']['ascend_upper']
+                ascend_upper = stand['ascend_upper']
                 ascend_point = item[2] - 1
                 top_point = item[3] - 1
                 ascend_date = result[ascend_point]['DATE']
@@ -128,7 +129,7 @@ def ascend_training_tensor(code, start_date, end_date):
                     if _i['DATE'] == ascend_date:
                         break
                     _index += 1
-                print _index
+                print 'W%R: ', _index
                 # lists ascend points
 
 
