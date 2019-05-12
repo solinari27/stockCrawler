@@ -135,19 +135,20 @@ def ascend_training_tensor(code, start_date, end_date):
 
                 WR_rules = conf['WR']
                 for _i in range(_index, 0, -1):
-                    if wr[_i]['W%R'] > WR_rules['ascend']:
+                    if wr[_i]['W%R'] > WR_rules['ascend'] and result[start_day]['TCLOSE'] < _topprice:
                         break
-                    start_day -= 1
+                    start_day = wr[_i]['DATE']
+
                 for _i in range(_index, len(wr)):
-                    if wr[_i]['W%R'] > WR_rules['ascend']:
+                    if wr[_i]['W%R'] > WR_rules['ascend'] and result[end_day]['TCLOSE'] < _topprice:
                         break
-                    end_day += 1
+                    end_day = wr[_i]['DATE']
                 print start_day, end_day
 
 
                 # =================================================================================
                 #deep copy
-                dataset = copy.deepcopy(result[start_day: end_day])
+                dataset = copy.deepcopy(result[item[2]: item[3]])
                 dateperiod = len(dataset)
 
                 _data = data2ndarray(dataset=dataset)
