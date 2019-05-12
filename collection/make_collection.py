@@ -115,9 +115,10 @@ def ascend_training_tensor(code, start_date, end_date):
 
                 # cal befire days and after days
                 # using BOLLING MACD EXPMA WR ...
-                start_day = 0
-                end_day = 0
+                start_day = item[2]
+                end_day = item[2]
 
+                # ===============================================================================
                 #rule: under start point 20% upper
                 _topprice = ascend_upper * (result[top_point]['TCLOSE'] - result[ascend_point]['TOPEN']) + result[ascend_point]['TOPEN']
                 #rule: below start point 10% lower
@@ -136,7 +137,7 @@ def ascend_training_tensor(code, start_date, end_date):
 
                 # =================================================================================
                 #deep copy
-                dataset = copy.deepcopy(result[item[2]: item[3]])
+                dataset = copy.deepcopy(result[start_day: end_day])
                 dateperiod = len(dataset)
 
                 _data = data2ndarray(dataset=dataset)
