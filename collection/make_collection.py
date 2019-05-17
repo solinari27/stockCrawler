@@ -157,8 +157,6 @@ def ascend_training_tensor(code, start_date, end_date):
                 # =================================================================================
                 #deep copy
                 dataset = copy.deepcopy(alldata[start_index: end_index])
-                dateperiod = len(dataset)
-
                 _data = data2ndarray(dataset=dataset)
                 yield _data
 
