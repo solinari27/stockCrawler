@@ -127,8 +127,6 @@ def ascend_training_tensor(code, start_date, end_date):
                     if alldata[end_index]['DATE'] == ascend_date:
                         break
 
-                print start_index, end_index
-
                 # ===============================================================================
                 #rule: under start point 20% upper
                 _topprice = ascend_upper * (result[top_point]['TCLOSE'] - result[ascend_point]['TOPEN']) + result[ascend_point]['TOPEN']
@@ -141,7 +139,6 @@ def ascend_training_tensor(code, start_date, end_date):
                     if _i['DATE'] == ascend_date:
                         break
                     _index += 1
-                print _index, 'W%R: ', wr[_index]['W%R']
                 # lists ascend points
 
                 WR_rules = conf['WR']
@@ -156,21 +153,17 @@ def ascend_training_tensor(code, start_date, end_date):
                         break
                     end_day = wr[_i]['DATE']
                     end_index += 1
-                print start_day, end_day
-
 
                 # =================================================================================
                 #deep copy
-                dataset = copy.deepcopy(result[item[2]: item[3]])
+                dataset = copy.deepcopy(alldata[start_index: end_index])
                 dateperiod = len(dataset)
 
                 _data = data2ndarray(dataset=dataset)
-                _data = []
                 yield _data
 
 # for ret in make_training_tensor(code="600007", start_date="2015-01-01", end_date="2019-12-31"):
 #     print torch.tensor(ret)
 
 for ret in ascend_training_tensor(code="600000", start_date="2010-01-01", end_date="2019-12-31"):
-    # print torch.tensor(ret)
-    pass
+    print torch.tensor(ret)
