@@ -91,6 +91,7 @@ def ascend_training_tensor(code, start_date, end_date):
 
         # get indexs
         wr = c.get_index(code=code, index='WR', start_date=None, end_date=None, period=55)
+        alldata = c.getAllData(code=code, start_date=start_date, end_date=end_date)
 
         for result in c.getData(code=code, start_date=start_date, end_date=end_date):
             ret = do_regression(result, epochs=conf['epochs'], thres=conf['thres'],

@@ -126,3 +126,81 @@ class Collection(object):
                         # No need to break here, it'll stop anyway
             result.append(item)
         yield result
+
+    def getAllData(self, code, start_date, end_date):
+        assert code is not None
+        assert start_date is not None
+        assert end_date is not None
+
+        netease_result = self.neteaseconn.getDailyData(
+            code=str(code), date1=start_date, date2=end_date)
+        sohu_result = self.sohuconn.getDailyData(
+            code=str(code), date1=start_date, date2=end_date)
+        # assert (len(netease_result) == len(sohu_result))
+
+        result = []
+        for index, netease_item in enumerate(netease_result):
+            item = {}
+
+            for key in netease_item.keys():
+                for case in switch(key):
+                    # base info
+                    if case('HIGH'):
+                        item[key] = netease_item[key]
+                        break
+                    if case('LOW'):
+                        item[key] = netease_item[key]
+                        break
+                    if case('CODE'):
+                        item[key] = netease_item[key]
+                        break
+                    if case('DATE'):
+                        item[key] = netease_item[key]
+                        break
+                    if case('NAME'):
+                        item[key] = netease_item[key]
+                        break
+
+                # drop this
+                    if case('_id'):
+                        break
+
+                # advantage info
+                    if case('TCAP'):
+                        item[key] = netease_item[key]
+                        break
+                    if case('MCAP'):
+                        item[key] = netease_item[key]
+                        break
+
+                    if case('CHG'):
+                        item[key] = netease_item[key]
+                        break
+                    if case('PCHG'):
+                        item[key] = netease_item[key]
+                        break
+
+                    if case('LCLOSE'):
+                        item[key] = netease_item[key]
+                        break
+                    if case('TOPEN'):
+                        item[key] = netease_item[key]
+                        break
+                    if case('TCLOSE'):
+                        item[key] = netease_item[key]
+                        break
+                    if case('VATURNOVER'):
+                        item[key] = netease_item[key]
+                        break
+
+                    if case('VOTURNOVER'):
+                        item[key] = netease_item[key]
+                        break
+                    if case('TURNOVER'):
+                        item[key] = netease_item[key]
+                        break
+                    if case():  # default, could also just omit condition or 'if True'
+                        pass
+                        # No need to break here, it'll stop anyway
+            result.append(item)
+        return result
