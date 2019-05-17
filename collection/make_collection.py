@@ -118,6 +118,16 @@ def ascend_training_tensor(code, start_date, end_date):
                 # using BOLLING MACD EXPMA WR ...
                 start_day = item[2]
                 end_day = item[2]
+                start_index = 0
+                end_index = 0
+                for start_index in range(0, len(alldata)):
+                    if alldata[start_index]['DATE'] == ascend_date:
+                        break
+                for end_index in range(start_index, len(alldata)):
+                    if alldata[end_index]['DATE'] == ascend_date:
+                        break
+
+                print start_index, end_index
 
                 # ===============================================================================
                 #rule: under start point 20% upper
@@ -136,14 +146,16 @@ def ascend_training_tensor(code, start_date, end_date):
 
                 WR_rules = conf['WR']
                 for _i in range(_index, 0, -1):
-                    if wr[_i]['W%R'] > WR_rules['ascend'] and result[start_day]['TCLOSE'] < _topprice:
+                    if wr[_i]['W%R'] > WR_rules['ascend'] and alldata[start_index]['TCLOSE'] < _topprice:
                         break
                     start_day = wr[_i]['DATE']
+                    start_index -= 1
 
                 for _i in range(_index, len(wr)):
-                    if wr[_i]['W%R'] > WR_rules['ascend'] and result[end_day]['TCLOSE'] < _topprice:
+                    if wr[_i]['W%R'] > WR_rules['ascend'] and alldata[end_index]['TCLOSE'] < _topprice:
                         break
                     end_day = wr[_i]['DATE']
+                    end_index += 1
                 print start_day, end_day
 
 
