@@ -26,19 +26,30 @@ def del_useless_info(info_dict):
     return info_dict
 
 def dict2list(_dict):
+    key_list = ['LCLOSE', 'TOPEN', 'TCLOSE',
+        'HIGH', 'LOW', 'MCAP', 'TCAP', 'CHG',
+        'PCHG', 'TURNOVER', 'VATURNOVER', 'VOTURNOVER']
     _list = []
-    _list.append(_dict['LCLOSE'])
-    _list.append(_dict['TOPEN'])
-    _list.append(_dict['TCLOSE'])
-    _list.append(_dict['HIGH'])
-    _list.append(_dict['LOW'])
-    _list.append(_dict['MCAP'])
-    _list.append(_dict['TCAP'])
-    _list.append(_dict['CHG'])
-    _list.append(_dict['PCHG'])
-    _list.append(_dict['TURNOVER'])
-    _list.append(_dict['VATURNOVER'])
-    _list.append(_dict['VOTURNOVER'])
+    # _list.append(_dict['LCLOSE'])
+    # _list.append(_dict['TOPEN'])
+    # _list.append(_dict['TCLOSE'])
+    # _list.append(_dict['HIGH'])
+    # _list.append(_dict['LOW'])
+    # _list.append(_dict['MCAP'])
+    # _list.append(_dict['TCAP'])
+    # _list.append(_dict['CHG'])
+    # _list.append(_dict['PCHG'])
+    # _list.append(_dict['TURNOVER'])
+    # _list.append(_dict['VATURNOVER'])
+    # _list.append(_dict['VOTURNOVER'])
+
+    for key in key_list:
+        if type(_dict[key]) == float:
+            _list.append(_dict[key])
+        else:
+            # FIXME: choose drop this _item
+            _list.append(0.0)
+            pass
     return _list
 
 def data2ndarray(dataset):
@@ -48,7 +59,9 @@ def data2ndarray(dataset):
             _item = del_useless_info(_item)
         except KeyError:
             pass    # FIXME: ERROR in dict key
-        _data.append(dict2list(_item))
+        _list = dict2list(_item)
+        if not len(_list) == 0:
+            _data.append(_list)
     _data = np.array(_data).T
     return _data
 
