@@ -25,7 +25,7 @@ def del_useless_info(info_dict):
     del(info_dict['DATE'])
     return info_dict
 
-def dict2list(_dict):
+def dict2list(_dict, suspension):
     key_list = ['LCLOSE', 'TOPEN', 'TCLOSE',
         'HIGH', 'LOW', 'MCAP', 'TCAP', 'CHG',
         'PCHG', 'TURNOVER', 'VATURNOVER', 'VOTURNOVER']
@@ -46,20 +46,20 @@ def dict2list(_dict):
     for key in key_list:
         if type(_dict[key]) == float:
             _list.append(_dict[key])
-        else:
-            # FIXME: choose drop this _item
+        elif suspension:
             _list.append(0.0)
-            pass
+        else:
+            return []
     return _list
 
-def data2ndarray(dataset):
+def data2ndarray(dataset, suspension):
     _data = []
     for _item in dataset:
         try:
             _item = del_useless_info(_item)
         except KeyError:
             pass    # FIXME: ERROR in dict key
-        _list = dict2list(_item)
+        _list = dict2list(_item, suspension)
         if not len(_list) == 0:
             _data.append(_list)
     _data = np.array(_data).T
@@ -170,11 +170,12 @@ def ascend_training_tensor(code, start_date, end_date):
                 # =================================================================================
                 #deep copy
                 dataset = copy.deepcopy(alldata[start_index: end_index])
-                _data = data2ndarray(dataset=dataset)
+                _data = data2ndarray(dataset=dataset, suspension=stand['suspension'])
                 yield _data
 
 # for ret in make_training_tensor(code="600007", start_date="2015-01-01", end_date="2019-12-31"):
 #     print torch.tensor(ret)
 
 for ret in ascend_training_tensor(code="600000", start_date="2010-01-01", end_date="2019-12-31"):
-    yield torch.tensor(ret)
+    print torch.tensor(ret)
+    # yield torch.tensor(ret)
