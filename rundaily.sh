@@ -4,3 +4,4 @@ python /home/ubuntu/stockCrawler/crawlliangyeedaily.py
 # python /home/ubuntu/stockCrawler/crawlnetease.py&
 # sh crawlnetease.sh
 # sh crawlsohu.sh
+sudo docker run -d stockcrawler:test /home/ubuntu/stockCrawler/crawlnetease.sh
