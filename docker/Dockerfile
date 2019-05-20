@@ -1,6 +1,5 @@
 # Version: 1.0.1
 FROM ubuntu:latest
-MAINTAINER Solinari "solinari27@gmail.com"
 RUN apt-get update
 RUN apt-get install -y python2.7
 RUN apt-get install -y python-pip
