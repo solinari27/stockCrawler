@@ -95,3 +95,4 @@ ENV/
 .idea
 .DS_Store
 .vscode/settings.json
+netease/crawler/spider.yaml
