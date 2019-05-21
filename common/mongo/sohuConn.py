@@ -58,7 +58,7 @@ class SohuConn(mongoConn):
 
     def insertDailyData(self, data):
         if (self._datadb['code' + data["CODE"]].find({"DATE": data["DATE"]}).count() == 0):
-            self._datadb.['code' + data["CODE"]].insert(data)
+            self._datadb['code' + data["CODE"]].insert(data)
             self._logger.info("{} insert data code: {} date: {} .".format(
                 self.__name__, data["CODE"], data["DATE"]))
         else:
