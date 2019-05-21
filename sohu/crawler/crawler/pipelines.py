@@ -8,14 +8,15 @@
 import os
 from common.mongo.sohuConn import SohuConn
 
+
 class CrawlerPipeline(object):
     def process_item(self, item, spider):
-        url = item.get ("url")
-        code = item.get ("code")
-        date = item.get ("date")
+        url = item.get("url")
+        code = item.get("code")
+        date = item.get("date")
         raw_data = item.get("raw_data")
-        # sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
-        sohuconn = SohuConn("/home/ubuntu/stockCrawler/Conf/sohu.conf")
+        sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
+        # sohuconn = SohuConn("/home/ubuntu/stockCrawler/Conf/sohu.conf")
         sohuconn.set_name("stock_" + str(code) + " pipeline")
 
         for codedata in raw_data["hq"]:
