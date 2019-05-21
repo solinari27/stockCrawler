@@ -23,7 +23,8 @@ class CrawlerPipeline(object):
             cf = open(file, 'r')
             results = []
             for x in csv.DictReader(cf):
-                d = json.dumps(x, indent=4, separators=(',', ':'), ensure_ascii=False)  # ,sort_keys=True
+                d = json.dumps(x, indent=4, separators=(',', ':'),
+                               ensure_ascii=False)  # ,sort_keys=True
                 d2 = json.loads(d)
                 d3 = {}
                 for key in d2.keys():
