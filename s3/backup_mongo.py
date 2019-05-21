@@ -13,7 +13,7 @@ import boto3
 
 
 MONGO_DUMP = "/home/solinari/mongodump"
-TAR_FILE = "/tmp/tartest.tar.gz"
+TAR_FILE = "/home/solinari/tartest.tar.gz"
 ACCESS_KEY = 'AKIAJUL5J2M422GJ26QQ'
 SECRET_KEY = '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'
 BUCKET = 'stockcrawler'
