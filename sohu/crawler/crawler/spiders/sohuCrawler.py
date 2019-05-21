@@ -31,8 +31,8 @@ class Sohu_crawler(scrapy.Spider):
 
         headers = {}
         cookies = {}
-        conn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
-        # conn = SohuConn("/home/ubuntu/stockCrawler/Conf/sohu.conf")
+        # conn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
+        conn = SohuConn("/home/ubuntu/stockCrawler/Conf/sohu.conf")
         stocklist = conn.getStocks()
 
         for stock in stocklist:
