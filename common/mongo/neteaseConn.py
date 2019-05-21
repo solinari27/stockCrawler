@@ -57,8 +57,8 @@ class NeteaseConn(mongoConn):
             self._logger.error(self.__name__ + " mongodb get stocklist error.")
 
     def insertDailyData(self, data):
-        if (self._datadb.dailydata.find({"CODE": data["CODE"], "DATE": data["DATE"]}).count() == 0):
-            self._datadb.dailydata.insert(data)
+        if (self._datadb['code' + data["CODE"]].find({"DATE": data["DATE"]}).count() == 0):
+            self._datadb['code' + data["CODE"]].insert(data)
             self._logger.info("{} insert data code: {} date: {} .".format(
                 self.__name__, data["CODE"], data["DATE"]))
         else:
@@ -66,8 +66,7 @@ class NeteaseConn(mongoConn):
 
     def getTime(self, code, today):
         enddate = "19920101"
-        cursor = self._datadb.datatime.find(
-            {"code": code}).sort([("date", -1)]).limit(1)
+        cursor = self._datadb['code' + code].find().sort([("date", -1)]).limit(1)
         for item in cursor:
             enddate = item['date']
         if enddate == "19920101":
@@ -77,8 +76,8 @@ class NeteaseConn(mongoConn):
     def getDailyData(self, code, date1=None, date2=None):
         # cursor = self._datadb.dailydata.find({"CODE": code}).sort([("DATE", -1)])
         # code = "'" + code   # bug for netease data
-        cursor = self._datadb.dailydata.find(
-            {"CODE": code, "DATE": {'$gte': date1, '$lte': date2}}).sort([("DATE", 1)])  # 升序
+        cursor = self._datadb['code' + code].find(
+            {"DATE": {'$gte': date1, '$lte': date2}}).sort([("DATE", 1)])  # 升序
 
         result = []
         for item in cursor:
@@ -93,4 +92,4 @@ class NeteaseConn(mongoConn):
 
     def cleanDB(self):
         self._datadb.datatime.remove({})
-        self._datadb.dailydata.remove({})
+        self._datadb.drop()
