@@ -15,8 +15,8 @@ class CrawlerPipeline(object):
         code = item.get("code")
         date = item.get("date")
         raw_data = item.get("raw_data")
-        # sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
-        sohuconn = SohuConn("/home/ubuntu/stockCrawler/Conf/sohu.conf")
+        sohuconn = SohuConn("/home/solinari/workspace/stockCrawler/Conf/sohu.conf")
+        # sohuconn = SohuConn("/home/ubuntu/stockCrawler/Conf/sohu.conf")
         sohuconn.set_name("stock_" + str(code) + " pipeline")
 
         for codedata in raw_data["hq"]:
