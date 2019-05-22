@@ -57,8 +57,8 @@ class SohuConn(mongoConn):
             self._logger.error(self.__name__ + " mongodb get stocklist error.")
 
     def insertDailyData(self, data):
-        if (self._datadb['code' + data["CODE"]].find({"DATE": data["DATE"]}).count() == 0):
-            self._datadb['code' + data["CODE"]].insert(data)
+        if (self._datadb['CN_A_' + data["CODE"]].find({"DATE": data["DATE"]}).count() == 0):
+            self._datadb['CN_A_' + data["CODE"]].insert(data)
             self._logger.info("{} insert data code: {} date: {} .".format(
                 self.__name__, data["CODE"], data["DATE"]))
         else:
@@ -66,7 +66,7 @@ class SohuConn(mongoConn):
 
     def getTime(self, code, today):
         enddate = "19920101"
-        cursor = self._datadb['code' + code].find(
+        cursor = self._datadb['CN_A_' + code].find(
             {"code": code}).sort([("date", -1)]).limit(1)
         for item in cursor:
             enddate = item['date']
@@ -76,7 +76,7 @@ class SohuConn(mongoConn):
 
     def getDailyData(self, code, date1=None, date2=None):
         # cursor = self._datadb.dailydata.find({"CODE": code}).sort([("DATE", -1)])
-        cursor = self._datadb['code' + code].find(
+        cursor = self._datadb['CN_A_' + code].find(
             {"DATE": {'$gte': date1, '$lte': date2}}).sort([("DATE", 1)])  # 升序
 
         result = []
