@@ -7,8 +7,6 @@ RUN apt-get install -y git
 RUN apt-get install -y vim
 RUN git clone https://github.com/solinari27/stockCrawler.git /home/solinari/workspace/stockCrawler/
 RUN pip install -r /home/solinari/workspace/stockCrawler/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-# RUN git clone https://github.com/solinari27/stockCrawler.git /home/ubuntu/stockCrawler/
-# RUN pip install -r /home/ubuntu/stockCrawler/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip install pyaml -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN mkdir /home/solinari/workspace/stockCrawler/netease/crawler/data
 RUN mkdir /home/solinari/workspace/stockCrawler/Log
@@ -23,3 +21,6 @@ RUN mkdir /home/solinari/workspace/stockCrawler/sohu/crawler/Log
 
 # ENV MONGODB_AUTH mongodb://127.0.0.1:27017
 # ENV MONGODB_AUTH mongodb://login:pw@mongodb:27017/dbname
+
+# RUN git clone https://github.com/solinari27/stockCrawler.git /home/ubuntu/stockCrawler/
+# RUN pip install -r /home/ubuntu/stockCrawler/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
