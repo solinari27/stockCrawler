@@ -23,12 +23,9 @@
 # 经：
 # FIXME: not correct CR index 132.56
 
-import sys
-sys.path.append('/home/ubuntu/stockCrawler')
-sys.path.append('/home/solinari/workspace/stockCrawler')
-
 
 from base import Base
+
 
 class CR_index():
 
@@ -41,7 +38,6 @@ class CR_index():
             code=code, start_date=start_date, end_date=end_date)
 
         self.period = 26
-
 
     def cal_index(self):
         total = len(self.datas)
@@ -61,7 +57,7 @@ class CR_index():
                     # YM = (2 * C + H + L) / 4
                     # YM = (C + _H + _L + O) / 4
                     YM = (C + _H + _L) / 3
-                    YM = (3* C + _H + _L) / 5
+                    YM = (3 * C + _H + _L) / 5
                     # YM = (_H + _L) / 2
 
                     print (self.datas[_i]['DATE'], H, YM, L)
@@ -78,7 +74,3 @@ class CR_index():
             ret.append({'DATE': self.datas[index]['DATE'], 'CR': CR})
 
         return ret
-
-
-c = CR_index(code="600007", end_date='1999-05-31')
-print c.cal_index()
