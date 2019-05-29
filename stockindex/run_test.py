@@ -19,6 +19,7 @@ from cr import CR_index
 
 c = CR_index(code="600007", end_date='1999-05-31')
 print c.cal_index()
+#consider python stockstats
 #19990419   132.56
 #19990420   133.8
 #19990421   102.56
