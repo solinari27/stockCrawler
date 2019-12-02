@@ -3,15 +3,18 @@ FROM ubuntu:latest
 RUN apt-get update
 RUN apt-get install -y python2.7
 RUN apt-get install -y python-pip
-RUN apt-get install -y git
+# RUN apt-get install -y git
 RUN apt-get install -y vim
-RUN git clone https://github.com/solinari27/stockCrawler.git /home/solinari/workspace/stockCrawler/
-RUN pip install -r /home/solinari/workspace/stockCrawler/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+# RUN git clone https://github.com/solinari27/stockCrawler.git /home/solinari/workspace/stockCrawler/
+# copy require.txt to here
+COPY requirements.txt /opt/requirements.txt
+RUN pip install pymongo -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install -r /opt/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip install pyaml -i https://pypi.tuna.tsinghua.edu.cn/simple
-RUN mkdir /home/solinari/workspace/stockCrawler/netease/crawler/data
-RUN mkdir /home/solinari/workspace/stockCrawler/Log
-RUN mkdir /home/solinari/workspace/stockCrawler/netease/crawler/Log
-RUN mkdir /home/solinari/workspace/stockCrawler/sohu/crawler/Log
+# RUN mkdir /home/solinari/workspace/stockCrawler/netease/crawler/data
+# RUN mkdir /home/solinari/workspace/stockCrawler/Log
+# RUN mkdir /home/solinari/workspace/stockCrawler/netease/crawler/Log
+# RUN mkdir /home/solinari/workspace/stockCrawler/sohu/crawler/Log
 # RUN mkdir /home/ubuntu/stockCrawler/netease/crawler/data
 # RUN mkdir /home/ubuntu/stockCrawler/Log
 # RUN mkdir /home/ubuntu/stockCrawler/netease/crawler/Log

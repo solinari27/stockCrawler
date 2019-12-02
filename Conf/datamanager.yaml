@@ -1,0 +1,25 @@
+main:
+    start_date: "2000-01-01"
+    end_date: "2010-12-31"
+
+collection:
+    clustering: "ap"
+    epochs: 1000
+    sk_learn:
+        DBSCAN_eps: 4
+        DBSCAN_minsamples: 3
+    thres: 10
+    line_score: 0.1
+    abs_weight: 0.01
+
+ap_clustering:
+    score: 0.2
+
+DBSCAN_clustering:
+    epochs: 1000
+    sk_learn:
+        DBSCAN_eps: 4
+        DBSCAN_minsamples: 3
+    thres: 10
+    line_score: 0.1
+    abs_weight: 0.01
