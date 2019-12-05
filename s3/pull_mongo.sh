@@ -1,1 +1,2 @@
 docker run -v /root/workspace/stockCrawler/:/home/workspace --rm --network=host stockcrawler python /home/workspace/s3/pull_mongo.py
+#  docker run -v /root/workspace/stockCrawler/:/home/workspace -v /home/data/:/home/downloads -d --rm --network=host stockcrawler python /home/workspace/s3/pull_mongo.py
