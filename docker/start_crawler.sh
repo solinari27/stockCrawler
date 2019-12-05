@@ -1,0 +1,1 @@
+docker run -v /root/workspace/stockCrawler/:/home/workspace -itd --rm --network=host stockcrawler /bin/bash
