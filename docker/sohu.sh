@@ -1,0 +1,1 @@
+ docker run -v /root/workspace/:/home/solinari/workspace -itd --rm --network=host stockcrawler ./home/solinari/workspacce/stockCrawler/crawlsohu.sh.sh
