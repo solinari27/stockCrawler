@@ -1,1 +1,1 @@
- docker run -v /root/workspace/:/home/solinari/workspace -itd --rm --network=host stockcrawler sh /home/solinari/workspacce/stockCrawler/crawlnetease.sh
+ docker run -v /root/workspace/:/home/solinari/workspace -itd --rm --network=host stockcrawler /home/solinari/workspace/stockCrawler/crawlnetease.sh
