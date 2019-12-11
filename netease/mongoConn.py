@@ -11,6 +11,7 @@ import sys
 import json
 import time
 import logging
+import urllib
 
 from Tools.swtich import switch
 
@@ -66,7 +67,10 @@ class mongoConn():
         self._logger.warn("netease crawler mongo connection started.")
 
         try:
-            self._conn = MongoClient(self._host, self._port)
+            username = urllib.quote_plus(self._username)
+            password = urllib.quote_plus(self._password)
+            self._conn = MongoClient('mongodb://%s:%s@%s' % (username, password, self._host))
+            # self._conn = MongoClient(self._host, self._port)
             if not self._check_connected(self._conn):
                 self._logger.error("netease crawler mongo connection failed.")
                 sys.exit(1)
