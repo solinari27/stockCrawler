@@ -69,7 +69,7 @@ class mongoConn():
         try:
             username = urllib.quote_plus(self._username)
             password = urllib.quote_plus(self._password)
-            self._conn = MongoClient('mongodb://%s:%s@%s' % (username, password, self._host))
+            self._conn = MongoClient('mongodb://%s:%s@' + self._host % (username, password))
             # self._conn = MongoClient(self._host, self._port)
             if not self._check_connected(self._conn):
                 self._logger.error("netease crawler mongo connection failed.")
