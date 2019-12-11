@@ -7,6 +7,7 @@
 """
 import sys
 import json
+import urllib
 from mongoConn import mongoConn
 from pymongo import MongoClient
 
@@ -25,7 +26,9 @@ class SohuConn(mongoConn):
 
         self.init_logger()
         try:
-            self._conn = MongoClient(self._host, self._port)
+            username = urllib.quote_plus(self._username)
+            password = urllib.quote_plus(self._password)
+            self._conn = MongoClient('mongodb://%s:%s@%s' % (username, password, self._host))
             if not self._check_connected(self._conn):
                 self._logger.error(self.__name__ + " mongo connection failed.")
                 sys.exit(1)
