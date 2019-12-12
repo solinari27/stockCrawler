@@ -27,11 +27,11 @@ class SohuConn(mongoConn):
         self.init_logger()
         try:
             if sys.version > '3':
-                username = urllib.quote_plus(self._username)
-                password = urllib.quote_plus(self._password)
-            else:
                 username = urllib.parse.quote_plus(self._username)
                 password = urllib.parse.quote_plus(self._password)
+            else:
+                username = urllib.quote_plus(self._username)
+                password = urllib.quote_plus(self._password)
             self._conn = MongoClient('mongodb://%s:%s@%s' % (username, password, self._host))
             if not self._check_connected(self._conn):
                 self._logger.error(self.__name__ + " mongo connection failed.")
