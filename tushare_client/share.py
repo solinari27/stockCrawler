@@ -6,10 +6,15 @@
 @time: 2020/04/12 
 """  
 
+import ConfigParser
 import tushare as ts
-ts.set_token(token="43edacb7b894f32a6bc55fc64a6dcfe66e1bfd67b8894bd0a29dcc98")
-pro = ts.pro_api()
-pro = ts.pro_api('43edacb7b894f32a6bc55fc64a6dcfe66e1bfd67b8894bd0a29dcc98')
+
+cf = ConfigParser.ConfigParser()
+cf.read('stockCrawler/tushare_client/tushare.ini')
+TOKEN = cf.get("tushare", "token")
+
+ts.set_token(token=TOKEN)
+pro = ts.pro_api(TOKEN)
 
 # # df = pro.daily(trade_date='20200325')
 # # df = pro.trade_cal(exchange='', start_date='20200101', end_date='20200107', fields='exchange,cal_date,is_open,pretrade_date', is_open='0')
